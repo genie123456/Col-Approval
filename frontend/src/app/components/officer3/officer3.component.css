@@ -1,0 +1,76 @@
+.container{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-bordered{
+    border: 1px solid #b9b8b8;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000000;
+}
+
+.noc-application {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 10px;
+  }
+  
+  .noc-application__heading {
+    margin-bottom: 16px;
+  }
+  
+  .noc-application__details {
+
+    margin-bottom: 13px;
+  }
+  
+  .noc-application__details__label {
+    font-weight: bold;
+  }
+  
+  .bannerISW {
+    background-color: rgb(255, 190, 206);
+    padding: 5px;
+    display: flex;
+    justify-content: left;
+   
+    margin: 3px 3px 5px 3px;; /* Adds 7px space on all sides */
+    border-radius: 10px; /* Adds rounded corners */
+    color: black;
+    font-size: 20px; /* Adjust font size if necessary */
+    text-align: left; /* Center the text */
+  }
+
+  .dotted-line {
+    border: none;
+    border-top: 2.5px dotted #000;
+    margin: 20px 0; /* Adjust the vertical margin as needed */
+  }
+
+  .form-c {
+    background-color: rgb(254, 224, 224);
+    padding: 10px;
+    border-radius: 7px; /* Adds rounded corners */
+    margin: 10px 0; /* Adds some space between form containers */
+    border: 0.7px solid gray;
+  }
+  
+  .button-container {
+    border: 1px solid #ccc; /* Border for the container */
+    border-top: 3px solid rgb(84, 164, 212);
+    border-radius: 7px;
+    padding: 10px;          /* Padding inside the container */
+    display: flex;          /* Use flexbox for layout */
+    justify-content: flex-end; /* Align items to the right */
+  }
+  
+  .button-bottom {
+    display: flex;          /* Flexbox for button layout */
+    gap: 10px;              /* Space between buttons */
+  }
+   
+  .required::after {
+    content: " *";
+    color: red;
+  }

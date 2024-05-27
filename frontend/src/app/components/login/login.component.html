@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <form (ngSubmit)="loginUser()" [formGroup]="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" formControlName="username">
+    <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')">
+      <div>Username is required.</div>
+    </div>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password">
+    <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')">
+      <div>Password is required.</div>
+    </div>
+
+    <!-- dropdown menu -->
+    <div class="dropdown-wrapper form-container">
+      <label for="type">Login As:</label>
+      <select id="type" formControlName="type">
+        <option value="official1">Official 1</option>
+        <option value="official2">Official 2</option>
+        <option value="official3">Official 3</option>
+        <option value="applicant">Applicant</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid" class="login-button">Login</button>
+  </form>
+</div>
+
+
+<!-- Bootstrap modal for error message -->
+<div class="modal" #errorModal tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login Failed</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Login failed! Please try again.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loginError" class="error-message">
+  Login failed! Please try again.
+</div>
+
+

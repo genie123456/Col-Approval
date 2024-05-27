@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/home">Coloniser Approval</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="!isLoginPage() && !loggedIn">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!isSignupPage() && !loggedIn">
+        <a class="nav-link" routerLink="/signup">Signup</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ms-auto" *ngIf="loggedIn">
+      <li class="nav-item">
+        <button type="button" class="btn btn-light nav-link" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+</nav>

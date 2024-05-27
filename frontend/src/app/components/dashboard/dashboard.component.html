@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Existing Users</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>User Type</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let official of officialsData">
+            <td>{{ official.id }}</td>
+            <td>{{ official.username }}</td>
+            <td>{{ official.type }}</td>
+            <td>{{ official.email }}</td>
+            <td>{{ official.phone_number }}</td>
+        </tr>
+        </tbody>
+     </table>
+    </div>
+    
+
+<div class="container">
+    <a class="btn btn-primary" href="/apply" role="button">Apply</a>
+</div>

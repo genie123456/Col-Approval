@@ -1,0 +1,84 @@
+<div class="container">
+    <table class="table table-bordered">
+    <tbody>
+        <tr *ngFor="let item of data">
+        <th scope="col">Service Name</th>
+        <td>{{ item.serviceName }}</td>
+        </tr>
+        <tr *ngFor="let item of data">
+        <th scope="col">Current Task</th>
+        <td>{{ item.currentTask }}</td>
+        </tr>
+        <tr *ngFor="let item of data">
+        <th scope="col">Application Reference Number</th>
+        <td>{{ item.appRefNo }}</td>
+        </tr>
+        <tr *ngFor="let item of data">
+        <th scope="col">Application Received Date</th>
+        <td>{{ item.appReceivedDate }}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<div class="container">
+    
+    <form class="form-c">
+        <h5>EWS Verification-Rural</h5>
+    <div class="noc-application">
+        <div class="noc-application__heading">
+          <span class="bannerISW">Application details</span>
+        </div>
+        <hr class="dotted-line">
+        <div class="noc-application__content">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="noc-application__details">
+                <div class="noc-application__details__label required">ACTIONS TO BE TAKEN</div>
+              </div>
+              <div class="noc-application__details">
+                <div class="noc-application__details__label required">SELECT OFFICIALS FOR EWS SITE VISIT</div>
+              </div>
+              <br>
+              <br>
+              <br>
+              <div class="noc-application__details">
+                <div class="noc-application__details__label">Remarks</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="noc-application__details">
+                <input type="radio" id="forward" name="action" value="forward" >
+                <label for="forward">Forward</label>
+              </div>
+              <div class="noc-application__details">
+                <input type="checkbox" id="SDM-DURG" name="official" value="SDM-DURG">
+                <label for="SDM-DURG">SDM DURG (Deputy Collector / SDM)</label><br>
+                <input type="checkbox" id="SDM-Dhamdha" name="official" value="SDM-Dhamdha">
+                <label for="SDM-Dhamdha">SDM Dhamdha (Deputy Collector / SDM)</label><br>
+                <input type="checkbox" id="SDM-Patan" name="official" value="SDM-Patan">
+                <label for="SDM-Patan">SDM Patan (Deputy Collector / SDM)</label><br>
+                <input type="checkbox" id="SDM-Bhilai" name="official" value="SDM-Bhilai">
+                <label for="SDM-Bhilai">SDM Bhilai (Deputy Collector / SDM)</label><br>
+              </div>
+              
+              <div class="noc-application__details">
+                <input id="remarks" name="remarks">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="button-container">
+        <div class="button-bottom">
+          <button type="button" class="btn btn-warning mr-2">Save Draft</button>
+          <button type="submit" class="btn btn-success mr-2">Submit</button>
+          <button type="button" class="btn btn-primary">Reset</button>
+          <button type="button" class="btn btn-danger mr-2">Cancel</button>
+        </div>
+      </div>
+      
+</div>
+
+  
