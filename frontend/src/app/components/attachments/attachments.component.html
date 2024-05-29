@@ -1,0 +1,533 @@
+<div class="banner">
+    <span>ATTACH ENCLOSURE(S)</span>
+</div>
+
+<div class="outer-container">
+    <div class="form-container">
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Type of Enclosure</p>
+            </div>
+            <div class="col-lg-4">
+                <p class="required">Enclosure Document</p>
+            </div>
+            <div class="col-lg-4">
+                <p class="required">File Reference</p>
+            </div>
+        </div>
+        </div>
+        <div class="flex-container">
+       <form>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Layout as per CG Bhumi Vikas Niyam 1984, Development Plan's provisions and Zoning Regulations (Softcopy) with Khasra Superimpose
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="layout" formControlName="layout" class="left">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="layoutIP" 
+                        aria-describedby="layoutIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="layoutIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Registration Form and declaration by Engineer/Architect for designing Layout</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="declaration" formControlName="declaration" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="inputGroupFile04"
+                        aria-describedby="declarationIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="declarationIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Survey Map</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="surveyMap" formControlName="surveyMap" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="surveyMapIP"
+                        aria-describedby="surveyMapIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="surveyMapIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Satelite Map(from Bhuvan or any other agency)
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="sateliteMap" formControlName="sateliteMap" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="sateliteMapIP"
+                        aria-describedby="sateliteMapIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="sateliteMapIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>Landuse Certificate</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="landuse" formControlName="landuse" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="landuseIP"
+                        aria-describedby="landuseIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="landuseIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>Allotment letter of government lab between road and Proposed Site </p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="alotLetter" formControlName="alotLetter" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="alotLetterIP"
+                        aria-describedby="alotLetterIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="alotLetterIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>Parking Plan</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="parking" formControlName="parking" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="parkingIP"
+                        aria-describedby="parkingIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="parkingIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>Soil Test Report</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="soilTest" formControlName="soilTest" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="soilTestIP"
+                        aria-describedby="soilTestIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="soilTestIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Location Map</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="location" formControlName="location" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="locationIP"
+                        aria-describedby="locationIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="locationIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>Structural Stability report as per Rule 17</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="stability" formControlName="stability" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="stabilityIP"
+                        aria-describedby="stabilityIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="stabilityIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Location plan of proposed EWS land (With Land Details)</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="EWSland" formControlName="EWSland" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="EWSlandIP"
+                        aria-describedby="EWSlandIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="EWSlandIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Service Plan</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="service" formControlName="service" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="serviceIP"
+                        aria-describedby="serviceIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="serviceIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Partnership Deed/MOA of a Company</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="deed" formControlName="deed" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="deedIP"
+                        aria-describedby="deedIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="deedIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>Affidavit in prescribed format for cases in which fees is to be deposited in "Services to the poor fund" account</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="affidavit" formControlName="affidavit" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="affidavitIP"
+                        aria-describedby="affidavitIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="affidavitIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Colonizer Registration Certificate</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="CRC" formControlName="CRC" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="CRCIP"
+                        aria-describedby="CRCIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="CRCIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Colonizer Net Worth for Development of Colony</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="netWorth" formControlName="netWorth" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="netWorthIP"
+                        aria-describedby="netWorthIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="netWorthIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>Any Other Documents</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="otherDoc" formControlName="otherDoc" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="otherDocIP"
+                        aria-describedby="otherDocIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="otherDocIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Khasra Samviliyan-Aggregation all Khasras for colony into a single Khasra (khasra integration order)</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="KIO" formControlName="KIO" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="KIOIP"
+                        aria-describedby="KIOIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="KIOIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Seemankan of Integrated Khasra - Signed by Tehsildar alongwith Total Station Survey</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="seemankan" formControlName="seemankan" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="seemankanIP"
+                        aria-describedby="seemankanIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="seemankanIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">B1 P2 Khasra Map</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="b1p2" formControlName="b1p2" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="b1p2IP"
+                        aria-describedby="b1p2IP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon04">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Registry Documents Details of all khasras used to make integrated khasra if will inheritance then mutation order</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="regDoc" formControlName="regDoc" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="regDocIP"
+                        aria-describedby="regDocIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="regDocIP">Scan</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="required">Panchshala Khasra of last 12 years for all khasras applied for diversion</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="flex-container">
+                        <select id="panchshala" formControlName="panchshala" class="right">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="panchshalaIP"
+                        aria-describedby="panchshalaIP" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="panchshalaIP">Scan</button>
+                </div>
+            </div>
+        </div>
+       </form>
+    </div>
+</div>
+  
+<div class="container">
+<div class="formA-container">
+    <form>
+        <span class="bannerISW">Additional Details</span>
+        <div class="form-group">
+            <div class="container">
+                <label class="required">Apply to the Office</label>
+                <div>
+                    <input type="text" id="office" name="office">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="button-container">
+    <div class="button-bottom">
+      <button type="button" class="btn btn-warning mr-2">Save Draft</button>
+      <a type="submit" role="button" class="btn btn-success mr-2" href="/enclosureList">Submit</a>
+      <button type="button" class="btn btn-primary">Reset</button>
+      <button type="button" class="btn btn-danger mr-2">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+button{
+    margin-right: 5px;
+  }
+
+  .button-container {
+    border: 1px solid #ccc; /* Border for the container */
+    border-top: 3px solid rgb(84, 164, 212);
+    border-radius: 7px;
+    padding: 10px;          /* Padding inside the container */
+    display: flex;          /* Use flexbox for layout */
+    justify-content: flex-end; /* Align items to the right */
+  }
+  .button-bottom {
+    display: flex;          /* Flexbox for button layout */
+    gap: 10px;              /* Space between buttons */
+  }

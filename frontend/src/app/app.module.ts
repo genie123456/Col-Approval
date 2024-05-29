@@ -21,6 +21,10 @@ import { ApplicantDashTableComponent } from './components/applicant-dash-table/a
 import { Officer2Component } from './components/officer2/officer2.component';
 import { Officer3Component } from './components/officer3/officer3.component';
 import { UserComponent } from './components/user/user.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AttachmentsComponent } from './components/attachments/attachments.component';
+import { EnclosureListComponent } from './components/enclosure-list/enclosure-list.component';
+import { EnclosurePrintComponent } from './components/enclosure-print/enclosure-print.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,11 @@ import { UserComponent } from './components/user/user.component';
     ApplicantDashTableComponent,
     Officer2Component,
     Officer3Component,
-    UserComponent
+    UserComponent,
+    ProfileComponent,
+    AttachmentsComponent,
+    EnclosureListComponent,
+    EnclosurePrintComponent
   ],
   imports: [
     HttpClientModule,

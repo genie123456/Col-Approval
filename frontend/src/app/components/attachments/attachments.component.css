@@ -1,0 +1,98 @@
+.banner {
+    background-color: rgb(14, 35, 53);
+    padding: 5px;
+    display: flex;
+    justify-content: left;
+    margin: 7px 10px 5px 10px; /* Top: 7px, Right: 10px, Bottom: 7px, Left: 10px */
+    border-radius: 1px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+  }
+
+  .bannerISW {
+    background-color: rgb(145, 150, 152);
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px 3px 5px 3px;; /* Adds 7px space on all sides */
+    border-radius: 10px; /* Adds rounded corners */
+    color: black;
+    font-size: 20px; /* Adjust font size if necessary */
+    text-align: center; /* Center the text */
+    font-weight: bold;
+  }
+
+  button{
+    margin-right: 5px;
+  }
+
+  .button-container {
+    border: 1px solid #ccc; /* Border for the container */
+    border-top: 3px solid rgb(84, 164, 212);
+    border-radius: 7px;
+    padding: 10px;          /* Padding inside the container */
+    display: flex;          /* Use flexbox for layout */
+    justify-content: flex-end; /* Align items to the right */
+  }
+  .button-bottom {
+    display: flex;          /* Flexbox for button layout */
+    gap: 10px;              /* Space between buttons */
+  }
+
+  .outer-container {
+    background-color: lightgray;
+    display: auto;
+    padding: 5px;
+    margin: 7px 10px 5px 10px; /* Top: 7px, Right: 10px, Bottom: 5px, Left: 10px */
+    border-radius: 5px; /* Optional: adds rounded corners */
+}
+
+  .form-container {
+    background-color: rgb(226, 226, 226);
+    padding: 5px;
+    border-radius: 3px; /* Adds rounded corners */
+    margin: 10px 15px; /*  Adds some space between form containers */
+    margin-bottom: 20px;
+    border: 0.7px solid gray;
+    height: 40px;
+  }
+
+  .formA-container {
+    background-color: lightgray;
+    padding: 10px;
+    border-radius: 7px; /* Adds rounded corners */
+    margin: 10px 0; /* Adds some space between form containers */
+    border: 0.7px solid gray;
+  }
+
+  .required::after {
+    content: " *";
+    color: red;
+  }
+
+  .disk-symbol::before {
+    content: '\25CF'; /* Unicode for filled circle */
+    margin-right: 8px; /* Space between symbol and text */
+    color: rgb(0, 0, 0);
+  }
+
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .right {
+    flex: 1;
+    text-align: right;
+  }
+
+  .left {
+    flex: 1;
+  }
+

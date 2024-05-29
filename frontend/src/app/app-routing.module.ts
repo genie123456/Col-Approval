@@ -13,7 +13,9 @@ import { HomeComponent } from './components/home/home.component';
 import { ApplyingFormComponent } from './components/applying-form/applying-form.component';
 
 import { DashApplicantComponent } from './components/dash-applicant/dash-applicant.component';
-import { UserComponent } from './components/user/user.component';
+import { AttachmentsComponent } from './components/attachments/attachments.component';
+import { EnclosureListComponent } from './components/enclosure-list/enclosure-list.component';
+import { EnclosurePrintComponent } from './components/enclosure-print/enclosure-print.component';
 
 // Define routes
 const routes: Routes = [
@@ -26,18 +28,9 @@ const routes: Routes = [
   { path: 'officer1', component: Officer1Component },
   { path: 'officer2', component: Officer2Component },
   { path: 'officer3', component: Officer3Component },
-
-  // User-specific routes with dynamic user type and component
-  // {
-  //   path: 'user/:type', // Dynamic route for user pages
-  //   component: UserComponent, 
-  //   children: [
-  //     { path: 'officer1', component: Officer1Component },
-  //     { path: 'officer2', component: Officer2Component },
-  //     { path: 'officer3', component: Officer3Component },
-  //     { path: '**', redirectTo: '' }, // Handle unmatched paths within user routes
-  //   ]
-  // },
+  { path: 'attachments', component: AttachmentsComponent },
+  { path: 'enclosureList', component: EnclosureListComponent },
+  { path: 'enclosurePrint', component: EnclosurePrintComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

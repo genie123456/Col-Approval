@@ -4,24 +4,26 @@
 
 <div class="container">
   <div class="form-container">
-    <form>
+    <form [formGroup]="applyingForm">
       <span class="bannerISW">Integrated Single Window System Approval</span>
       <hr class="dotted-line">
       <div class="form-group">
         <div class="flex-container">
           <label for="district" class="left required">In which district is colony development permission sought?</label>
-          <select id="district" name="district" class="right">
-            <option value="">Please Select</option>
+          <select id="district" formControlName="district" class="left">
+            <option value="raipur">Raipur</option>
+            <option value="durg">Durg</option>
+            <option value="bilaspur">Bilaspur</option>
           </select>
         </div>
       </div>
       <div class="form-group">
         <div class="flex-container">
-          <label for="area" class="left  required">For which area is permission sought?</label>
+          <label for="area" class="left required">For which area is permission sought?</label>
           <div class="radio-buttons right">
-            <input type="radio" id="rural" name="area" value="rural">
+            <input type="radio" id="rural" formControlName="area" value="rural">
             <label for="rural">ग्रामीण क्षेत्र (Rural Area)</label>
-            <input type="radio" id="urban" name="area" value="urban">
+            <input type="radio" id="urban" formControlName="area" value="urban">
             <label for="urban">शहरी क्षेत्र (Urban Area)</label>
           </div>
         </div>
@@ -33,24 +35,26 @@
         <div class="flex-container">
           <label for="khasra-integrated" class="left required">Has the khasra been integrated?</label>
           <div class="radio-buttons right">
-            <input type="radio" id="yes" name="khasra-integrated" value="yes">
+            <input type="radio" id="yes" name="khasra-integrated" value="yes" (change)="onKhasraIntegratedChange('yes')">
             <label for="yes">Yes</label>
-            <input type="radio" id="no" name="khasra-integrated" value="no">
+            <input type="radio" id="no" name="khasra-integrated" value="no" (change)="onKhasraIntegratedChange('no')">
             <label for="no">No</label>
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <div class="flex-container">
-          <label for="integrated-khasra" class="left required">Enter the integrated khasra number received from the revenue department</label>
-          <input type="text" id="integrated-khasra" name="integrated-khasra" class="right">
+      <div >
+        <div class="form-group">
+          <div class="flex-container">
+            <label for="integrated-khasra" class="left required">Enter the integrated khasra number received from the revenue department</label>
+            <input type="text" id="integrated-khasra" formControlName="integratedKhasraNumber" class="right">
+          </div>
         </div>
       </div>
     </form>
   </div>
 
-  <div class="form-container">
-    <form>
+  <div class="form-container" *ngIf="showAdditionalForm" id="additional-form">
+    <form [formGroup]="applyingForm">
       <span class="bannerISW">Format for Application for Colony Approval</span>
       <hr class="dotted-line">
       <div class="form-group">
@@ -88,7 +92,9 @@
             <input type="text" id="NeiCol3" name="NeiCol3" class="right">
             <label class="required left">3.3 District</label>
             <select id="district3" name="district3" class="right">
-              <option value="">Please Select</option>
+              <option value="raipur">Raipur</option>
+              <option value="durg">Durg</option>
+              <option value="bilaspur">Bilaspur</option>
             </select>
           </div>
           </div>
@@ -112,7 +118,9 @@
         <input type="text" id="NeiCol4" name="NeiCol4" class="right">
         <label for="district4" class="required left">4.5 District</label>
         <select id="district4" name="district4" class="required right">
-          <option value="">Please Select</option>
+          <option value="raipur">Raipur</option>
+            <option value="durg">Durg</option>
+            <option value="bilaspur">Bilaspur</option>
         </select>
       </div>
     </div>
@@ -127,7 +135,9 @@
             <input type="text" id="NeiCol5" name="NeiCol5" class="right">
             <label for="district5" class="left">5.4 District</label>
             <select id="district5" name="district5" class="right">
-              <option value="">Please Select</option>
+              <option value="raipur">Raipur</option>
+              <option value="durg">Durg</option>
+              <option value="bilaspur">Bilaspur</option>
             </select>
         </div>
         </div>
@@ -277,14 +287,29 @@
         <label class="form-check-label" for="RES">RES (Rural Engineering Services)</label>
       </div>
     </div>
-
     </form>
   </div>
-  
+
+<div class="form-container">
+  <form>
+    <span class="bannerISW">Additional Details</span>
+    <div class="form-group">
+      <div class="container">
+        <label class="required">Apply to the Office</label>
+        <div>
+          <input type="text" id="office" name="office">
+        </div>
+        
+      </div>
+      </div>
+      </form>
+      </div>
+
+
   <div class="button-container">
     <div class="button-bottom">
       <button type="button" class="btn btn-warning mr-2">Save Draft</button>
-      <button type="submit" class="btn btn-success mr-2" href="/officer1">Submit</button>
+      <a type="submit" role="button" class="btn btn-success mr-2" href="/attachment">Submit</a>
       <button type="button" class="btn btn-primary">Reset</button>
       <button type="button" class="btn btn-danger mr-2">Cancel</button>
     </div>
