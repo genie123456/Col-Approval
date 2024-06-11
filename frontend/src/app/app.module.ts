@@ -28,6 +28,7 @@ import { EnclosureListComponent } from './components/enclosure-list/enclosure-li
 import { EnclosurePrintComponent } from './components/enclosure-print/enclosure-print.component';
 import { AdmVerificationComponent } from './components/adm-verification/adm-verification.component';
 import { ADMSentComponent } from './components/adm-sent/adm-sent.component';
+import { SidebarOffComponent } from './components/sidebar-off/sidebar-off.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ADMSentComponent } from './components/adm-sent/adm-sent.component';
     EnclosureListComponent,
     EnclosurePrintComponent,
     AdmVerificationComponent,
-    ADMSentComponent
+    ADMSentComponent,
+    SidebarOffComponent
   ],
   imports: [
     HttpClientModule,

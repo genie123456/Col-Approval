@@ -4,11 +4,11 @@ import { AuthService } from 'src/app/services/auth.service';
 declare var bootstrap: any;
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  selector: 'app-sidebar-off',
+  templateUrl: './sidebar-off.component.html',
+  styleUrls: ['./sidebar-off.component.css']
 })
-export class SidebarComponent implements AfterViewInit, OnInit {
+export class SidebarOffComponent implements AfterViewInit, OnInit{
   loggedIn: boolean = false;
   username: string = '';
 

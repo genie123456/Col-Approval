@@ -1,4 +1,44 @@
-<body>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    
+    <span class="fs-4">Menu</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a href="#" class="nav-link active" aria-current="page">
+        <i class="bi bi-building-gear"></i>
+        Apply for Services
+        <i class="bi bi-arrow-right-short"></i>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link text-white">
+        <i class="bi bi-window-dock"></i>
+        View Status of Application
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link text-white">
+        <i class="bi bi-chat-right-fill"></i>
+        Submit Feedback
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <div class="dropdown">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-person-circle" routerLink="/dashboard"></i>
+      
+      <span class="ms-2">Welcome, {{ username }}  </span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+      <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- <body>
   <div class="wrapper">
     <aside id="sidebar">
       <div class="d-flex">
@@ -79,4 +119,4 @@
     </aside>
   </div>
   
-</body>
+</body> -->

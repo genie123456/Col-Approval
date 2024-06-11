@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,6 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
-
 
   constructor(private http: HttpClient) { 
     this.checkSession();
@@ -32,14 +31,13 @@ export class AuthService {
       })
     );
   }
-  
-  
 
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
       tap(() => {
         this.loggedIn.next(false);
         localStorage.removeItem('user');
+        this.userSubject.next(null);  // Emit null user
       })
     );
   }
@@ -59,18 +57,16 @@ export class AuthService {
         } else {
           this.loggedIn.next(false);
           localStorage.removeItem('user');
-          this.userSubject.next(null);
+          this.userSubject.next(null);  // Emit null user
         }
       },
       error => {
         this.loggedIn.next(false);
         localStorage.removeItem('user');
-        this.userSubject.next(null);
+        this.userSubject.next(null);  // Emit null user
       }
     );
   }
-    
-  
 
   getProfile(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/profile`, { withCredentials: true });
