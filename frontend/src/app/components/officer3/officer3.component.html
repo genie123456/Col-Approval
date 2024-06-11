@@ -30,27 +30,29 @@
           <span class="bannerISW">Application details</span>
         </div>
         <hr class="dotted-line">
+
         <div class="noc-application__content">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-6">
               <div class="noc-application__details">
                 <div class="noc-application__details__label required">ACTIONS TO BE TAKEN</div>
               </div>
-              <div class="noc-application__details">
-                <div class="noc-application__details__label required">SELECT OFFICIALS FOR EWS SITE VISIT</div>
-              </div>
-              <br>
-              <br>
-              <br>
-              <div class="noc-application__details">
-                <div class="noc-application__details__label">Remarks</div>
-              </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
               <div class="noc-application__details">
                 <input type="radio" id="forward" name="action" value="forward" >
                 <label for="forward">Forward</label>
               </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="noc-application__details">
+                <div class="noc-application__details__label required">SELECT OFFICIALS FOR EWS SITE VISIT</div>
+              </div>
+            </div>
+            <div class="col-lg-6">
               <div class="noc-application__details">
                 <input type="checkbox" id="SDM-DURG" name="official" value="SDM-DURG">
                 <label for="SDM-DURG">SDM DURG (Deputy Collector / SDM)</label><br>
@@ -61,9 +63,18 @@
                 <input type="checkbox" id="SDM-Bhilai" name="official" value="SDM-Bhilai">
                 <label for="SDM-Bhilai">SDM Bhilai (Deputy Collector / SDM)</label><br>
               </div>
-              
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
               <div class="noc-application__details">
-                <input id="remarks" name="remarks">
+                <div class="noc-application__details__label">Remarks</div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="noc-application__details">
+                <input type="text" id="remarks" name="remarks" class="custom-input">
               </div>
             </div>
           </div>
@@ -77,8 +88,5 @@
           <button type="button" class="btn btn-primary">Reset</button>
           <button type="button" class="btn btn-danger mr-2">Cancel</button>
         </div>
-      </div>
-      
+      </div>  
 </div>
-
-  

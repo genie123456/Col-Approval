@@ -16,13 +16,16 @@ import { DashApplicantComponent } from './components/dash-applicant/dash-applica
 import { AttachmentsComponent } from './components/attachments/attachments.component';
 import { EnclosureListComponent } from './components/enclosure-list/enclosure-list.component';
 import { EnclosurePrintComponent } from './components/enclosure-print/enclosure-print.component';
+import { AdmVerificationComponent } from './components/adm-verification/adm-verification.component';
+
+import { authGuard } from './guards/auth.guard';
 
 // Define routes
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent }, 
-  { path: 'signup', component: SignupComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent }, // nope
+  { path: 'dashboard', component: DashboardComponent }, // , canActivate: [authGuard]
+  { path: 'signup', component: SignupComponent }, // nope
+  { path: 'home', component: HomeComponent }, // nope
   { path: 'apply', component: ApplyingFormComponent },
   { path: 'applicant-dashboard', component: DashApplicantComponent }, 
   { path: 'officer1', component: Officer1Component },
@@ -30,7 +33,8 @@ const routes: Routes = [
   { path: 'officer3', component: Officer3Component },
   { path: 'attachments', component: AttachmentsComponent },
   { path: 'enclosureList', component: EnclosureListComponent },
-  { path: 'enclosurePrint', component: EnclosurePrintComponent},
+  { path: 'enclosurePrint', component: EnclosurePrintComponent },
+  { path: 'officer1/verification/Pull', component: AdmVerificationComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

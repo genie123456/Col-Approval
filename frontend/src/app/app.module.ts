@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 import { AppComponent } from './app.component';
 import { ApplyingFormComponent } from './components/applying-form/applying-form.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -25,6 +26,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AttachmentsComponent } from './components/attachments/attachments.component';
 import { EnclosureListComponent } from './components/enclosure-list/enclosure-list.component';
 import { EnclosurePrintComponent } from './components/enclosure-print/enclosure-print.component';
+import { AdmVerificationComponent } from './components/adm-verification/adm-verification.component';
+import { ADMSentComponent } from './components/adm-sent/adm-sent.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { EnclosurePrintComponent } from './components/enclosure-print/enclosure-
     ProfileComponent,
     AttachmentsComponent,
     EnclosureListComponent,
-    EnclosurePrintComponent
+    EnclosurePrintComponent,
+    AdmVerificationComponent,
+    ADMSentComponent
   ],
   imports: [
     HttpClientModule,

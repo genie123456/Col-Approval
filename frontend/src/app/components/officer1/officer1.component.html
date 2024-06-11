@@ -43,9 +43,10 @@
     </thead>
     <tbody class="table-group-divider">
         <tr *ngFor="let item of data; let i = index">
-        <th scope="row">{{ i + 1 }}</th>  <td>{{ item.appNo }}</td>
+        <th scope="row">{{ i + 1 }}</th>  
+        <td>{{ item.appNo }}</td>
         <td>{{ item.status }}</td>
-        <td>{{ item.action }}</td>
+        <td><a [routerLink]="['/officer1/verification', item.action]">{{ item.action }}</a></td>
         <td>{{ item.RtP }}</td>
         </tr>
     </tbody>

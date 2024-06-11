@@ -10,7 +10,7 @@
 }
 
 .noc-application {
-    border: 1px solid #ddd;
+    border: 1px solid #666666;
     border-radius: 4px;
     padding: 16px;
     margin: 10px;
@@ -73,4 +73,18 @@
   .required::after {
     content: " *";
     color: red;
+  }
+
+  input[type="radio"] {
+    margin-right: 2.5mm;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 2.5mm;
+  }
+
+  .custom-input{
+    width: 10cm;
+    height: 1cm;
+    box-sizing: border-box; 
   }

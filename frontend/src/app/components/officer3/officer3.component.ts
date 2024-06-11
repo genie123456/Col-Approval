@@ -14,7 +14,7 @@ interface EWSdata {
 })
 export class Officer3Component implements OnInit {
   data: EWSdata[] = [];
-  ngOnInit(): void {
+  ngOnInit() {
     this.data = [
       { serviceName: 'Single Window Colony Approval', currentTask: 'EWS Verification-Rural', appRefNo: 'CGAWAAS/2024/00012', appReceivedDate: '08-04-2024' }
     ];

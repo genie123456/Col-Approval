@@ -1,0 +1,23 @@
+.profile-icon {
+    /* font-size: 1.5rem; */
+    cursor: pointer;
+    margin-right: 2mm;
+  }
+  
+  .welcome-message {
+    cursor: pointer;
+  }
+
+  .navbar{
+    border-bottom: 1px solid #000;
+    background-color: #e3f2fd;
+  }
+
+  .navbar-brand {
+    /* Adjust margin or padding for left alignment */
+    margin-left: 1rem;  /* Example: Margin for left alignment */
+  }
+
+  .navbar-ending{
+    margin-right: 1rem;  /* Example: Margin for right alignment */
+  }

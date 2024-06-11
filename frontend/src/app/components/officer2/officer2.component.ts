@@ -17,7 +17,6 @@ export class Officer2Component implements OnInit {
   ngOnInit() {
     this.data = [
       { serviceName: 'Single Window Colony Approval', currentTask: 'NOC Application to CSEB', appRefNo: 'CGAWAAS/2024/00012', appReceivedDate: '08-04-2024'},
-  
     ];
   }
 }

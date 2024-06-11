@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -19,54 +19,56 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router, 
+    private router: Router,
     private modalService: NgbModal
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      type: ['official', Validators.required]
+      type: ['official1', Validators.required] // Set a default value
     });
   }
 
   loginUser() {
     if (this.loginForm.valid) {
-      const username = this.loginForm.value.username;
-      const password = this.loginForm.value.password;
-      const type = this.loginForm.value.type;
+      const { username, password, type } = this.loginForm.value;
 
-      this.authService.login(username, password, type)
-        .subscribe(
-          response => {
-            console.log('Login successful:');
-            this.loginSuccess = true;
-            if (this.loginSuccess) {  
-              if (response.user.type === 'official1') {
-                this.router.navigateByUrl('/officer1');
-              }
-              else if(response.user.type==='official2'){
-                this.router.navigateByUrl('/officer2');
-              }
-              else if(response.user.type==='official3'){
-                this.router.navigateByUrl('/officer3');
-              }
-                 else if (type === 'applicant') {
-                this.router.navigateByUrl('/applicant-dashboard');
-              }   
-            }
-          },
-          error => {
-            console.error('Login failed:', error);
-            this.openErrorModal();
+      this.authService.login(username, password, type).subscribe(
+        response => {
+          console.log('Login successful:', response);
+          this.loginSuccess = true;
+
+          // Navigate based on user type
+          switch (response.user.type) {
+            case 'official1':
+              this.router.navigateByUrl('/officer1');
+              break;
+            case 'official2':
+              this.router.navigateByUrl('/officer2');
+              break;
+            case 'official3':
+              this.router.navigateByUrl('/officer3');
+              break;
+            case 'applicant':
+              this.router.navigateByUrl('/applicant-dashboard');
+              break;
+            default:
+              this.router.navigateByUrl('/dashboard');
+              break;
           }
-        );
+        },
+        error => {
+          console.error('Login failed:', error);
+          this.loginError = true;
+          this.openErrorModal();
+        }
+      );
     } else {
       console.log('Form is invalid. Please check your inputs.');
     }
   }
 
   openErrorModal() {
-    // Open Bootstrap modal
     this.modalService.open(this.errorModal);
   }
 }

@@ -7,16 +7,20 @@ import { AppFormService } from './services/app-form.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor (private appFormService: AppFormService) {}
+  constructor(private appFormService: AppFormService) {}
+
   ngOnInit(): void {
     this.getDynamicFormFields();
   }
 
   getDynamicFormFields() {
     this.appFormService.getFormFields().subscribe(
-      (response) => {
+      response => {
         console.log(response);
+      },
+      error => {
+        console.error('Error fetching form fields:', error);
       }
-    )
+    );
   }
 }

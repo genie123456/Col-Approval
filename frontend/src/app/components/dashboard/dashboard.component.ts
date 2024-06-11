@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OfficialsService } from 'src/app/services/officials.service';
-
+import { Router } from '@angular/router';
+import { ProfileService } from 'src/app/services/profile.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,22 +9,33 @@ import { OfficialsService } from 'src/app/services/officials.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  officialsData: any[] = [];
+  user: any = null;
 
-  constructor(private officialsService: OfficialsService) { }
+  constructor(
+    private router: Router,
+    private profileService: ProfileService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
-    this.loadOfficialsData();
+    this.loadUserProfile();
   }
 
-  loadOfficialsData(): void {
-    this.officialsService.getOfficials().subscribe(
-      data => {
-        this.officialsData = data;
+  loadUserProfile(): void {
+    this.profileService.getUserProfile().subscribe(
+      profile => {
+        this.user = profile.user;
       },
       error => {
-        console.error('Error fetching officials data:', error);
-      }
-    );
-  }
+        console.error('Error fetching profile:', error);
+        this.router.navigate(['/login']);
+      }
+    );
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/login']);
+    });
+  }
 }

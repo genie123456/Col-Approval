@@ -22,7 +22,6 @@
 </div>
 
 <div class="container">
-    
     <form class="form-c">
         <h5>NOC Application to CSEB</h5>
     <div class="noc-application">
@@ -30,30 +29,45 @@
           <span class="bannerISW">Application details</span>
         </div>
         <hr class="dotted-line">
+
         <div class="noc-application__content">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-6">
               <div class="noc-application__details">
                 <div class="noc-application__details__label required">ACTIONS TO BE TAKEN</div>
               </div>
-              <div class="noc-application__details">
-                <div class="noc-application__details__label required">SELECT OFFICIALS FOR FIELD VISIT AND NOC SUBMISSION</div>
-              </div>
-              <div class="noc-application__details">
-                <div class="noc-application__details__label">Remarks</div>
-              </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
               <div class="noc-application__details">
                 <input type="radio" id="forward" name="action" value="forward" >
                 <label for="forward">Forward</label>
               </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="noc-application__details">
+                <div class="noc-application__details__label required">SELECT OFFICIALS FOR FIELD VISIT AND NOC SUBMISSION</div>
+              </div>
+            </div>
+            <div class="col-lg-6">
               <div class="noc-application__details">
                 <input type="checkbox" id="executive-engineer" name="official" value="executive-engineer">
                 <label for="executive-engineer"> Executive Engineer</label>
               </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
               <div class="noc-application__details">
-                <input id="remarks" name="remarks">
+                <div class="noc-application__details__label">Remarks</div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="noc-application__details">
+                <input type="text" id="remarks" name="remarks" class="custom-input">
               </div>
             </div>
           </div>
@@ -69,7 +83,6 @@
           <button type="button" class="btn btn-danger mr-2">Cancel</button>
         </div>
       </div>
-      
 </div>
 
   
