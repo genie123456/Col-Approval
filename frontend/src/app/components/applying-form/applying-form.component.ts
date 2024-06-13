@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ApplyingFormComponent {
   applyingForm: FormGroup;
   showAdditionalForm: boolean = false;
+  isKhasraIntegrated: boolean = true; // Track the state of khasra integration
+  naam: boolean = true; // Track the state
 
   constructor(private fb: FormBuilder) {
     this.applyingForm = this.fb.group({
@@ -55,9 +57,46 @@ export class ApplyingFormComponent {
         RES: [false]
       })
     });
+
+    // Subscribe to changes on the khasraIntegrated form control
+    this.applyingForm.get('khasraIntegrated')!.valueChanges.subscribe(value => {
+      this.onKhasraIntegratedChange(value);
+    });
   }
+pankaj(event: any) {
+  alert(event.target.value)
+  if(event.target.value == 'yes') {
+    this.naam = false;
+  }
+}
 
   onKhasraIntegratedChange(value: string) {
     this.showAdditionalForm = (value === 'yes');
+    this.isKhasraIntegrated = (value === 'yes');
+  }
+
+  onSubmit() {
+    if (this.isKhasraIntegrated) {
+      // Handle submit action
+      console.log('Form submitted:', this.applyingForm.value);
+    } else {
+      // Replace MatSnackBar functionality with a custom feedback method
+      alert('Please get it integrated from the revenue department before applying for colony approval.');
+    }
+  }
+
+  saveDraft() {
+    // Implement save draft functionality
+  }
+
+  onReset() {
+    // Reset the form
+    this.applyingForm.reset();
+    this.isKhasraIntegrated = true;
+  }
+
+  onCancel() {
+    // Handle cancel action
+    console.log('Form cancelled');
   }
 }

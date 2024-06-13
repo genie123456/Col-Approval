@@ -1,7 +1,7 @@
 .profile-icon {
     /* font-size: 1.5rem; */
     cursor: pointer;
-    margin-right: 2mm;
+    margin-right: 1mm;
   }
   
   .welcome-message {
@@ -10,7 +10,7 @@
 
   .navbar{
     border-bottom: 1px solid #000;
-    background-color: #e3f2fd;
+    background-color: rgb(145, 150, 152);
   }
 
   .navbar-brand {

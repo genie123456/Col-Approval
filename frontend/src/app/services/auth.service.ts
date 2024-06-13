@@ -72,8 +72,3 @@ export class AuthService {
     return this.http.get<any>(`${this.apiUrl}/profile`, { withCredentials: true });
   }
 }
-
- // signup(username: string, email: string, phoneNumber: string, password: string, type: string): Observable<any> {
-  //   const signupData = { username, email, phoneNumber, password, type };
-  //   return this.http.post<any>(`${this.apiUrl}/signup`, signupData);
-  // }

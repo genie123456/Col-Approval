@@ -1,24 +1,24 @@
 <div class="container">
-    <table class="table table-bordered">
-    <tbody>
-        <tr *ngFor="let item of data">
-        <th scope="col">Service Name</th>
-        <td>{{ item.serviceName }}</td>
-        </tr>
-        <tr *ngFor="let item of data">
-        <th scope="col">Current Task</th>
-        <td>{{ item.currentTask }}</td>
-        </tr>
-        <tr *ngFor="let item of data">
-        <th scope="col">Application Reference Number</th>
-        <td>{{ item.appRefNo }}</td>
-        </tr>
-        <tr *ngFor="let item of data">
-        <th scope="col">Application Received Date</th>
-        <td>{{ item.appReceivedDate }}</td>
-        </tr>
-    </tbody>
-    </table>
+  <table class="table table-bordered">
+      <tbody>
+          <tr>
+              <th scope="col">Service Name</th>
+              <td>{{ data.serviceName }}</td>
+          </tr>
+          <tr>
+              <th scope="col">Current Task</th>
+              <td>{{ data.currentTask }}</td>
+          </tr>
+          <tr>
+              <th scope="col">Application Reference Number</th>
+              <td>{{ data.appRefNo }}</td>
+          </tr>
+          <tr>
+              <th scope="col">Application Received Date</th>
+              <td>{{ data.appReceivedDate }}</td>
+          </tr>
+      </tbody>
+  </table>
 </div>
 
 <div class="container">

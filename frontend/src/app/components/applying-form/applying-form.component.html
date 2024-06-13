@@ -306,12 +306,18 @@
       </div>
 
 
-  <div class="button-container">
-    <div class="button-bottom">
-      <button type="button" class="btn btn-warning mr-2">Save Draft</button>
-      <a type="submit" role="button" class="btn btn-success mr-2" href="/attachments">Submit</a>
-      <button type="button" class="btn btn-primary">Reset</button>
-      <button type="button" class="btn btn-danger mr-2">Cancel</button>
-    </div>
-  </div>
+      <div class="button-container">
+        <div class="button-bottom">
+          <button type="button" class="btn btn-warning mr-2" (click)="saveDraft()" >Save Draft</button>
+          
+          <button type="button" class="btn btn-success mr-2" (click)="onSubmit()">Submit</button>
+          
+          <a class="btn btn-info mr-2" href="/attachments">Attachments</a>
+          
+          <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
+          
+          <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
+        </div>
+      </div> 
+      
 </div>

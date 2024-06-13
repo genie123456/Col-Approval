@@ -17,6 +17,8 @@ interface PullData {
 export class Officer1Component implements OnInit {
   data: PullData[] = [];
   filteredData: PullData[] = [];
+  selectedService: string = 'single-window-colony-approval';
+  selectedTask: string = 'adm-verification';
 
   constructor() {}
 

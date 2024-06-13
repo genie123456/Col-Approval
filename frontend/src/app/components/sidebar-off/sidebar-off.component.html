@@ -1,64 +1,63 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <span class="fs-4">Menu</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-                <i class="bi bi-envelope"></i>
-              <a class="text-white dropdown" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false"> Message Box</a>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+          <a href="#" class="nav-link active" aria-current="page">
+              <a class="text-white dropdown" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false"> <i class="bi bi-envelope"></i>
+                  Message Box 
+                  <i class="bi bi-caret-down"></i>
+              </a>
               <div class="collapse" id="account-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                    <li><i class="bi bi-caret-right-fill"></i><a href="#" class="text-white">     Inbox</a></li>
-                  <li><i class="bi bi-caret-right-fill"></i><a href="#" class="text-white">     Sent Application</a></li>
-                  <li><i class="bi bi-caret-right-fill"></i><a href="#" class="text-white">     Revalidate Payment</a></li>
-                </ul>
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                      <li><i class="bi bi-caret-right-fill"></i><a href="#" class="text-white">Inbox</a></li>
+                      <li><i class="bi bi-caret-right-fill"></i><a href="#" class="text-white">Sent Application</a></li>
+                      <li><i class="bi bi-caret-right-fill"></i><a href="#" class="text-white">Revalidate Payment</a></li>
+                  </ul>
               </div>
-            </a>
-          </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-            <i class="bi bi-three-dots"></i>
-          Grievance
-        </a>
+          </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
-            <i class="bi bi-kanban"></i>
-          DSC Management
-        </a>
+          <a href="#" class="nav-link text-white">
+              <i class="bi bi-three-dots"></i>
+              Grievance
+          </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
-            <i class="bi bi-file-earmark"></i>
-          Reports
-        </a>
+          <a href="#" class="nav-link text-white">
+              <i class="bi bi-kanban"></i>
+              DSC Management
+          </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
-            <i class="bi bi-file-earmark-person"></i>
-          Admin Panel
-        </a>
+          <a href="#" class="nav-link text-white">
+              <i class="bi bi-file-earmark"></i>
+              Reports
+          </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
-            <i class="bi bi-file-earmark-text"></i>
-          Reports
-        </a>
+          <a href="#" class="nav-link text-white">
+              <i class="bi bi-file-earmark-person"></i>
+              Admin Panel
+          </a>
       </li>
-    </ul>
-    <hr>
-    <div class="dropdown">
+      <li>
+          <a href="#" class="nav-link text-white">
+              <i class="bi bi-file-earmark-text"></i>
+              Reports
+          </a>
+      </li>
+  </ul>
+  <hr>
+  <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-person-circle" routerLink="/dashboard"></i>
-        
-        <span class="ms-2">Welcome, {{ username }}  </span>
+          <i class="bi bi-person-circle" routerLink="/dashboard"></i>
+          <span class="ms-2">Welcome, {{ username }}  </span>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
+          <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
       </ul>
-    </div>
   </div>
-  
+</div>

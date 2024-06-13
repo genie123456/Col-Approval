@@ -22,10 +22,11 @@ import { authGuard } from './guards/auth.guard';
 
 // Define routes
 const routes: Routes = [
-  { path: 'login', component: LoginComponent }, // nope
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'home', component: HomeComponent },
+
   { path: 'dashboard', component: DashboardComponent }, // , canActivate: [authGuard]
-  { path: 'signup', component: SignupComponent }, // nope
-  { path: 'home', component: HomeComponent }, // nope
   { path: 'apply', component: ApplyingFormComponent },
   { path: 'applicant-dashboard', component: DashApplicantComponent }, 
   { path: 'officer1', component: Officer1Component },
@@ -34,7 +35,7 @@ const routes: Routes = [
   { path: 'attachments', component: AttachmentsComponent },
   { path: 'enclosureList', component: EnclosureListComponent },
   { path: 'enclosurePrint', component: EnclosurePrintComponent },
-  { path: 'officer1/verification/Pull', component: AdmVerificationComponent },
+  { path: 'officer1/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: AdmVerificationComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

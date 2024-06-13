@@ -95,6 +95,25 @@ a.sidebar-link {
     border-left: 3px solid transparent;
 }
 
+a.text-white.dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a.text-white.dropdown .bi-caret-down {
+    margin-left: auto;
+    transition: transform 0.5s;
+}
+
+a.text-white.dropdown[aria-expanded="true"] .bi-caret-down {
+    transform: rotate(180deg);
+}
+
+a.text-white.dropdown .bi-envelope {
+    margin-right: .3rem;
+}
+
 .sidebar-link i {
     font-size: 1.1rem;
     margin-right: .75rem;

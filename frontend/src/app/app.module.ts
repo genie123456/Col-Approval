@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 import { AppComponent } from './app.component';
 import { ApplyingFormComponent } from './components/applying-form/applying-form.component';
@@ -29,6 +28,9 @@ import { EnclosurePrintComponent } from './components/enclosure-print/enclosure-
 import { AdmVerificationComponent } from './components/adm-verification/adm-verification.component';
 import { ADMSentComponent } from './components/adm-sent/adm-sent.component';
 import { SidebarOffComponent } from './components/sidebar-off/sidebar-off.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -58,10 +60,12 @@ import { SidebarOffComponent } from './components/sidebar-off/sidebar-off.compon
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
-  
+    FormsModule,
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
