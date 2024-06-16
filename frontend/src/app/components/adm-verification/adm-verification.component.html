@@ -1,25 +1,26 @@
 <div class="container">
   <table class="table table-bordered">
-      <tbody>
-          <tr>
-              <th scope="col">Service Name</th>
-              <td>{{ data.serviceName }}</td>
-          </tr>
-          <tr>
-              <th scope="col">Current Task</th>
-              <td>{{ data.currentTask }}</td>
-          </tr>
-          <tr>
-              <th scope="col">Application Reference Number</th>
-              <td>{{ data.appRefNo }}</td>
-          </tr>
-          <tr>
-              <th scope="col">Application Received Date</th>
-              <td>{{ data.appReceivedDate }}</td>
-          </tr>
-      </tbody>
+    <tbody>
+      <tr>
+        <th scope="col">Service Name</th>
+        <td>{{ data.serviceName }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Current Task</th>
+        <td>{{ data.currentTask }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Application Reference Number</th>
+        <td>{{ data.appRefNo }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Application Received Date</th>
+        <td>{{ data.appReceivedDate }}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
+
 
 <div class="container">
     
@@ -252,6 +253,7 @@
       <div class="button-bottom">
         <button type="button" class="btn btn-warning mr-2">Save Draft</button>
         <button type="submit" class="btn btn-success mr-2">Submit</button>
+        <a class="btn btn-primary" href="/officer2" role="button">Forward</a>
         <button type="button" class="btn btn-primary">Reset</button>
         <button type="button" class="btn btn-danger mr-2">Cancel</button>
       </div>

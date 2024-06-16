@@ -31,6 +31,11 @@ import { SidebarOffComponent } from './components/sidebar-off/sidebar-off.compon
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Officer1InComponent } from './components/officer1-in/officer1-in.component';
+import { Officer2InComponent } from './components/officer2-in/officer2-in.component';
+import { VerifyEEComponent } from './components/verify-ee/verify-ee.component';
+import { VerifySDMComponent } from './components/verify-sdm/verify-sdm.component';
+import { Officer3InComponent } from './components/officer3-in/officer3-in.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     EnclosurePrintComponent,
     AdmVerificationComponent,
     ADMSentComponent,
-    SidebarOffComponent
+    SidebarOffComponent,
+    Officer1InComponent,
+    Officer2InComponent,
+    VerifyEEComponent,
+    VerifySDMComponent,
+    Officer3InComponent
   ],
   imports: [
     HttpClientModule,

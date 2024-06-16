@@ -1,13 +1,26 @@
-<div class="container-fluid">
-  <div class="row">
-      <div class="col-md-3">
-          <app-sidebar-off></app-sidebar-off>
-      </div>
-      <div class="col-md-9">
-          <h1>Officer2 works</h1>
-      </div>
+<div class="container">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th scope="col">Service Name</th>
+          <td>{{ data.serviceName }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Current Task</th>
+          <td>{{ data.currentTask }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Application Reference Number</th>
+          <td>{{ data.appRefNo }}</td>
+        </tr>
+        <tr>
+          <th scope="col">Application Received Date</th>
+          <td>{{ data.appReceivedDate }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</div>
+  
 <!-- <div class="container">
     <table class="table table-bordered">
     <tbody>
@@ -29,7 +42,7 @@
         </tr>
     </tbody>
     </table>
-</div>
+</div> -->
 
 <div class="container">
     <form class="form-c">
@@ -94,5 +107,3 @@
         </div>
       </div>
 </div>
-
-   -->

@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <app-sidebar-off></app-sidebar-off>
+      </div>
+      <div class="col-md-9">
+        <div class="search-box">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Message Box</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Inbox</li>
+            </ol>
+          </nav>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="search-box__filter">
+                <label for="service" class="required left">Select Service</label>
+                <select name="service" id="service" class="form-control" [(ngModel)]="selectedService">
+                  <option>Single Window Colony Approval</option>
+                  <option>Any Other</option>
+                </select>
+              </div>
+              <div class="search-box__filter">
+                <label for="from-date">From Date:</label>
+                <input type="date" id="from-date" name="from-date" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="search-box__filter">
+                <label for="task" class="required left">Select Task</label>
+                <select name="task" id="task" class="form-control" [(ngModel)]="selectedTask">
+                  <option>ADM Verification</option>
+                  <option>Any Other</option>
+                </select>
+              </div>
+              <div class="search-box__filter">
+                <label for="to-date">To Date:</label>
+                <input type="date" id="to-date" name="to-date" class="form-control">
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="search-box__button">
+            <button type="button" class="btn btn-primary" (click)="filterData()">→ Get Data</button>
+          </div>
+        </div>
+        <div class="container">
+          <table class="table table-striped table-bordered">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col">Sr. No.</th>
+                <th scope="col">Application Number</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+                <th scope="col">Return to Pool</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <tr *ngFor="let item of filteredData; let i = index" (click)="item">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.appNo }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.date }}</td>
+                <td><a [routerLink]="['/officer1/verification', selectedService, selectedTask, item.appNo, item.date]">{{ item.action }}</a></td>
+                <td>{{ item.RtP }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="container">
+          <div class="button-container">
+            <div class="button-bottom">
+              <button type="button" class="btn btn-warning mr-2">Save Draft</button>
+              <button type="submit" class="btn btn-success mr-2">Submit</button>
+              <!-- <a class="btn btn-primary" [routerLink]="['/officer1/verification', selectedService, selectedTask, selectedAppNo, selectedDate]" role="button">Verification</a> -->
+              <button type="button" class="btn btn-primary">Reset</button>
+              <button type="button" class="btn btn-danger mr-2">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

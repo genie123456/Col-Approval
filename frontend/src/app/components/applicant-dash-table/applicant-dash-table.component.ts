@@ -22,7 +22,6 @@ export class ApplicantDashTableComponent implements OnInit {
     // Assuming you have your service data here, populate the array
     this.data = [
       { sno: 1, serviceName: 'Service Name 1', departmentName: 'Department 1', state: 'State 1' },
-      { sno: 2, serviceName: 'Service Name 2', departmentName: 'Department 2', state: 'State 2' },
       // ... add more data objects as needed
     ];
   }

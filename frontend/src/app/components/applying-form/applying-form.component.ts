@@ -63,12 +63,6 @@ export class ApplyingFormComponent {
       this.onKhasraIntegratedChange(value);
     });
   }
-pankaj(event: any) {
-  alert(event.target.value)
-  if(event.target.value == 'yes') {
-    this.naam = false;
-  }
-}
 
   onKhasraIntegratedChange(value: string) {
     this.showAdditionalForm = (value === 'yes');
@@ -80,7 +74,6 @@ pankaj(event: any) {
       // Handle submit action
       console.log('Form submitted:', this.applyingForm.value);
     } else {
-      // Replace MatSnackBar functionality with a custom feedback method
       alert('Please get it integrated from the revenue department before applying for colony approval.');
     }
   }

@@ -10,24 +10,24 @@ interface PullData {
 }
 
 @Component({
-  selector: 'app-officer1',
-  templateUrl: './officer1.component.html',
-  styleUrls: ['./officer1.component.css']
+  selector: 'app-officer2-in',
+  templateUrl: './officer2-in.component.html',
+  styleUrls: ['./officer2-in.component.css']
 })
-export class Officer1Component implements OnInit {
+export class Officer2InComponent implements OnInit {
   data: PullData[] = [];
   filteredData: PullData[] = [];
   selectedService: string = 'Single Window Colony Approval';
   selectedTask: string = 'ADM Verification';
+  selectedAppNo: string = '';
+  selectedDate: string = '';
 
   constructor() {}
 
   ngOnInit() {
-    // Assuming you have your service data here, populate the array
     this.data = [
       { sno: 1, appNo: 'Application 1', status: 'Initiated', action: 'Pull', RtP: '', date: '2024-06-11' },
       { sno: 2, appNo: 'Application 2', status: 'Initiated', action: 'Pull', RtP: '', date: '2023-06-10' },
-      // ... add more data objects as needed
     ];
     this.filteredData = this.data; // Initialize filteredData to display all data initially
   }
@@ -44,5 +44,10 @@ export class Officer1Component implements OnInit {
     } else {
       this.filteredData = this.data; // If no date filter is applied, show all data
     }
+  }
+
+  setSelectedApp(item: PullData) {
+    this.selectedAppNo = item.appNo;
+    this.selectedDate = item.date;
   }
 }
