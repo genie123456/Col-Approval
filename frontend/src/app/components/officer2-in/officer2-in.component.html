@@ -30,7 +30,7 @@
               <div class="search-box__filter">
                 <label for="task" class="required left">Select Task</label>
                 <select name="task" id="task" class="form-control" [(ngModel)]="selectedTask">
-                  <option>ADM Verification</option>
+                  <option>NOC Application to CSEB</option>
                   <option>Any Other</option>
                 </select>
               </div>
@@ -58,12 +58,12 @@
               </tr>
             </thead>
             <tbody class="table-group-divider">
-              <tr *ngFor="let item of filteredData; let i = index" (click)="setSelectedApp(item)">
+              <tr *ngFor="let item of filteredData; let i = index" (click)="item">
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.appNo }}</td>
                 <td>{{ item.status }}</td>
                 <td>{{ item.date }}</td>
-                <td><a (click)="setSelectedApp(item)">{{ item.action }}</a></td>
+                <td><a [routerLink]="['/officer2/verification', selectedService, selectedTask, item.appNo, item.date]">{{ item.action }}</a></td>
                 <td>{{ item.RtP }}</td>
               </tr>
             </tbody>
@@ -74,7 +74,7 @@
             <div class="button-bottom">
               <button type="button" class="btn btn-warning mr-2">Save Draft</button>
               <button type="submit" class="btn btn-success mr-2">Submit</button>
-              <a class="btn btn-primary" [routerLink]="['/officer2/verification', selectedService, selectedTask, selectedAppNo, selectedDate]" role="button">Verification</a>
+              <!-- <a class="btn btn-primary" [routerLink]="['/officer2/verification', selectedService, selectedTask, selectedAppNo, selectedDate]" role="button">Verification</a> -->
               <button type="button" class="btn btn-primary">Reset</button>
               <button type="button" class="btn btn-danger mr-2">Cancel</button>
             </div>

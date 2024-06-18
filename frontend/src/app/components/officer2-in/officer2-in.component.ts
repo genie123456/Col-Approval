@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-interface PullData {
+interface NOCData {
   sno: number;
   appNo: string;
   status: string;
@@ -15,10 +15,10 @@ interface PullData {
   styleUrls: ['./officer2-in.component.css']
 })
 export class Officer2InComponent implements OnInit {
-  data: PullData[] = [];
-  filteredData: PullData[] = [];
+  data: NOCData[] = [];
+  filteredData: NOCData[] = [];
   selectedService: string = 'Single Window Colony Approval';
-  selectedTask: string = 'ADM Verification';
+  selectedTask: string = 'NOC Application to CSEB';
   selectedAppNo: string = '';
   selectedDate: string = '';
 
@@ -26,8 +26,8 @@ export class Officer2InComponent implements OnInit {
 
   ngOnInit() {
     this.data = [
-      { sno: 1, appNo: 'Application 1', status: 'Initiated', action: 'Pull', RtP: '', date: '2024-06-11' },
-      { sno: 2, appNo: 'Application 2', status: 'Initiated', action: 'Pull', RtP: '', date: '2023-06-10' },
+      { sno: 1, appNo: 'Application 1', status: 'Initiated', action: 'Verify', RtP: '', date: '2024-06-11' },
+      { sno: 2, appNo: 'Application 2', status: 'Initiated', action: 'Verify', RtP: '', date: '2023-06-10' },
     ];
     this.filteredData = this.data; // Initialize filteredData to display all data initially
   }
@@ -46,7 +46,7 @@ export class Officer2InComponent implements OnInit {
     }
   }
 
-  setSelectedApp(item: PullData) {
+  setSelectedApp(item: NOCData) {
     this.selectedAppNo = item.appNo;
     this.selectedDate = item.date;
   }
