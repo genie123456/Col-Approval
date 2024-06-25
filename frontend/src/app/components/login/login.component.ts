@@ -41,13 +41,16 @@ export class LoginComponent {
           // Navigate based on user type
           switch (response.user.type) {
             case 'official1':
-              this.router.navigateByUrl('/officer1');
+              this.router.navigateByUrl('/officer1/inbox');
               break;
             case 'official2':
-              this.router.navigateByUrl('/officer2');
+              this.router.navigateByUrl('/officer2/inbox');
               break;
             case 'official3':
-              this.router.navigateByUrl('/officer3');
+              this.router.navigateByUrl('/officer3/inbox');
+              break;
+            case 'official4':
+              this.router.navigateByUrl('/officer4/inbox');
               break;
             case 'applicant':
               this.router.navigateByUrl('/applicant-dashboard');

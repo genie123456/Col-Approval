@@ -17,7 +17,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { DashApplicantComponent } from './components/dash-applicant/dash-applicant.component';
 import { Officer1Component } from './components/officer1/officer1.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { ApplicantDashTableComponent } from './components/applicant-dash-table/applicant-dash-table.component';
+import { ApplicantDashTableComponent } from './components/dash-applicant/applicant-dash-table/applicant-dash-table.component';
 import { Officer2Component } from './components/officer2/officer2.component';
 import { Officer3Component } from './components/officer3/officer3.component';
 import { UserComponent } from './components/user/user.component';
@@ -31,11 +31,19 @@ import { SidebarOffComponent } from './components/sidebar-off/sidebar-off.compon
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Officer1InComponent } from './components/officer1-in/officer1-in.component';
-import { Officer2InComponent } from './components/officer2-in/officer2-in.component';
+import { Officer1InComponent } from './components/officer1/officer1-in/officer1-in.component';
+import { Officer2InComponent } from './components/officer2/officer2-in/officer2-in.component';
 import { VerifyEEComponent } from './components/verify-ee/verify-ee.component';
 import { VerifySDMComponent } from './components/verify-sdm/verify-sdm.component';
-import { Officer3InComponent } from './components/officer3-in/officer3-in.component';
+import { Officer3InComponent } from './components/officer3/officer3-in/officer3-in.component';
+import { VPHComponent } from './components/adm-verification/vph/vph.component';
+import { Officer4Component } from './components/officer4/officer4.component';
+import { Officer4InComponent } from './components/officer4/officer4-in/officer4-in.component';
+import { VerifyTNCPComponent } from './components/verify-tncp/verify-tncp.component';
+import { ProvisionalLayoutComponent } from './components/verify-TNCP/provisional-layout/provisional-layout.component';
+import { DiversionCertificateComponent } from './components/verify-SDM/diversion-certificate/diversion-certificate.component';
+import { DevelopmentPermissionComponent } from './components/verify-SDM/development-permission/development-permission.component';
+import { FinalColDevComponent } from './components/Adm-verification/final-col-dev/final-col-dev.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +73,15 @@ import { Officer3InComponent } from './components/officer3-in/officer3-in.compon
     Officer2InComponent,
     VerifyEEComponent,
     VerifySDMComponent,
-    Officer3InComponent
+    Officer3InComponent,
+    VPHComponent,
+    Officer4Component,
+    Officer4InComponent,
+    VerifyTNCPComponent,
+    ProvisionalLayoutComponent,
+    DiversionCertificateComponent,
+    DevelopmentPermissionComponent,
+    FinalColDevComponent
   ],
   imports: [
     HttpClientModule,

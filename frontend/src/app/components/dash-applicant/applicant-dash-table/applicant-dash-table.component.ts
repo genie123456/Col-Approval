@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
 
 interface ServiceData {
   sno: number;
@@ -21,7 +20,7 @@ export class ApplicantDashTableComponent implements OnInit {
   ngOnInit() {
     // Assuming you have your service data here, populate the array
     this.data = [
-      { sno: 1, serviceName: 'Service Name 1', departmentName: 'Department 1', state: 'State 1' },
+      { sno: 1, serviceName: 'Single Window Colony Approval', departmentName: 'Housing and Environment Department', state: 'Chhattisgarh' },
       // ... add more data objects as needed
     ];
   }
