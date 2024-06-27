@@ -7,10 +7,27 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./applying-form.component.css']
 })
 export class ApplyingFormComponent {
+  districts: string[] = [
+    'Balod', 'Baloda Bazar', 'Balrampur', 'Bastar', 'Bemetara', 'Bijapur',
+    'Bilaspur', 'Dantewada', 'Dhamtari', 'Durg', 'Gariaband', 'Gaurela-Pendra-Marwahi',
+    'Janjgir-Champa', 'Jashpur', 'Kabirdham', 'Kanker', 'Kondagaon', 'Korba',
+    'Koriya', 'Mahasamund', 'Mungeli', 'Narayanpur', 'Raigarh', 'Raipur',
+    'Rajnandgaon', 'Sukma', 'Surajpur', 'Surguja'
+  ].sort();
+
+  selectedDistrict: string = '';
+
+  purposes = [
+    { value: 'plotted', label: 'Plotted' },
+    { value: 'corporate', label: 'Corporate' },
+    { value: 'plotted_corporate', label: 'Plotted and Corporate' }
+  ];
+
+  selectedPurpose: string = '';
+
   applyingForm: FormGroup;
   showAdditionalForm: boolean = false;
-  isKhasraIntegrated: boolean = true; // Track the state of khasra integration
-  naam: boolean = true; // Track the state
+  isKhasraIntegrated: boolean = true;
 
   constructor(private fb: FormBuilder) {
     this.applyingForm = this.fb.group({
@@ -36,7 +53,7 @@ export class ApplyingFormComponent {
       district5: [''],
       RelLR: [''],
       purpose: [''],
-      Monumber: [''],
+      MoNumber: [''],
       Email: [''],
       Firm: [''],
       EWS: [''],
@@ -62,6 +79,11 @@ export class ApplyingFormComponent {
     this.applyingForm.get('khasraIntegrated')!.valueChanges.subscribe(value => {
       this.onKhasraIntegratedChange(value);
     });
+
+    // Subscribe to changes on the EWS form control
+    this.applyingForm.get('EWS')!.valueChanges.subscribe(value => {
+      this.onEWSChange(value);
+    });
   }
 
   onKhasraIntegratedChange(value: string) {
@@ -69,27 +91,34 @@ export class ApplyingFormComponent {
     this.isKhasraIntegrated = (value === 'yes');
   }
 
+  onEWSChange(value: string) {
+    if (value === 'EWS-less') {
+      this.applyingForm.addControl('EWSb', this.fb.control(''));
+    } else {
+      this.applyingForm.removeControl('EWSb');
+    }
+  }
+
   onSubmit() {
     if (this.isKhasraIntegrated) {
-      // Handle submit action
       console.log('Form submitted:', this.applyingForm.value);
+      // Implement form submission logic here
     } else {
       alert('Please get it integrated from the revenue department before applying for colony approval.');
     }
   }
 
   saveDraft() {
-    // Implement save draft functionality
+    // Implement save draft functionality if needed
   }
 
   onReset() {
-    // Reset the form
     this.applyingForm.reset();
-    this.isKhasraIntegrated = true;
+    this.isKhasraIntegrated = true; // Reset khasra integration state
   }
 
   onCancel() {
-    // Handle cancel action
     console.log('Form cancelled');
+    // Implement cancellation logic if needed
   }
 }

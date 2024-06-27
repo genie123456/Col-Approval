@@ -106,6 +106,21 @@
     margin-right: 2.5mm; 
   }
 
+  .radio-buttonsEWS-b-a {
+    display: flex;
+    align-items: center;
+  }
+  
+  .radio-buttonsEWS-b-a input[type="radio"] {
+    margin-right: 10px;
+    margin-left: 20px; /* Adjust this value to increase/decrease spacing between radio buttons */
+  }
+  
+  .radio-buttonsEWS-b-a label {
+    margin-right: 20px; /* Adjust this value to increase/decrease spacing between labels */
+  }
+  
+
   #no{
     margin-left: 50px;
    }
@@ -154,3 +169,7 @@
     border: 1px solid #000;
   }
  
+  select option[disabled][hidden] {
+    display: none;
+  }
+  

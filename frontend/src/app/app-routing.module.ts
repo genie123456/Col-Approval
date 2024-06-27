@@ -27,7 +27,11 @@ import { VerifySDMComponent } from './components/verify-sdm/verify-sdm.component
 import { Officer4Component } from './components/officer4/officer4.component';
 import { Officer4InComponent } from './components/officer4/officer4-in/officer4-in.component';
 import { VerifyTNCPComponent } from './components/verify-tncp/verify-tncp.component';
-import { ProvisionalLayoutComponent } from './components/verify-TNCP/provisional-layout/provisional-layout.component';
+
+import { ProvisionalLayoutComponent } from './components/verify-tncp/provisional-layout/provisional-layout.component';
+import { DiversionCertificateComponent } from './components/verify-sdm/diversion-certificate/diversion-certificate.component';
+import { DevelopmentPermissionComponent } from './components/verify-sdm/development-permission/development-permission.component';
+import { FinalColDevComponent } from './components/adm-verification/final-col-dev/final-col-dev.component';
 
 
 // Define routes
@@ -57,7 +61,10 @@ const routes: Routes = [
   { path: 'officer3/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: VerifySDMComponent },
   { path: 'officer4/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: VerifyTNCPComponent },
 
-  { path: '/provisional', component: ProvisionalLayoutComponent },
+  { path: 'provisional', component: ProvisionalLayoutComponent },
+  { path: 'diversion', component: DiversionCertificateComponent },
+  { path: 'development', component: DevelopmentPermissionComponent },
+  { path: 'final', component: FinalColDevComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

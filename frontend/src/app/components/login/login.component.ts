@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   @ViewChild('errorModal') errorModal!: ElementRef;
+  @ViewChild('togglePassword') togglePasswordButton!: ElementRef;
 
   loginForm: FormGroup;
   loginSuccess: boolean = false;
@@ -28,6 +29,15 @@ export class LoginComponent {
       type: ['official1', Validators.required] // Set a default value
     });
   }
+
+  showPassword = false; // Initial state: password hidden
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    passwordInput.type = this.showPassword ? 'text' : 'password';
+  }
+  
 
   loginUser() {
     if (this.loginForm.valid) {
@@ -69,6 +79,18 @@ export class LoginComponent {
     } else {
       console.log('Form is invalid. Please check your inputs.');
     }
+  }
+
+  ngAfterViewInit() {
+    this.togglePasswordButton.nativeElement.addEventListener('click', () => {
+      const password = document.getElementById('password') as HTMLInputElement;
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+  
+      // Toggle the eye icon directly using classList
+      this.togglePasswordButton.nativeElement.querySelector('i.bi-eye').classList.toggle('d-none');
+      this.togglePasswordButton.nativeElement.querySelector('i.bi-eye-slash').classList.toggle('d-none');
+    });
   }
 
   openErrorModal() {

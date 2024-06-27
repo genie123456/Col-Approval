@@ -10,30 +10,51 @@
 
     <div class="form-group">
       <label for="password">Password:</label>
-      <input type="password" id="password" class="form-control" formControlName="password">
+      <div class="input-group position-relative">
+        <input type="password" id="password" class="form-control" formControlName="password" #passwordInput>
+        <div class="input-group-append position-absolute" style="right: 0; top: 0; height: 100%;">
+          <button type="button" class="btn btn-dark" (click)="togglePasswordVisibility()" #togglePassword>
+            <i class="bi bi-eye-slash"></i>
+            <i class="bi bi-eye d-none"></i>
+          </button>
+          
+          
+        </div>
+      </div>
       <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')" class="text-danger">
         Password is required.
       </div>
     </div>
- 
-        <!-- dropdown menu -->
-        <div class="dropdown-wrapper form-container">
-          <label for="type">Login As:</label>
-          <select id="type" formControlName="type">
-            <option value="official1">ADM</option>
-            <option value="official2">Executive Engineer</option>
-            <option value="official3">SDM</option>
-            <option value="official4">Deputy Director</option>
-            <option value="applicant">Applicant</option>
-          </select>
-        </div>
 
-    <button type="submit" [disabled]="loginForm.invalid" class="login-button">Login</button>
+    <br>
+
+    <div class="form-group d-flex align-items-center">
+      <label for="type" class="mr-2">Login As:</label>
+      <select id="type" class="form-control" formControlName="type">
+        <option value="official1">ADM</option>
+        <option value="official2">Executive Engineer</option>
+        <option value="official3">SDM</option>
+        <option value="official4">Deputy Director</option>
+        <option value="applicant">Applicant</option>
+      </select>
+    </div>
+    <br>
+
+    <button type="submit" [disabled]="loginForm.invalid" #loginButton class="login-button btn btn-primary">
+      Login
+    </button>
+
+    <br>
+
+    <div class="text-center">
+      <p>Not a member? <a href="#!">Register</a></p>
+    </div>
   </form>
 </div>
 
+
 <!-- Bootstrap modal for error message -->
-<div class="modal fade" #errorModal tabindex="-1" role="dialog">
+<!-- <div class="modal fade" #errorModal tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -50,4 +71,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

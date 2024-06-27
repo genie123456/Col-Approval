@@ -31,6 +31,7 @@ import { SidebarOffComponent } from './components/sidebar-off/sidebar-off.compon
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 import { Officer1InComponent } from './components/officer1/officer1-in/officer1-in.component';
 import { Officer2InComponent } from './components/officer2/officer2-in/officer2-in.component';
 import { VerifyEEComponent } from './components/verify-ee/verify-ee.component';
@@ -40,10 +41,11 @@ import { VPHComponent } from './components/adm-verification/vph/vph.component';
 import { Officer4Component } from './components/officer4/officer4.component';
 import { Officer4InComponent } from './components/officer4/officer4-in/officer4-in.component';
 import { VerifyTNCPComponent } from './components/verify-tncp/verify-tncp.component';
-import { ProvisionalLayoutComponent } from './components/verify-TNCP/provisional-layout/provisional-layout.component';
-import { DiversionCertificateComponent } from './components/verify-SDM/diversion-certificate/diversion-certificate.component';
-import { DevelopmentPermissionComponent } from './components/verify-SDM/development-permission/development-permission.component';
-import { FinalColDevComponent } from './components/Adm-verification/final-col-dev/final-col-dev.component';
+import { ProvisionalLayoutComponent } from './components/verify-tncp/provisional-layout/provisional-layout.component';
+import { DiversionCertificateComponent } from './components/verify-sdm/diversion-certificate/diversion-certificate.component';
+import { DevelopmentPermissionComponent } from './components/verify-sdm/development-permission/development-permission.component';
+import { FinalColDevComponent } from './components/adm-verification/final-col-dev/final-col-dev.component';
+import { ApplicantDataComponent } from './components/applying-form/applicant-data/applicant-data.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ import { FinalColDevComponent } from './components/Adm-verification/final-col-de
     ProvisionalLayoutComponent,
     DiversionCertificateComponent,
     DevelopmentPermissionComponent,
-    FinalColDevComponent
+    FinalColDevComponent,
+    ApplicantDataComponent
   ],
   imports: [
     HttpClientModule,

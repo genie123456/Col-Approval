@@ -9,13 +9,14 @@
       <hr class="dotted-line">
       <div class="form-group">
         <div class="flex-container">
-          <label for="district" class="left required">In which district is colony development permission sought?</label>
-          <select id="district" formControlName="district" class="left">
-            <option value="raipur">Raipur</option>
-            <option value="durg">Durg</option>
-            <option value="bilaspur">Bilaspur</option>
+          <label for="district1" class="left required">In which district is colony development permission sought?</label>
+          <select id="district1" [(ngModel)]="selectedDistrict" class="left" required [ngModelOptions]="{standalone: true}">
+            <option value="" disabled selected>Please Select</option>
+            <option *ngFor="let district of districts" [value]="district.toLowerCase()">
+              {{ district }}
+            </option>
           </select>
-        </div>
+        </div>        
       </div>
       <div class="form-group">
         <div class="flex-container">
@@ -34,8 +35,8 @@
       <div class="form-group">
         <div class="flex-container">
           <label for="khasra-integrated" class="left required">Has the khasra been integrated?</label>
-          <div class="radio-buttons right">
-            <input type="radio" id="yes" name="khasra-integrated" value="yes" (change)="onKhasraIntegratedChange('yes')">
+          <div class="radio-buttons right" >
+            <input type="radio" id="yes" name="khasra-integrated" value="yes" (change)="onKhasraIntegratedChange('yes')" >
             <label for="yes">Yes</label>
             <input type="radio" id="no" name="khasra-integrated" value="no" (change)="onKhasraIntegratedChange('no')">
             <label for="no">No</label>
@@ -91,11 +92,12 @@
             <label for="NeiCol3" class="required left">3.2 Neighbourhood / Colony</label>
             <input type="text" id="NeiCol3" name="NeiCol3" class="right">
             <label class="required left">3.3 District</label>
-            <select id="district3" name="district3" class="right">
-              <option value="raipur">Raipur</option>
-              <option value="durg">Durg</option>
-              <option value="bilaspur">Bilaspur</option>
-            </select>
+              <select id="district3" name="district3" [(ngModel)]="selectedDistrict" class="right" required>
+                <option value="" selected disabled>Please Select</option>
+                <option *ngFor="let district of districts" [value]="district.toLowerCase()">
+                  {{ district }}
+                </option>
+              </select>
           </div>
           </div>
         </div>    
@@ -117,11 +119,12 @@
         <label for="NeiCol4" class="required left">4.4 Neighbourhood / Colony</label>
         <input type="text" id="NeiCol4" name="NeiCol4" class="right">
         <label for="district4" class="required left">4.5 District</label>
-        <select id="district4" name="district4" class="required right">
-          <option value="raipur">Raipur</option>
-            <option value="durg">Durg</option>
-            <option value="bilaspur">Bilaspur</option>
-        </select>
+          <select id="district4" name="district4" [(ngModel)]="selectedDistrict" class="required right">
+            <option value="" selected disabled>Please Select</option>
+            <option *ngFor="let district of districts" [value]="district.toLowerCase()">
+              {{ district }}
+            </option>
+          </select>
       </div>
     </div>
       <div class="col-lg-6">
@@ -134,11 +137,12 @@
             <label for="NeiCol5" class="left">5.3 Neighbourhood / Colony</label>
             <input type="text" id="NeiCol5" name="NeiCol5" class="right">
             <label for="district5" class="left">5.4 District</label>
-            <select id="district5" name="district5" class="right">
-              <option value="raipur">Raipur</option>
-              <option value="durg">Durg</option>
-              <option value="bilaspur">Bilaspur</option>
-            </select>
+              <select id="district5" name="district5" [(ngModel)]="selectedDistrict" class="right">
+                <option value="" selected disabled>Please Select</option>
+                <option *ngFor="let district of districts" [value]="district.toLowerCase()">
+                  {{ district }}
+                </option>
+              </select>
         </div>
         </div>
       </div>    
@@ -166,14 +170,21 @@
   <div class="form-group">
     <div class="row">
     <div class="col-lg-6">
-      <label class="required"><b>8. For what purpose is the permit being requested?</b></label>`
-      <select id="purpose" name="purpose" class="left">
-        <option value="">Please Select</option>
-      </select>
+      <label class="required"><b>8. For what purpose is the permit being requested?</b></label>
+      <div class="container">
+      <select id="purpose" name="purpose" [(ngModel)]="selectedPurpose" class="left" required>
+          <option value="" selected disabled>Please Select</option>
+          <option *ngFor="let purpose of purposes" [value]="purpose.value">
+            {{ purpose.label }}
+          </option>
+        </select>
+      </div>  
       </div>
       <div class="col-lg-6">
         <label class="required"><b>9. Mobile Number</b></label>
-        <input type="text" id="Monumber" name="Monumber" class="right">
+        <div class="container">
+          <input type="text" id="MoNumber" name="MoNumber" class="right">
+      </div>
       </div>
     </div>
   </div>
@@ -183,12 +194,16 @@
   <div class="form-group">
     <div class="row">
     <div class="col-lg-6">
-      <label class="required"><b>10. Email</b></label>`
+      <label class="required"><b>10. Email</b></label>
+      <div class="container">
       <input type="text" id="Email" name="Email" class="right">
+    </div>
       </div>
       <div class="col-lg-6">
         <label class="required"><b>11. If the applicant is a firm, provide the TIN/GSTN number.</b></label>
+        <div class="container">
         <input type="text" id="Firm" name="Firm" class="right">
+      </div>
       </div>
     </div>
   </div>
@@ -213,18 +228,72 @@
       <div class="col-lg-6">
         <label><b>13. The following information will be submitted by me/us to the Town and Village Investment Department for development permission, land diversion from the competent authority, and colony development permission from the urban body/competent authority. The details are as follows:
         </b></label>
+        
         <div class="container">
           <label>(a) Proposed development map (including Khasra superimpose) (Attach as Annexure in the prescribed format in the Annexure Section)
           </label>
           <label class="required">(b) Details of 9% of the land earmarked for transfer to the Economically Weaker Section (EWS):</label>
           <div class="radio-buttonsEWS left">
-            <input type="radio" id="EWS-less" name="EWS" >
-            <label for="EWS-less">If the proposed layout is less than one acre
-            </label>
-            <input type="radio" id="EWS-more" name="EWS">
-            <label for="EWS-more">If the proposed layout is one acre or more</label>
+            <input type="radio" id="EWS-less" formControlName="EWS" value="EWS-less">
+            <label for="EWS-less">If the proposed layout is less than one acre</label>
+            <input type="radio" id="EWS-more" formControlName="EWS" value="EWS-more">
+            <label for="EWS-more">If the proposed layout is one acre or more</label>
+          </div>
+        
+          <div *ngIf="applyingForm.get('EWS')?.value === 'EWS-less'" class="container">
+            <label><b>If the proposed layout is less than one acre</b></label>
+            <div class="radio-buttonsEWS-b-a left">
+              <input type="radio" id="EWS-b-a-PaymentOfLand" formControlName="EWSb" value="PaymentOfLand">
+              <label for="EWS-b-a-PaymentOfLand">Payment of Land</label>
+              <input type="radio" id="EWS-b-a-Plot" formControlName="EWSb" value="Plot">
+              <label for="EWS-b-a-Plot">Plot</label>
+            </div>
+          </div>
+        
+          <div *ngIf="applyingForm.get('EWS')?.value === 'EWS-more'" class="container">
+            <label><b>If the proposed layout is one acre or more</b></label>
+            <div class="container">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="outside" value="option1">
+                <label class="form-check-label" for="outside">Outside of Proposed non-residential area</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inside" value="option2">
+                <label class="form-check-label" for="inside">Within a radius of 01 kilometer (in the Gram Panchayat area) or
+                  within a radius of 03 kilometers (in the urban local body area) from the proposed non-residential area</label>
+              </div>
+            </div>
+        
+            <br>
+        
+            <label><b>Collector guideline rate in the proposed residential area</b></label>
+            <div class="container">
+              <input type="text" id="CGR-Res" name="CGR-Res" class="right">
+            </div>
+        
+            <label><b>Collector guideline rate in the proposed land area</b></label>
+            <div class="container">
+              <input type="text" id="CGR-land" name="CGR-land" class="right">
+            </div>
+        
+            <label><b>Area of EWS land in the proposed residential area</b></label>
+            <div class="container">
+              <input type="text" id="Area-Res" name="Area-Res" class="right">
+            </div>
+        
+            <label><b>Area of the proposed EWS land</b></label>
+            <div class="container">
+              <input type="text" id="Area-land" name="Area-land" class="right">
+            </div>
+        
+            <label><b>Total amount as per collector guideline rate in lieu of 9 percent EWS land</b></label>
+            <div class="container">
+              <input type="text" id="CGR-amount" name="CGR-amount" class="right">
+            </div>
           </div>
         </div>
+        
+        
       </div>
     </div>
   </div>
@@ -234,6 +303,7 @@
   <div class="form-group">
     
       <label for="Clearance"><b>14. Clearance from various departments</b></label>
+      <div class="container">
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" id="PWD" value="option1">
         <label class="form-check-label" for="PWD">PWD (Public Works Department)</label>
@@ -287,6 +357,7 @@
         <label class="form-check-label" for="RES">RES (Rural Engineering Services)</label>
       </div>
     </div>
+    </div>
     </form>
   </div>
 
@@ -296,7 +367,7 @@
     <div class="form-group">
       <div class="container">
         <label class="required">Apply to the Office</label>
-        <div>
+        <div class="container">
           <input type="text" id="office" name="office">
         </div>
         
@@ -314,5 +385,4 @@
           <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
         </div>
       </div> 
-      
 </div>
