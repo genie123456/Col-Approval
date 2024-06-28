@@ -33,7 +33,6 @@ import { DiversionCertificateComponent } from './components/verify-sdm/diversion
 import { DevelopmentPermissionComponent } from './components/verify-sdm/development-permission/development-permission.component';
 import { FinalColDevComponent } from './components/adm-verification/final-col-dev/final-col-dev.component';
 
-
 // Define routes
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

@@ -35,3 +35,46 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.signup-button{
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* Styling for success and error messages */
+.success-message, .error-message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.success-message {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.error-message {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.outer-container {
+  background-color: rgb(227, 230, 239);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  padding-top: 50px; /* Adjust the padding-top as needed */
+  padding-bottom: 50px; /* Add padding-bottom to adjust the gap to the footer */
+  height: 100vh; /* Vertically center the container */
+}
+
+.signup-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

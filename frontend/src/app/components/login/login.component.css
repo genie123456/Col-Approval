@@ -106,3 +106,21 @@ button {
 .btn-dark .bi {
   font-size: 1.5em; /* Increase the font size as needed */
 }
+
+.outer-container {
+  background-color: rgb(227, 230, 239);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  padding-top: 50px; /* Adjust the padding-top as needed to reduce the gap */
+  padding-bottom: 50px; 
+  height: 100vh; /* Vertically center the container */
+}
+
+.login-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}

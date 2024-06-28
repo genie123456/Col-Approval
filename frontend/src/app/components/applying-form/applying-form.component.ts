@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ApplicantDataComponent } from './applicant-data/applicant-data.component';
 
 @Component({
   selector: 'app-applying-form',
@@ -16,109 +17,59 @@ export class ApplyingFormComponent {
   ].sort();
 
   selectedDistrict: string = '';
-
-  purposes = [
-    { value: 'plotted', label: 'Plotted' },
-    { value: 'corporate', label: 'Corporate' },
-    { value: 'plotted_corporate', label: 'Plotted and Corporate' }
-  ];
-
-  selectedPurpose: string = '';
-
   applyingForm: FormGroup;
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
 
-  constructor(private fb: FormBuilder) {
+  @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
+
+  constructor(
+    private fb: FormBuilder
+  ) {
     this.applyingForm = this.fb.group({
       district: [''],
       area: [''],
       khasraIntegrated: [''],
       integratedKhasraNumber: [''],
-      fullName: [''],
-      LUB: [''],
-      Srno: [''],
-      date2: [''],
-      Hno: [''],
-      NeiCol3: [''],
-      district3: [''],
-      Surveyno: [''],
-      areaDetails: [''],
-      village: [''],
-      NeiCol4: [''],
-      district4: [''],
-      NameDL: [''],
-      village5: [''],
-      NeiCol5: [''],
-      district5: [''],
-      RelLR: [''],
-      purpose: [''],
-      MoNumber: [''],
-      Email: [''],
-      Firm: [''],
-      EWS: [''],
       office: [''],
-      clearances: this.fb.group({
-        PWD: [false],
-        WRD: [false],
-        CSEB: [false],
-        CECB: [false],
-        NHAI: [false],
-        PHED: [false],
-        PMGSY: [false],
-        FOREST: [false],
-        FireNOC: [false],
-        GramPan: [false],
-        NNNPTP: [false],
-        Revenue: [false],
-        RES: [false]
-      })
     });
 
-    // Subscribe to changes on the khasraIntegrated form control
     this.applyingForm.get('khasraIntegrated')!.valueChanges.subscribe(value => {
       this.onKhasraIntegratedChange(value);
-    });
-
-    // Subscribe to changes on the EWS form control
-    this.applyingForm.get('EWS')!.valueChanges.subscribe(value => {
-      this.onEWSChange(value);
     });
   }
 
   onKhasraIntegratedChange(value: string) {
     this.showAdditionalForm = (value === 'yes');
     this.isKhasraIntegrated = (value === 'yes');
+    // if (value === 'yes') {
+    //   this.loadApplicantDataComponent();
+    // } else {
+    //   this.container.clear();
+    // }
   }
 
-  onEWSChange(value: string) {
-    if (value === 'EWS-less') {
-      this.applyingForm.addControl('EWSb', this.fb.control(''));
-    } else {
-      this.applyingForm.removeControl('EWSb');
-    }
-  }
+  // loadApplicantDataComponent() {
+  //   this.container.clear();
+  //   this.container.createComponent(ApplicantDataComponent);
+  // }
 
   onSubmit() {
     if (this.isKhasraIntegrated) {
       console.log('Form submitted:', this.applyingForm.value);
-      // Implement form submission logic here
     } else {
       alert('Please get it integrated from the revenue department before applying for colony approval.');
     }
   }
 
-  saveDraft() {
-    // Implement save draft functionality if needed
-  }
+  saveDraft() {}
 
   onReset() {
     this.applyingForm.reset();
-    this.isKhasraIntegrated = true; // Reset khasra integration state
+    this.isKhasraIntegrated = true;
   }
 
   onCancel() {
     console.log('Form cancelled');
-    // Implement cancellation logic if needed
   }
 }
