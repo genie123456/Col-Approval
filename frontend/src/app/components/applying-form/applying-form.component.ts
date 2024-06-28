@@ -1,19 +1,17 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ApplicantDataComponent } from './applicant-data/applicant-data.component';
 
 @Component({
   selector: 'app-applying-form',
   templateUrl: './applying-form.component.html',
   styleUrls: ['./applying-form.component.css']
 })
-export class ApplyingFormComponent {
+export class ApplyingFormComponent implements OnInit {
   districts: string[] = [
-    'Balod', 'Baloda Bazar', 'Balrampur', 'Bastar', 'Bemetara', 'Bijapur',
-    'Bilaspur', 'Dantewada', 'Dhamtari', 'Durg', 'Gariaband', 'Gaurela-Pendra-Marwahi',
-    'Janjgir-Champa', 'Jashpur', 'Kabirdham', 'Kanker', 'Kondagaon', 'Korba',
-    'Koriya', 'Mahasamund', 'Mungeli', 'Narayanpur', 'Raigarh', 'Raipur',
-    'Rajnandgaon', 'Sukma', 'Surajpur', 'Surguja'
+    'Balod', 'Baloda Bazar - Bhatapara', 'Balrampur - Ramanujganj', 'Bastar', 'Bemetara', 'Bijapur',
+    'Bilaspur', 'Dakshin Bastar Dantewada', 'Dhamtari', 'Durg', 'Gariaband', 'Gaurela-Pendra-Marwahi',
+    'Janjgir-Champa', 'Jashpur', 'Kabirdham', 'Khairagarh Chhuikhadan Gandai', 'Kondagaon', 'Korba',
+    'Korea', 'Mahasamund', 'Manendragarh Chirmiri Bharatpur Mcb', 'Mohla Manpur Ambagarh Chouki', 'Mungeli', 'Narayanpur', 'Raigarh', 'Raipur', 'Rajnandgaon', 'Sakti', 'Sarangarh Bilaigarh', 'Sukma', 'Surajpur', 'Surguja', 'Uttar Bastar Kanker'
   ].sort();
 
   selectedDistrict: string = '';
@@ -23,15 +21,14 @@ export class ApplyingFormComponent {
 
   @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
 
-  constructor(
-    private fb: FormBuilder
-  ) {
+  constructor(private fb: FormBuilder) {
     this.applyingForm = this.fb.group({
       district: [''],
       area: [''],
       khasraIntegrated: [''],
       integratedKhasraNumber: [''],
       office: [''],
+      body: [{ value: '', disabled: true }] // Added form control for body
     });
 
     this.applyingForm.get('khasraIntegrated')!.valueChanges.subscribe(value => {
@@ -39,20 +36,21 @@ export class ApplyingFormComponent {
     });
   }
 
+  ngOnInit(): void {
+    // Subscribe to changes in the 'area' form control to show/hide the body options
+    this.applyingForm.get('area')!.valueChanges.subscribe(value => {
+      if (value === 'urban') {
+        this.applyingForm.get('body')!.enable(); // Enable the body options
+      } else {
+        this.applyingForm.get('body')!.disable(); // Disable the body options for other areas
+      }
+    });
+  }
+
   onKhasraIntegratedChange(value: string) {
     this.showAdditionalForm = (value === 'yes');
     this.isKhasraIntegrated = (value === 'yes');
-    // if (value === 'yes') {
-    //   this.loadApplicantDataComponent();
-    // } else {
-    //   this.container.clear();
-    // }
   }
-
-  // loadApplicantDataComponent() {
-  //   this.container.clear();
-  //   this.container.createComponent(ApplicantDataComponent);
-  // }
 
   onSubmit() {
     if (this.isKhasraIntegrated) {

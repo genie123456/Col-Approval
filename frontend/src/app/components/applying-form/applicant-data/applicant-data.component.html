@@ -38,7 +38,7 @@
                 <input type="text" id="NeiCol3" name="NeiCol3" class="right">
                 <label class="required left">3.3 District</label>
                   <select id="district3" name="district3" [(ngModel)]="selectedDistrict" class="right" required>
-                    <option value="" selected disabled>Please Select</option>
+                    <option value="" disabled selected>Please Select</option>
                     <option *ngFor="let district of districts" [value]="district.toLowerCase()">
                       {{ district }}
                     </option>
@@ -65,7 +65,7 @@
             <input type="text" id="NeiCol4" name="NeiCol4" class="right">
             <label for="district4" class="required left">4.5 District</label>
               <select id="district4" name="district4" [(ngModel)]="selectedDistrict" class="required right">
-                <option value="" selected disabled>Please Select</option>
+                <option value="" disabled selected>Please Select</option>
                 <option *ngFor="let district of districts" [value]="district.toLowerCase()">
                   {{ district }}
                 </option>
@@ -83,7 +83,7 @@
                 <input type="text" id="NeiCol5" name="NeiCol5" class="right">
                 <label for="district5" class="left">5.4 District</label>
                   <select id="district5" name="district5" [(ngModel)]="selectedDistrict" class="right">
-                    <option value="" selected disabled>Please Select</option>
+                    <option value="" disabled selected>Please Select</option>
                     <option *ngFor="let district of districts" [value]="district.toLowerCase()">
                       {{ district }}
                     </option>
@@ -118,7 +118,7 @@
           <label class="required"><b>8. For what purpose is the permit being requested?</b></label>
           <div class="container">
           <select id="purpose" name="purpose" [(ngModel)]="selectedPurpose" class="left" required>
-              <option value="" selected disabled>Please Select</option>
+              <option value="" disabled selected>Please Select</option>
               <option *ngFor="let purpose of purposes" [value]="purpose.value">
                 {{ purpose.label }}
               </option>
