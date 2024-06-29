@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewContainerRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-applying-form',
@@ -14,7 +14,6 @@ export class ApplyingFormComponent implements OnInit {
     'Korea', 'Mahasamund', 'Manendragarh Chirmiri Bharatpur Mcb', 'Mohla Manpur Ambagarh Chouki', 'Mungeli', 'Narayanpur', 'Raigarh', 'Raipur', 'Rajnandgaon', 'Sakti', 'Sarangarh Bilaigarh', 'Sukma', 'Surajpur', 'Surguja', 'Uttar Bastar Kanker'
   ].sort();
 
-  selectedDistrict: string = '';
   applyingForm: FormGroup;
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
@@ -23,12 +22,15 @@ export class ApplyingFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.applyingForm = this.fb.group({
-      district: [''],
-      area: [''],
-      khasraIntegrated: [''],
-      integratedKhasraNumber: [''],
-      office: [''],
-      body: [{ value: '', disabled: true }] // Added form control for body
+      selectedDistrict: ['', Validators.required], // form control for selected district
+      area: ['', Validators.required], // form control for area
+      body: [{ value: '', disabled: true }], // form control for body
+      choosingCorporation: [''], // form control for choosing corporation
+      choosingCouncil: [''], // form control for choosing council
+      choosingJury: [''], // form control for choosing jury
+      khasraIntegrated: ['', Validators.required], // form control for khasra integration
+      integratedKhasraNumber: [''], // form control for integrated khasra number
+      office: [''] // form control for office
     });
 
     this.applyingForm.get('khasraIntegrated')!.valueChanges.subscribe(value => {
@@ -60,7 +62,10 @@ export class ApplyingFormComponent implements OnInit {
     }
   }
 
-  saveDraft() {}
+  saveDraft() {
+    // Custom logic to save the form as draft
+    console.log('Draft saved:', this.applyingForm.value);
+  }
 
   onReset() {
     this.applyingForm.reset();
