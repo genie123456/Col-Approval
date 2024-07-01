@@ -14,10 +14,10 @@
   }
 
   .dropdown-wrapper {
-    margin-bottom: 20px; /* Adjust the margin as needed */
+    margin-bottom: 20px; 
   }
 
-  /* Center the form container */
+
   .form-container {
     display: flex;
     flex-direction: column;

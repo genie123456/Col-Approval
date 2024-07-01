@@ -1,23 +1,42 @@
 .profile-icon {
-    /* font-size: 1.5rem; */
-    cursor: pointer;
-    margin-right: 1mm;
-  }
-  
-  .welcome-message {
-    cursor: pointer;
-  }
+  /* font-size: 1.5rem; */
+  cursor: pointer;
+  margin-right: 1mm;
+  color: white;
+}
 
-  .navbar{
-    border-bottom: 1px solid #000;
-    background-color: rgb(103, 102, 149);
-  }
+.welcome-message {
+  cursor: pointer;
+  color: white;
+}
 
-  .navbar-brand {
-    /* Adjust margin or padding for left alignment */
-    margin-left: 1rem;  /* Example: Margin for left alignment */
-  }
+.navbar {
+  border-bottom: 1px solid #000;
+  background-color: rgb(103, 102, 149);
+}
 
-  .navbar-ending{
-    margin-right: 1rem;  /* Example: Margin for right alignment */
-  }
+.navbar-brand {
+  /* Adjust margin or padding for left alignment */
+  margin-left: 1rem;  /* Example: Margin for left alignment */
+  color: white;
+}
+
+.navbar-ending {
+  margin-right: 1rem;  /* Example: Margin for right alignment */
+}
+
+.nav-link {
+  color: white;
+}
+
+.navbar-toggler {
+  color: white;
+}
+
+.navbar-toggler-icon {
+  color: white;
+}
+
+.navbar-collapse {
+  color: white;
+}

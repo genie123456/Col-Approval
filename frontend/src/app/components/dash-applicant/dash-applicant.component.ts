@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./dash-applicant.component.css']
 })
 export class DashApplicantComponent {
-
 }

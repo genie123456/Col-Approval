@@ -1,25 +1,130 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+<nav class="sidebar">
+  <div class="text">
+    Menu
+  </div>
+  <ul class="main_side">
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#account-collapse1" aria-expanded="false">
+        <i class="bi bi-envelope"></i>
+        Manage Profile
+        <i class="bi bi-caret-down"></i>
+      </a>
+      <div class="collapse" id="account-collapse1">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+          <li>
+            <i class="bi bi-caret-right-fill"></i>
+            <a href="#" class="text-white">View Profile</a>
+          </li>
+          <li>
+            <i class="bi bi-caret-right-fill"></i>
+            <a href="#" class="text-white">Edit Profile</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#account-collapse2" aria-expanded="false">
+        <i class="bi bi-envelope"></i>
+        View Status of Application
+        <i class="bi bi-caret-down"></i>
+      </a>
+      <div class="collapse" id="account-collapse2">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+          <li>
+            <i class="bi bi-caret-right-fill"></i>
+            <a class="text-white">Track Application Status</a>
+          </li>
+          <li>
+            <i class="bi bi-caret-right-fill"></i>
+            <a href="#" class="text-white">View Incomplete Application</a>
+          </li>
+          <li>
+            <i class="bi bi-caret-right-fill"></i>
+            <a href="#" class="text-white">Revalidate Payment</a>
+          </li>
+          <li>
+            <i class="bi bi-caret-right-fill"></i>
+            <a href="#" class="text-white">Modify Submission</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="bi bi-chat-right-fill"></i>
+        Submit Feedback
+      </a>
+    </li>
+  </ul>
+  <hr>
+</nav>
+
+
+
+
+<!-- <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-container">
   <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    
     <span class="fs-4">Menu</span>
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-      <a href="#" class="nav-link active" aria-current="page">
-        <i class="bi bi-building-gear"></i>
-        Apply for Services
-        <i class="bi bi-arrow-right-short"></i>
+      <a href="#" class="nav-link">
+        <div class="text-white dropdown" data-bs-toggle="collapse" data-bs-target="#account-collapse1" aria-expanded="false">
+          <i class="bi bi-envelope"></i>
+          Manage Profile
+          <i class="bi bi-caret-down"></i>
+        </div>
+        <div class="collapse" id="account-collapse1">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+            <li>
+              <i class="bi bi-caret-right-fill"></i>
+              <a class="text-white">View Profile</a>
+            </li>
+            <li>
+              <i class="bi bi-caret-right-fill"></i>
+              <a href="#" class="text-white">Edit Profile</a>
+            </li>
+          </ul>
+        </div>
       </a>
     </li>
-    <li>
-      <a href="#" class="nav-link text-white">
-        <i class="bi bi-window-dock"></i>
-        View Status of Application
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <div class="text-white dropdown" data-bs-toggle="collapse" data-bs-target="#account-collapse2" aria-expanded="false">
+          <i class="bi bi-envelope"></i>
+          View Status of Application
+          <i class="bi bi-caret-down"></i>
+        </div>
+        <div class="collapse" id="account-collapse2">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+            <li>
+              <i class="bi bi-caret-right-fill"></i>
+              <a class="text-white">Track Application Status</a>
+            </li>
+            <li>
+              <i class="bi bi-caret-right-fill"></i>
+              <a href="#" class="text-white">View Incomplete Application</a>
+            </li>
+            <li>
+              <i class="bi bi-caret-right-fill"></i>
+              <a href="#" class="text-white">Revalidate Payment</a>
+            </li>
+            <li>
+              <i class="bi bi-caret-right-fill"></i>
+              <a href="#" class="text-white">Modify Submission</a>
+            </li>
+          </ul>
+        </div>
       </a>
     </li>
-    <li>
-      <a href="#" class="nav-link text-white">
+    <li class="nav-item">
+      <a >
         <i class="bi bi-chat-right-fill"></i>
         Submit Feedback
       </a>
@@ -29,14 +134,15 @@
   <div class="dropdown">
     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
       <i class="bi bi-person-circle" routerLink="/dashboard"></i>
-      
-      <span class="ms-2">Welcome, {{ username }}  </span>
+      <span class="ms-2">Welcome, {{ username }}</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
       <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
     </ul>
   </div>
-</div>
+</div> -->
+
+
 
 <!-- <body>
   <div class="wrapper">
