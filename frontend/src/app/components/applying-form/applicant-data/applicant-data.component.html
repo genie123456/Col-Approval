@@ -1,6 +1,6 @@
 
-    <div class="form-container"  id="additional-form">
-        <form [formGroup]="applyingForm">
+    <div class="form-container" id="additional-form">
+        <form [formGroup]="applicantData">
           <span class="bannerISW">Format for Application for Colony Approval</span>
           <hr class="dotted-line">
           <div class="form-group">
@@ -177,7 +177,7 @@
                 <input type="radio" id="EWS-more" formControlName="EWS" value="EWS-more">
                 <label for="EWS-more">If the proposed layout is one acre or more</label>
               </div>
-              <div *ngIf="applyingForm.get('EWS')?.value === 'EWS-less'" class="container">
+              <div *ngIf="applicantData.get('EWS')?.value === 'EWS-less'" class="container">
                 <label><b>If the proposed layout is less than one acre</b></label>
                 <div class="radio-buttonsEWS-b-a left">
                   <input type="radio" id="EWS-b-a-PaymentOfLand" formControlName="EWSb" value="PaymentOfLand">
@@ -186,7 +186,7 @@
                   <label for="EWS-b-a-Plot">Plot</label>
                 </div>
               </div>
-              <div *ngIf="applyingForm.get('EWS')?.value === 'EWS-more'" class="container">
+              <div *ngIf="applicantData.get('EWS')?.value === 'EWS-more'" class="container">
                 <label><b>If the proposed layout is one acre or more</b></label>
                 <div class="container">
                   <div class="form-check form-check-inline">

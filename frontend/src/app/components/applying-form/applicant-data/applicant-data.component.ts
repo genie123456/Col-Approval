@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-applicant-data',
@@ -24,12 +24,12 @@ export class ApplicantDataComponent {
 
   selectedPurpose: string = '';
 
-  applyingForm: FormGroup;
+  applicantData: FormGroup;
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
 
   constructor(private fb: FormBuilder) {
-    this.applyingForm = this.fb.group({
+    this.applicantData = this.fb.group({
       fullName: [''],
       LUB: [''],
       Srno: [''],
@@ -76,21 +76,21 @@ export class ApplicantDataComponent {
     });
 
     // Subscribe to changes on the EWS form control
-    this.applyingForm.get('EWS')!.valueChanges.subscribe(value => {
+    this.applicantData.get('EWS')!.valueChanges.subscribe(value => {
       this.onEWSChange(value);
     });
   }
 
   onEWSChange(value: string) {
     if (value === 'EWS-less') {
-      this.applyingForm.addControl('EWSb', this.fb.control(''));
+      this.applicantData.addControl('EWSb', this.fb.control(''));
     } else {
-      this.applyingForm.removeControl('EWSb');
+      this.applicantData.removeControl('EWSb');
     }
   }
 
   onSubmit() {
-    console.log('Form submitted:', this.applyingForm.value);
+    console.log('Form submitted:', this.applicantData.value);
     // Implement form submission logic here
   }
 
@@ -99,7 +99,7 @@ export class ApplicantDataComponent {
   }
 
   onReset() {
-    this.applyingForm.reset();
+    this.applicantData.reset();
     this.isKhasraIntegrated = true; // Reset khasra integration state
   }
 
