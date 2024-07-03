@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApplyingFormService } from 'src/app/services/applying-form.service';
 
 @Component({
   selector: 'app-applicant-data',
@@ -28,7 +29,7 @@ export class ApplicantDataComponent {
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private applyingFormService: ApplyingFormService) {
     this.applicantData = this.fb.group({
       fullName: [''],
       LUB: [''],
@@ -46,18 +47,21 @@ export class ApplicantDataComponent {
       village5: [''],
       neighbourhoodColony5: [''],
       district5: [''],
-      EWS: [''],
-      EWSb: [''],
-      CGRResidential: [''],
-      CGRLand: [''],
-      EWSAreaResidential: [''],
-      EWSAreaLand: [''],
-      CGRAmount: [''],
       relinquishment: [''],
       permitPurpose: [''],
       mobileNumber: [''],
       email: [''],
       tinGstnNumber: [''],
+
+      EWS: [''],
+      EWSb: [''],
+      side: [''],
+      CGRResidential: [''],
+      CGRLand: [''],
+      EWSAreaResidential: [''],
+      EWSAreaLand: [''],
+      CGRAmount: [''],
+  
       clearances: this.fb.group({
         clearancePWD: [false],
         clearanceWRD: [false],
@@ -90,12 +94,27 @@ export class ApplicantDataComponent {
   }
 
   onSubmit() {
-    console.log('Form submitted:', this.applicantData.value);
-    // Implement form submission logic here
+    if (this.applicantData.valid) {
+      this.applyingFormService.saveApplicantData(this.applicantData.value).subscribe(
+        response => {
+          console.log('Form submitted successfully:', response);
+        },
+        error => {
+          console.error('Error submitting form:', error);
+        }
+      );
+    }
   }
 
   saveDraft() {
-    // Implement save draft functionality if needed
+    this.applyingFormService.saveDraft(this.applicantData.value).subscribe(
+      response => {
+        console.log('Draft saved:', response);
+      },
+      error => {
+        console.error('Error saving draft:', error);
+      }
+    );
   }
 
   onReset() {

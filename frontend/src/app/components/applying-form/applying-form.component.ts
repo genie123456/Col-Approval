@@ -1,5 +1,6 @@
-import { Component, ViewChild, ViewContainerRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApplyingFormService } from 'src/app/services/applying-form.service';
 
 @Component({
   selector: 'app-applying-form',
@@ -20,9 +21,7 @@ export class ApplyingFormComponent implements OnInit {
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
 
-  @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
-
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private applyingFormService: ApplyingFormService) {
     this.applyingForm = this.fb.group({
       selectedDistrict: ['', Validators.required], // form control for selected district
       area: ['', Validators.required], // form control for area
@@ -32,9 +31,10 @@ export class ApplyingFormComponent implements OnInit {
       choosingJury: [''], // form control for choosing jury
       khasraIntegrated: ['', Validators.required], // form control for khasra integration
       integratedKhasraNumber: [''], // form control for integrated khasra number
-      office: [''] // form control for office
+      office: ['', Validators.required] // form control for office
     });
 
+    // Subscribe to changes in the 'khasraIntegrated' form control to show/hide additional form fields
     this.applyingForm.get('khasraIntegrated')!.valueChanges.subscribe(value => {
       this.onKhasraIntegratedChange(value);
     });
@@ -58,15 +58,28 @@ export class ApplyingFormComponent implements OnInit {
 
   onSubmit() {
     if (this.isKhasraIntegrated) {
-      console.log('Form submitted:', this.applyingForm.value);
+      this.applyingFormService.saveApplyingFormData(this.applyingForm.value).subscribe(
+        response => {
+          console.log('Form submitted:', response);
+        },
+        error => {
+          console.error('Error submitting form:', error);
+        }
+      );
     } else {
       alert('Please get it integrated from the revenue department before applying for colony approval.');
     }
   }
 
   saveDraft() {
-    // Custom logic to save the form as draft
-    console.log('Draft saved:', this.applyingForm.value);
+    this.applyingFormService.saveDraft(this.applyingForm.value).subscribe(
+      response => {
+        console.log('Draft saved:', response);
+      },
+      error => {
+        console.error('Error saving draft:', error);
+      }
+    );
   }
 
   onReset() {

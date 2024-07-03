@@ -46,6 +46,7 @@ import { DiversionCertificateComponent } from './components/verify-sdm/diversion
 import { DevelopmentPermissionComponent } from './components/verify-sdm/development-permission/development-permission.component';
 import { FinalColDevComponent } from './components/adm-verification/final-col-dev/final-col-dev.component';
 import { ApplicantDataComponent } from './components/applying-form/applicant-data/applicant-data.component';
+import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ApplicantDataComponent } from './components/applying-form/applicant-dat
     DiversionCertificateComponent,
     DevelopmentPermissionComponent,
     FinalColDevComponent,
-    ApplicantDataComponent
+    ApplicantDataComponent,
+    SplashScreenComponent
   ],
   imports: [
     HttpClientModule,

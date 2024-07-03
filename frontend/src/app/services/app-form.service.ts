@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppFormService {
-  private formFieldsUrl = 'http://localhost:3000/formFields';
+  private formFieldsUrl = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) { }
 

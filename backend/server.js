@@ -4,7 +4,6 @@ const session = require('express-session');
 const pool = require('./dbConfig'); // Import the database connection pool
 const crypto = require('crypto'); // Import the crypto module
 
-const FormFields = require('./models/FormFields')
 const formFieldsRoutes = require('./routes/formFields');
 
 const app = express();
@@ -35,16 +34,11 @@ app.use(session({
 }));
 
 // Use the formFields route for form submissions
-app.use('/api/formFields', formFieldsRoutes);
+app.use('/formFields', formFieldsRoutes);
 
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); // Sync the model with the database
-    console.log('FormFields table synced successfully.');
-  } catch (error) {
-    console.error('Error syncing FormFields table:', error);
-  }
-})();
+app.get('/get', async (req, res) => {
+  res.send('working');
+});
 
 // Signup route
 app.post('/signup', async (req, res) => {

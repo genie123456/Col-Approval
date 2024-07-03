@@ -19,9 +19,9 @@
             
             <div class="container">
               <label for="LUB" class="left">2.1 Name of the Issuing Local Urban Body</label>
-              <input type="text" id="LUB" name="LUB" class="right">
+              <input type="text" id="LUB" name="LUB" class="right" formControlName="LUB">
               <label for="Srno" class="left">2.2 Serial Number</label>
-              <input type="text" id="Srno" name="Srno" class="right">
+              <input type="text" id="Srno" name="Srno" class="right" formControlName="Srno">
               <label for="date2" class="required left">2.3 Date</label>
               <div class="date-input-container right">
                 <input type="date" class="form-control date-input" formControlName="registrationDate">
@@ -33,9 +33,9 @@
                 <label ><b>3. Current Address</b></label>
                 <div class="container">
                 <label class="required left">3.1 House Number</label>
-                <input type="text" id="Hno" name="Hno" class="right" formControlName="neighbourhoodColony">
+                <input type="text" id="Hno" name="Hno" class="right" formControlName="Hno">
                 <label for="NeiCol3" class="required left">3.2 Neighbourhood / Colony</label>
-                <input type="text" id="NeiCol3" name="NeiCol3" class="right">
+                <input type="text" id="NeiCol3" name="NeiCol3" class="right" formControlName="neighbourhoodColony">
                 <label class="required left">3.3 District</label>
                   <select id="district3" name="district3" [(ngModel)]="selectedDistrict" class="right" formControlName="district">
                     <option value="" disabled selected>Please Select</option>
@@ -190,11 +190,11 @@
                 <label><b>If the proposed layout is one acre or more</b></label>
                 <div class="container">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="outside" formControlName="outside">
+                    <input class="form-check-input" type="checkbox" id="outside" formControlName="side">
                     <label class="form-check-label" for="outside">Outside of Proposed non-residential area</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inside" formControlName="inside">
+                    <input class="form-check-input" type="checkbox" id="inside" formControlName="side">
                     <label class="form-check-label" for="inside">Within a radius of 01 kilometer (in the Gram Panchayat area) or within a radius of 03 kilometers (in the urban local body area) from the proposed non-residential area</label>
                   </div>
                 </div>

@@ -2,7 +2,7 @@
   <span>Chhattisgarh Automated Workflow and Approval System</span>
 </div>
 
-<div class="container">
+<div class="container applying-form-container" >
   <div class="form-container">
     <form [formGroup]="applyingForm">
       <span class="bannerISW">Integrated Single Window System Approval</span>
@@ -86,7 +86,7 @@
     </form>
   </div>
 
-  <div *ngIf="showAdditionalForm">
+  <div *ngIf="showAdditionalForm" class="applicant-data-container">
     <app-applicant-data></app-applicant-data>
   </div>
 
