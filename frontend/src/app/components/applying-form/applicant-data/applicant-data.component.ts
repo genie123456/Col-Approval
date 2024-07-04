@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
 
@@ -8,6 +8,9 @@ import { ApplyingFormService } from 'src/app/services/applying-form.service';
   styleUrls: ['./applicant-data.component.css']
 })
 export class ApplicantDataComponent {
+  @Input() applicantFormData!: FormGroup; // Input property to receive data from parent component
+  @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>(); // Output property to emit form submit event
+
   districts: string[] = [
     'Balod', 'Baloda Bazar - Bhatapara', 'Balrampur - Ramanujganj', 'Bastar', 'Bemetara', 'Bijapur',
     'Bilaspur', 'Dakshin Bastar Dantewada', 'Dhamtari', 'Durg', 'Gariaband', 'Gaurela-Pendra-Marwahi',
@@ -25,12 +28,12 @@ export class ApplicantDataComponent {
 
   selectedPurpose: string = '';
 
-  applicantData: FormGroup;
+  // applicantData: FormGroup;
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
 
   constructor(private fb: FormBuilder, private applyingFormService: ApplyingFormService) {
-    this.applicantData = this.fb.group({
+    this.applicantFormData = this.fb.group({
       fullName: [''],
       LUB: [''],
       Srno: [''],
@@ -80,34 +83,34 @@ export class ApplicantDataComponent {
     });
 
     // Subscribe to changes on the EWS form control
-    this.applicantData.get('EWS')!.valueChanges.subscribe(value => {
+    this.applicantFormData.get('EWS')!.valueChanges.subscribe(value => {
       this.onEWSChange(value);
     });
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['applicantFormData'] && changes['applicantFormData'].currentValue) {
+      this.applicantFormData = changes['applicantFormData'].currentValue;
+      // If additional setup is needed when the input property changes, add it here
+    }
+  }
+
   onEWSChange(value: string) {
     if (value === 'EWS-less') {
-      this.applicantData.addControl('EWSb', this.fb.control(''));
+      this.applicantFormData.addControl('EWSb', this.fb.control(''));
     } else {
-      this.applicantData.removeControl('EWSb');
+      this.applicantFormData.removeControl('EWSb');
     }
   }
 
   onSubmit() {
-    if (this.applicantData.valid) {
-      this.applyingFormService.saveApplicantData(this.applicantData.value).subscribe(
-        response => {
-          console.log('Form submitted successfully:', response);
-        },
-        error => {
-          console.error('Error submitting form:', error);
-        }
-      );
+    if (this.applicantFormData.valid) {
+      this.formSubmit.emit(this.applicantFormData.value); // Emit form submit event with form data
     }
   }
 
   saveDraft() {
-    this.applyingFormService.saveDraft(this.applicantData.value).subscribe(
+    this.applyingFormService.saveDraft(this.applicantFormData.value).subscribe(
       response => {
         console.log('Draft saved:', response);
       },
@@ -118,7 +121,7 @@ export class ApplicantDataComponent {
   }
 
   onReset() {
-    this.applicantData.reset();
+    this.applicantFormData.reset();
     this.isKhasraIntegrated = true; // Reset khasra integration state
   }
 

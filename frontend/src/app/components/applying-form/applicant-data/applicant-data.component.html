@@ -1,58 +1,62 @@
+<div class="form-container" id="additional-form">
+  <form [formGroup]="applicantFormData">
+    <span class="bannerISW">Format for Application for Colony Approval</span>
+    <hr class="dotted-line">
+    <div class="form-group">
+      <div class="flex-container">
+        <label for="full-name" class="required left"><b>1. Applicant's full name</b> (Mention if it is an individual,
+          firm, cooperative society, society, company, or any other category. Also, attach the Partnership Deed/MOAA in
+          PDF format as an Annexure in the Annexure Section.)</label>
+        <input type="text" class="right" id="full-name" formControlName="fullName">
+      </div>
+    </div>
+    <br>
+    <div class="flex-container form-group">
+      <div class="row">
+        <div class="col-lg-6">
+          <div>
+            <label class="d-flex"><b>2. Colonizer Registration Certificate(Attach a copy in PDF format of the issuing
+                local urban body’s name, serial number, and date as an annexure in the Annexure Section.)</b></label>
+          </div>
 
-    <div class="form-container" id="additional-form">
-        <form [formGroup]="applicantData">
-          <span class="bannerISW">Format for Application for Colony Approval</span>
-          <hr class="dotted-line">
-          <div class="form-group">
-            <div class="flex-container">
-              <label for="full-name" class="required left"><b>1. Applicant's full name</b> (Mention if it is an individual, firm, cooperative society, society, company, or any other category. Also, attach the Partnership Deed/MOAA in PDF format as an Annexure in the Annexure Section.)</label>
-              <input type="text" class="right" id="full-name" formControlName="fullName">
-            </div>
-            </div>
-            <br>
-            <div class="flex-container form-group">
-            <div class="row">
-            <div class="col-lg-6">
-            <div>
-              <label class="d-flex"><b>2. Colonizer Registration Certificate(Attach a copy in PDF format of the issuing local urban body’s name, serial number, and date as an annexure in the Annexure Section.)</b></label>
-            </div>
-            
-            <div class="container">
-              <label for="LUB" class="left">2.1 Name of the Issuing Local Urban Body</label>
-              <input type="text" id="LUB" name="LUB" class="right" formControlName="LUB">
-              <label for="Srno" class="left">2.2 Serial Number</label>
-              <input type="text" id="Srno" name="Srno" class="right" formControlName="Srno">
-              <label for="date2" class="required left">2.3 Date</label>
-              <div class="date-input-container right">
-                <input type="date" class="form-control date-input" formControlName="registrationDate">
-                <div class="calendar-icon"></div>
-            </div>
+          <div class="container">
+            <label for="LUB" class="left">2.1 Name of the Issuing Local Urban Body</label>
+            <input type="text" id="LUB" name="LUB" class="right" formControlName="LUB">
+            <label for="Srno" class="left">2.2 Serial Number</label>
+            <input type="text" id="Srno" name="Srno" class="right" formControlName="Srno">
+            <label for="date2" class="required left">2.3 Date</label>
+            <div class="date-input-container right">
+              <input type="date" class="form-control date-input" formControlName="registrationDate">
+              <div class="calendar-icon"></div>
             </div>
           </div>
-            <div class="col-lg-6">
-                <label ><b>3. Current Address</b></label>
-                <div class="container">
-                <label class="required left">3.1 House Number</label>
-                <input type="text" id="Hno" name="Hno" class="right" formControlName="Hno">
-                <label for="NeiCol3" class="required left">3.2 Neighbourhood / Colony</label>
-                <input type="text" id="NeiCol3" name="NeiCol3" class="right" formControlName="neighbourhoodColony">
-                <label class="required left">3.3 District</label>
-                  <select id="district3" name="district3" [(ngModel)]="selectedDistrict" class="right" formControlName="district">
-                    <option value="" disabled selected>Please Select</option>
-                    <option *ngFor="let district of districts" [value]="district.toLowerCase()">
-                      {{ district }}
-                    </option>
-                  </select>
-              </div>
-              </div>
-            </div>    
         </div>
-     <br>
-        <div class="flex-container form-group">
-          <div class="row">
-          <div class="col-lg-6">
+        <div class="col-lg-6">
+          <label><b>3. Current Address</b></label>
+          <div class="container">
+            <label class="required left">3.1 House Number</label>
+            <input type="text" id="Hno" name="Hno" class="right" formControlName="Hno">
+            <label for="NeiCol3" class="required left">3.2 Neighbourhood / Colony</label>
+            <input type="text" id="NeiCol3" name="NeiCol3" class="right" formControlName="neighbourhoodColony">
+            <label class="required left">3.3 District</label>
+            <select id="district3" name="district3" [(ngModel)]="selectedDistrict" class="right"
+              formControlName="district">
+              <option value="" disabled selected>Please Select</option>
+              <option *ngFor="let district of districts" [value]="district.toLowerCase()">
+                {{ district }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="flex-container form-group">
+      <div class="row">
+        <div class="col-lg-6">
           <div>
-            <label class="d-flex"><b>4. Details of the land, including survey number, which is intended to be developed.</b></label>
+            <label class="d-flex"><b>4. Details of the land, including survey number, which is intended
+                to be developed.</b></label>
           </div>
           <div class="container">
             <label for="Surveyno" class="required left">4.1 Survey Number</label>
@@ -64,224 +68,247 @@
             <label for="NeiCol4" class="required left">4.4 Neighbourhood / Colony</label>
             <input type="text" id="NeiCol4" name="NeiCol4" class="right" formControlName="neighbourhoodColony4">
             <label for="district4" class="required left">4.5 District</label>
-              <select id="district4" name="district4" [(ngModel)]="selectedDistrict" class="required right" formControlName="district4">
-                <option value="" disabled selected>Please Select</option>
-                <option *ngFor="let district of districts" [value]="district.toLowerCase()">
-                  {{ district }}
-                </option>
-              </select>
+            <select id="district4" name="district4" [(ngModel)]="selectedDistrict" class="required right"
+              formControlName="district4">
+              <option value="" disabled selected>Please Select</option>
+              <option *ngFor="let district of districts" [value]="district.toLowerCase()">
+                {{ district }}
+              </option>
+            </select>
           </div>
         </div>
-          <div class="col-lg-6">
-              <label ><b>5. Has the applicant developed any land before submitting this application form? If yes, please provide the details.</b></label>
-              <div class="container">
-                <label for="NameDL" class="left">5.1 Name (Developed Land)</label>
-                <input type="text" id="NameDL" name="NameDL" class="right" formControlName="developedLandName">
-                <label for="village5" class="left">5.2 Village</label>
-                <input type="text" id="village5" name="village5" class="right" formControlName="village5">
-                <label for="NeiCol5" class="left">5.3 Neighbourhood / Colony</label>
-                <input type="text" id="NeiCol5" name="NeiCol5" class="right" formControlName="neighbourhoodColony5">
-                <label for="district5" class="left">5.4 District</label>
-                  <select id="district5" name="district5" [(ngModel)]="selectedDistrict" class="right" formControlName="district5">
-                    <option value="" disabled selected>Please Select</option>
-                    <option *ngFor="let district of districts" [value]="district.toLowerCase()">
-                      {{ district }}
-                    </option>
-                  </select>
-            </div>
-            </div>
-          </div>    
-      </div>
-      <br>
-      <div class="flex-container form-group">
-        <div class="row">
         <div class="col-lg-6">
-          <label ><b>6. Details of financial resources for the establishment of the colony (mention net worth). Attach in PDF format as an annexure in the Annexure Section.</b></label>`
-          </div>
-          <div class="col-lg-6">
-            <label class="required"><b>7. Relinquishment of land rights (1. In the case of 'Yes', the land for roads and open areas will be relinquished and recorded in the revenue records. 2. In the case of 'No', the land diversion fee and premium amount will be payable on the entire ownership of the land.)</b></label>
-            <div class="radio-buttons right">
-              <input type="radio" id="yes" formControlName="relinquishment" value="yes">
-              <label for="yes">Yes</label>
-              <input type="radio" id="no" formControlName="relinquishment" value="no">
-              <label for="no">No</label>
-            </div>
+          <label><b>5. Has the applicant developed any land before submitting this application form? If yes, please
+              provide the details.</b></label>
+          <div class="container">
+            <label for="NameDL" class="left">5.1 Name (Developed Land)</label>
+            <input type="text" id="NameDL" name="NameDL" class="right" formControlName="developedLandName">
+            <label for="village5" class="left">5.2 Village</label>
+            <input type="text" id="village5" name="village5" class="right" formControlName="village5">
+            <label for="NeiCol5" class="left">5.3 Neighbourhood / Colony</label>
+            <input type="text" id="NeiCol5" name="NeiCol5" class="right" formControlName="neighbourhoodColony5">
+            <label for="district5" class="left">5.4 District</label>
+            <select id="district5" name="district5" [(ngModel)]="selectedDistrict" class="right"
+              formControlName="district5">
+              <option value="" disabled selected>Please Select</option>
+              <option *ngFor="let district of districts" [value]="district.toLowerCase()">
+                {{ district }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
-     <br>
-      <div class="form-group">
-        <div class="row">
+    </div>
+    <br>
+    <div class="flex-container form-group">
+      <div class="row">
+        <div class="col-lg-6">
+          <label><b>6. Details of financial resources for the establishment of the colony (mention net worth). Attach in
+              PDF format as an annexure in the Annexure Section.</b></label>`
+        </div>
+        <div class="col-lg-6">
+          <label class="required"><b>7. Relinquishment of land rights (1. In the case of 'Yes', the land for roads and
+              open areas will be relinquished and recorded in the revenue records. 2. In the case of 'No', the land
+              diversion fee and premium amount will be payable on the entire ownership of the land.)</b></label>
+          <div class="radio-buttons right">
+            <input type="radio" id="yes" formControlName="relinquishment" value="yes">
+            <label for="yes">Yes</label>
+            <input type="radio" id="no" formControlName="relinquishment" value="no">
+            <label for="no">No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <div class="row">
         <div class="col-lg-6">
           <label class="required"><b>8. For what purpose is the permit being requested?</b></label>
           <div class="container">
-          <select id="purpose" name="purpose" [(ngModel)]="selectedPurpose" class="left" formControlName="permitPurpose"  required>
+            <select id="purpose" name="purpose" [(ngModel)]="selectedPurpose" class="left"
+              formControlName="permitPurpose" required>
               <option value="" disabled selected>Please Select</option>
               <option *ngFor="let purpose of purposes" [value]="purpose.value">
                 {{ purpose.label }}
               </option>
             </select>
-          </div>  
           </div>
-          <div class="col-lg-6">
-            <label class="required"><b>9. Mobile Number</b></label>
-            <div class="container">
-              <input type="text" id="MoNumber" name="MoNumber" class="right" formControlName="mobileNumber">
-          </div>
+        </div>
+        <div class="col-lg-6">
+          <label class="required"><b>9. Mobile Number</b></label>
+          <div class="container">
+            <input type="text" id="MoNumber" name="MoNumber" class="right" formControlName="mobileNumber">
           </div>
         </div>
       </div>
-      <br>
-      <div class="form-group">
-        <div class="row">
+    </div>
+    <br>
+    <div class="form-group">
+      <div class="row">
         <div class="col-lg-6">
           <label class="required"><b>10. Email</b></label>
           <div class="container">
-          <input type="text" id="Email" name="Email" class="right" formControlName="email">
-        </div>
+            <input type="text" id="Email" name="Email" class="right" formControlName="email">
           </div>
-          <div class="col-lg-6">
-            <label class="required"><b>11. If the applicant is a firm, provide the TIN/GSTN number.</b></label>
-            <div class="container">
+        </div>
+        <div class="col-lg-6">
+          <label class="required"><b>11. If the applicant is a firm, provide the TIN/GSTN number.</b></label>
+          <div class="container">
             <input type="text" id="Firm" name="Firm" class="right" formControlName="tinGstnNumber">
           </div>
-          </div>
         </div>
       </div>
-      <br>
-      <div class="form-group">
-        <div class="row">
-          <div class="col-lg-6">
-            <label><b>12. Proof of Applicant's Rights, Land or Plot Ownership, including Evidence of Rights: The following proofs will be attached:</b></label>
-            <div class="container">
-              <label>(a) An attested copy of the original sale deed, lease deed, or any other document under which the rights, claims, and interests in the land or plot are claimed. (Attach as Annexure in PDF format in the Annexure Section)
-              </label>
-              <label>(b) If there is a will, an attested copy of the mutation and Khasra amalgamation (Attach as Annexure in PDF format in the Annexure Section)
-              </label>
-              <label>(c) An attested copy of the Khasra map and Khatoni records (Khasra map B-1, P-II) (Attach as Annexure in PDF format in the Annexure Section)
-              </label>
-              <label>(d) Other documents acceptable to the authority (Attach as Annexure in PDF format in the Annexure Section)
-              </label>
-            </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-6">
+          <label><b>12. Proof of Applicant's Rights, Land or Plot Ownership, including Evidence of Rights: The following
+              proofs will be attached:</b></label>
+          <div class="container">
+            <label>(a) An attested copy of the original sale deed, lease deed, or any other document under which the
+              rights, claims, and interests in the land or plot are claimed. (Attach as Annexure in PDF format in the
+              Annexure Section)
+            </label>
+            <label>(b) If there is a will, an attested copy of the mutation and Khasra amalgamation (Attach as Annexure
+              in PDF format in the Annexure Section)
+            </label>
+            <label>(c) An attested copy of the Khasra map and Khatoni records (Khasra map B-1, P-II) (Attach as Annexure
+              in PDF format in the Annexure Section)
+            </label>
+            <label>(d) Other documents acceptable to the authority (Attach as Annexure in PDF format in the Annexure
+              Section)
+            </label>
           </div>
-          <div class="col-lg-6">
-            <label><b>13. The following information will be submitted by me/us to the Town and Village Investment Department for development permission, land diversion from the competent authority, and colony development permission from the urban body/competent authority. The details are as follows:
+        </div>
+        <div class="col-lg-6">
+          <label><b>13. The following information will be submitted by me/us to the Town and Village Investment
+              Department for development permission, land diversion from the competent authority, and colony development
+              permission from the urban body/competent authority. The details are as follows:
             </b></label>
-            <div class="container">
-              <label>(a) Proposed development map (including Khasra superimpose) (Attach as Annexure in the prescribed format in the Annexure Section)
-              </label>
-              <label class="required">(b) Details of 9% of the land earmarked for transfer to the Economically Weaker Section (EWS):</label>
-              <div class="radio-buttonsEWS left">
-                <input type="radio" id="EWS-less" formControlName="EWS" value="EWS-less">
-                <label for="EWS-less">If the proposed layout is less than one acre</label>
-                <input type="radio" id="EWS-more" formControlName="EWS" value="EWS-more">
-                <label for="EWS-more">If the proposed layout is one acre or more</label>
+          <div class="container">
+            <label>(a) Proposed development map (including Khasra superimpose) (Attach as Annexure in the prescribed
+              format in the Annexure Section)
+            </label>
+            <label class="required">(b) Details of 9% of the land earmarked for transfer to the Economically Weaker
+              Section (EWS):</label>
+            <div class="radio-buttonsEWS left">
+              <input type="radio" id="EWS-less" formControlName="EWS" value="EWS-less">
+              <label for="EWS-less">If the proposed layout is less than one acre</label>
+              <input type="radio" id="EWS-more" formControlName="EWS" value="EWS-more">
+              <label for="EWS-more">If the proposed layout is one acre or more</label>
+            </div>
+            <div *ngIf="applicantFormData.get('EWS')?.value === 'EWS-less'" class="container">
+              <label><b>If the proposed layout is less than one acre</b></label>
+              <div class="radio-buttonsEWS-b-a left">
+                <input type="radio" id="EWS-b-a-PaymentOfLand" formControlName="EWSb" value="PaymentOfLand">
+                <label for="EWS-b-a-PaymentOfLand">Payment of Land</label>
+                <input type="radio" id="EWS-b-a-Plot" formControlName="EWSb" value="Plot">
+                <label for="EWS-b-a-Plot">Plot</label>
               </div>
-              <div *ngIf="applicantData.get('EWS')?.value === 'EWS-less'" class="container">
-                <label><b>If the proposed layout is less than one acre</b></label>
-                <div class="radio-buttonsEWS-b-a left">
-                  <input type="radio" id="EWS-b-a-PaymentOfLand" formControlName="EWSb" value="PaymentOfLand">
-                  <label for="EWS-b-a-PaymentOfLand">Payment of Land</label>
-                  <input type="radio" id="EWS-b-a-Plot" formControlName="EWSb" value="Plot">
-                  <label for="EWS-b-a-Plot">Plot</label>
+            </div>
+            <div *ngIf="applicantFormData.get('EWS')?.value === 'EWS-more'" class="container">
+              <label><b>If the proposed layout is one acre or more</b></label>
+              <div class="container">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="outside" formControlName="side">
+                  <label class="form-check-label" for="outside">Outside of Proposed non-residential area</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inside" formControlName="side">
+                  <label class="form-check-label" for="inside">Within a radius of 01 kilometer (in the Gram Panchayat
+                    area) or within a radius of 03 kilometers (in the urban local body area) from the proposed
+                    non-residential area</label>
                 </div>
               </div>
-              <div *ngIf="applicantData.get('EWS')?.value === 'EWS-more'" class="container">
-                <label><b>If the proposed layout is one acre or more</b></label>
-                <div class="container">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="outside" formControlName="side">
-                    <label class="form-check-label" for="outside">Outside of Proposed non-residential area</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inside" formControlName="side">
-                    <label class="form-check-label" for="inside">Within a radius of 01 kilometer (in the Gram Panchayat area) or within a radius of 03 kilometers (in the urban local body area) from the proposed non-residential area</label>
-                  </div>
-                </div>
-                <br>
-                <label><b>Collector guideline rate in the proposed residential area</b></label>
-                <div class="container">
-                  <input type="text" id="CGR-Res" name="CGR-Res" class="right" formControlName="CGRResidential">
-                </div>
-                <label><b>Collector guideline rate in the proposed land area</b></label>
-                <div class="container">
-                  <input type="text" id="CGR-land" name="CGR-land" class="right" formControlName="CGRLand">
-                </div>
-                <label><b>Area of EWS land in the proposed residential area</b></label>
-                <div class="container">
-                  <input type="text" id="Area-Res" name="Area-Res" class="right" formControlName="EWSAreaResidential">
-                </div>
-                <label><b>Area of the proposed EWS land</b></label>
-                <div class="container">
-                  <input type="text" id="Area-land" name="Area-land" class="right" formControlName="EWSAreaLand">
-                </div>
-                <label><b>Total amount as per collector guideline rate in lieu of 9 percent EWS land</b></label>
-                <div class="container">
-                  <input type="text" id="CGR-amount" name="CGR-amount" class="right" formControlName="CGRAmount">
-                </div>
+              <br>
+              <label><b>Collector guideline rate in the proposed residential area</b></label>
+              <div class="container">
+                <input type="text" id="CGR-Res" name="CGR-Res" class="right" formControlName="CGRResidential">
+              </div>
+              <label><b>Collector guideline rate in the proposed land area</b></label>
+              <div class="container">
+                <input type="text" id="CGR-land" name="CGR-land" class="right" formControlName="CGRLand">
+              </div>
+              <label><b>Area of EWS land in the proposed residential area</b></label>
+              <div class="container">
+                <input type="text" id="Area-Res" name="Area-Res" class="right" formControlName="EWSAreaResidential">
+              </div>
+              <label><b>Area of the proposed EWS land</b></label>
+              <div class="container">
+                <input type="text" id="Area-land" name="Area-land" class="right" formControlName="EWSAreaLand">
+              </div>
+              <label><b>Total amount as per collector guideline rate in lieu of 9 percent EWS land</b></label>
+              <div class="container">
+                <input type="text" id="CGR-amount" name="CGR-amount" class="right" formControlName="CGRAmount">
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <br>
-      <div class="form-group">
-        <label for="Clearance"><b>14. Clearance from various departments</b></label>
-        <div class="container">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="PWD" formControlName="clearancePWD" value="PWD">
-            <label class="form-check-label" for="PWD">PWD (Public Works Department)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="WRD" formControlName="clearanceWRD" value="WRD">
-            <label class="form-check-label" for="WRD">WRD (Water Resources Department)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="CSEB" formControlName="clearanceCSEB" value="CSEB">
-            <label class="form-check-label" for="CSEB">CSEB (CG Electricity Board)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="CECB" formControlName="clearanceCECB" value="CECB">
-            <label class="form-check-label" for="CECB">CECB (Environment)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="NHAI" formControlName="clearanceNHAI" value="NHAI">
-            <label class="form-check-label" for="NHAI">NHAI (National Highway)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="PHED" formControlName="clearancePHED" value="PHED">
-            <label class="form-check-label" for="PHED">PHED (Public Health Engineering)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="PMGSY" formControlName="clearancePMGSY" value="PMGSY">
-            <label class="form-check-label" for="PMGSY">PMGSY (PM Gramin Sadak Yojna)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="FOREST" formControlName="clearanceFOREST" value="FOREST">
-            <label class="form-check-label" for="FOREST">FOREST</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="Fire-NOC" formControlName="clearanceFireNOC" value="Fire-NOC">
-            <label class="form-check-label" for="Fire-NOC">Fire NOC (Home Department)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="Gram-Pan" formControlName="clearanceGramPanchayat" value="Gram-Pan">
-            <label class="form-check-label" for="Gram-Pan">Gram Panchayat</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="NN-NP-TP" formControlName="clearanceNNNPTP" value="NN-NP-TP">
-            <label class="form-check-label" for="NN-NP-TP">NN / NP / TP</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="Revenue" formControlName="clearanceRevenue" value="Revenue">
-            <label class="form-check-label" for="Revenue">Revenue Department</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="RES" formControlName="clearanceRES" value="RES">
-            <label class="form-check-label" for="RES">RES (Rural Engineering Services)</label>
-          </div>
+    </div>
+
+    <br>
+    <div class="form-group">
+      <label for="Clearance"><b>14. Clearance from various departments</b></label>
+      <div class="container">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="PWD" formControlName="clearancePWD" value="PWD">
+          <label class="form-check-label" for="PWD">PWD (Public Works Department)</label>
         </div>
-      </div>      
-        </form>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="WRD" formControlName="clearanceWRD" value="WRD">
+          <label class="form-check-label" for="WRD">WRD (Water Resources Department)</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="CSEB" formControlName="clearanceCSEB" value="CSEB">
+          <label class="form-check-label" for="CSEB">CSEB (CG Electricity Board)</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="CECB" formControlName="clearanceCECB" value="CECB">
+          <label class="form-check-label" for="CECB">CECB (Environment)</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="NHAI" formControlName="clearanceNHAI" value="NHAI">
+          <label class="form-check-label" for="NHAI">NHAI (National Highway)</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="PHED" formControlName="clearancePHED" value="PHED">
+          <label class="form-check-label" for="PHED">PHED (Public Health Engineering)</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="PMGSY" formControlName="clearancePMGSY" value="PMGSY">
+          <label class="form-check-label" for="PMGSY">PMGSY (PM Gramin Sadak Yojna)</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="FOREST" formControlName="clearanceFOREST" value="FOREST">
+          <label class="form-check-label" for="FOREST">FOREST</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="Fire-NOC" formControlName="clearanceFireNOC"
+            value="Fire-NOC">
+          <label class="form-check-label" for="Fire-NOC">Fire NOC (Home Department)</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="Gram-Pan" formControlName="clearanceGramPanchayat"
+            value="Gram-Pan">
+          <label class="form-check-label" for="Gram-Pan">Gram Panchayat</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="NN-NP-TP" formControlName="clearanceNNNPTP"
+            value="NN-NP-TP">
+          <label class="form-check-label" for="NN-NP-TP">NN / NP / TP</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="Revenue" formControlName="clearanceRevenue"
+            value="Revenue">
+          <label class="form-check-label" for="Revenue">Revenue Department</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="RES" formControlName="clearanceRES" value="RES">
+          <label class="form-check-label" for="RES">RES (Rural Engineering Services)</label>
+        </div>
       </div>
+    </div>
+  </form>
+</div>

@@ -2,7 +2,7 @@
   <span>Chhattisgarh Automated Workflow and Approval System</span>
 </div>
 
-<div class="container applying-form-container" >
+<div class="container applying-form-container">
   <div class="form-container">
     <form [formGroup]="applyingForm">
       <span class="bannerISW">Integrated Single Window System Approval</span>
@@ -19,7 +19,7 @@
           </select>
         </div>
       </div>
-
+      
       <div class="form-group">
         <div class="flex-container">
           <label for="area" class="left required">For which area is permission sought?</label>
@@ -32,32 +32,155 @@
         </div>
       </div>
 
-      <div *ngIf="applyingForm.get('body')?.value === 'Corporation'" class="form-group" id="Corporation">
+      <div class="form-group" *ngIf="applyingForm.get('area')?.value === 'urban'">
         <div class="flex-container">
-          <label for="choosingCorporation" class="left">Choose the <b>Municipal Corporation</b></label>
-          <select id="choosingCorporation" formControlName="choosingCorporation" class="left">
-            <option value="" disabled selected>Please Select</option>
-          </select>
+          <label for="body" class="left required">In an urban area, which body should be approached for colony <br>development permission?</label>
+          <div class="radio-buttons right">
+            <input type="radio" id="Corporation" formControlName="body" [value]="'Corporation'">
+            <label for="Corporation">नगर निगम (Municipal Corporation)</label>
+            <input type="radio" id="Council" formControlName="body" [value]="'Council'">
+            <label for="Council">नगर पालिका (Municipal Council)</label>
+            <input type="radio" id="Jury" formControlName="body" [value]="'Jury'">
+            <label for="Jury">नगर पंचायत (Municipal Jury)</label>
+          </div>
         </div>
       </div>
 
-      <div *ngIf="applyingForm.get('body')?.value === 'Council'" class="form-group" id="Council">
-        <div class="flex-container">
-          <label for="choosingCouncil" class="left">Choose the <b>Municipal Council</b></label>
-          <select id="choosingCouncil" formControlName="choosingCouncil" class="left">
-            <option value="" disabled selected>Please Select</option>
-          </select>
+      
+      <!-- Dynamic options based on selected district and body -->
+      <ng-container *ngIf="applyingForm.get('selectedDistrict')?.value && applyingForm.get('area')?.value === 'urban'">
+        <div *ngIf="applyingForm.get('body')?.enabled">
+          <!-- Bilaspur options -->
+          <div *ngIf="applyingForm.get('selectedDistrict')?.value === 'bilaspur'">
+            <div *ngIf="applyingForm.get('body')?.value === 'Corporation'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingCorporation" class="left">Choose the <b>Municipal Corporation</b></label>
+                  <select id="choosingCorporation" formControlName="choosingCorporation" class="left" name="forBilaspur">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Bilaspur">Bilaspur</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="applyingForm.get('body')?.value === 'Council'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingCouncil" class="left">Choose the <b>Municipal Council</b></label>
+                  <select id="choosingCouncil" formControlName="choosingCouncil" class="left" name="forBilaspur">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Ratanpur">Ratanpur</option>
+                    <option value="Takhatpur">Takhatpur</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="applyingForm.get('body')?.value === 'Jury'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingJury" class="left">Choose the <b>Municipal Jury</b></label>
+                  <select id="choosingJury" formControlName="choosingJury" class="left" name="forBilaspur">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Bilha">Bilha</option>
+                    <option value="Bodri">Bodri</option>
+                    <option value="Gaurella">Gaurella</option>
+                    <option value="Kota">Kota</option>
+                    <option value="Malhar">Malhar</option>
+                    <option value="Pendra">Pendra</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Durg options -->
+          <div *ngIf="applyingForm.get('selectedDistrict')?.value === 'durg'">
+            <div *ngIf="applyingForm.get('body')?.value === 'Corporation'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingCorporation" class="left">Choose the <b>Municipal Corporation</b></label>
+                  <select id="choosingCorporation" formControlName="choosingCorporation" class="left" name="forDurg">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Bhilai">Bhilai</option>
+                    <option value="Bhilai Charoda">Bhilai Charoda</option>
+                    <option value="Durg">Durg</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="applyingForm.get('body')?.value === 'Council'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingCouncil" class="left">Choose the <b>Municipal Council</b></label>
+                  <select id="choosingCouncil" formControlName="choosingCouncil" class="left" name="forDurg">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Ahiwara">Ahiwara</option>
+                    <option value="Jamul">Jamul</option>
+                    <option value="Kumhari">Kumhari</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="applyingForm.get('body')?.value === 'Jury'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingJury" class="left">Choose the <b>Municipal Jury</b></label>
+                  <select id="choosingJury" formControlName="choosingJury" class="left" name="forDurg">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Dhamdha">Dhamdha</option>
+                    <option value="Patan">Patan</option>
+                    <option value="Utai">Utai</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Raipur options -->
+          <div *ngIf="applyingForm.get('selectedDistrict')?.value === 'raipur'">
+            <div *ngIf="applyingForm.get('body')?.value === 'Corporation'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingCorporation" class="left">Choose the <b>Municipal Corporation</b></label>
+                  <select id="choosingCorporation" formControlName="choosingCorporation" class="left" name="forRaipur">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Birgaon">Birgaon</option>
+                    <option value="Raipur">Raipur</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="applyingForm.get('body')?.value === 'Council'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingCouncil" class="left">Choose the <b>Municipal Council</b></label>
+                  <select id="choosingCouncil" formControlName="choosingCouncil" class="left" name="forRaipur">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Arang">Arang</option>
+                    <option value="Gobra Nawapara">Gobra Nawapara</option>
+                    <option value="Tilda Newra">Tilda Newra</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="applyingForm.get('body')?.value === 'Jury'">
+              <div class="form-group">
+                <div class="flex-container">
+                  <label for="choosingJury" class="left">Choose the <b>Municipal Jury</b></label>
+                  <select id="choosingJury" formControlName="choosingJury" class="left" name="forRaipur">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="Abhanpur">Abhanpur</option>
+                    <option value="Kharora">Kharora</option>
+                    <option value="Kurra">Kurra</option>
+                    <option value="Mana Camp">Mana Camp</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div *ngIf="applyingForm.get('body')?.value === 'Jury'" class="form-group" id="Jury">
-        <div class="flex-container">
-          <label for="choosingJury" class="left">Choose the <b>Municipal Jury</b></label>
-          <select id="choosingJury" formControlName="choosingJury" class="left">
-            <option value="" disabled selected>Please Select</option>
-          </select>
-        </div>
-      </div>
+      </ng-container>
+      
 
       <div class="form-group">
         <p class="left required"><b>Note - If the khasra is not integrated, please get it integrated from the revenue department before applying for colony approval.</b></p>
@@ -86,9 +209,11 @@
     </form>
   </div>
 
+  <!-- Include Applicant Data Component -->
   <div *ngIf="showAdditionalForm" class="applicant-data-container">
-    <app-applicant-data></app-applicant-data>
+    <app-applicant-data [applicantFormData]="applicantFormData" (formSubmit)="onApplicantFormSubmit($event)"></app-applicant-data>
   </div>
+  
 
   <div class="form-container">
     <form [formGroup]="applyingForm">
@@ -97,35 +222,28 @@
         <div class="container">
           <label class="required">Apply to the Office</label>
           <div class="container">
-            <input type="text" id="office" formControlName="office">
+            <input type="text" id="office" formControlName="office" class="wide-input" [value]="applyingForm.get('office')?.value || ''">
           </div>
         </div>
       </div>
     </form>
-  </div>
-
+  </div>  
+  
   <div class="button-container">
     <div class="button-bottom">
       <button type="button" class="btn btn-warning mr-2" [disabled]="!isKhasraIntegrated" (click)="saveDraft()">Save Draft</button>
       <button type="button" class="btn btn-success mr-2" [disabled]="!isKhasraIntegrated" (click)="onSubmit()">Submit</button>
-      <a  class="btn btn-info mr-2" [class.disabled]="!isKhasraIntegrated" href="/attachments">Attachments</a>
+      <a class="btn btn-info mr-2" [class.disabled]="!isKhasraIntegrated" href="/attachments">Attachments</a>
       <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
       <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
     </div>
   </div>
 </div>
 
+<div *ngIf="successMessage" class="alert alert-success" role="alert">
+  {{ successMessage }}
+</div>
 
-<!-- <div class="form-group" *ngIf="applyingForm.get('area')?.value === 'urban'">
-        <div class="flex-container">
-          <label class="left required">In an urban area, which body should be approached for colony development permission?</label>
-          <div class="radio-buttons right">
-            <input type="radio" id="Corporation" formControlName="body" [value]="'Corporation'">
-            <label for="Corporation">नगर निगम (Municipal Corporation)</label>
-            <input type="radio" id="Council" formControlName="body" [value]="'Council'">
-            <label for="Council">नगर पालिका (Municipal Council)</label>
-            <input type="radio" id="Jury" formControlName="body" [value]="'Jury'">
-            <label for="Jury">नगर पंचायत (Municipal Jury)</label>
-          </div>
-        </div>
-      </div> -->
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{ errorMessage }}
+</div>

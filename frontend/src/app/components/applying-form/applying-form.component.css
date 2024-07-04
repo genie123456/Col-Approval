@@ -173,3 +173,9 @@
     display: none;
   }
   
+  .wide-input {
+    width: 100%; /* Makes the input take the full width of its container */
+    max-width: 500px; /* Optional: Set a maximum width */
+    padding: 0px; /* Optional: Add some padding for better appearance */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+  }

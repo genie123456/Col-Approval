@@ -6,11 +6,5 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppFormService {
-  private formFieldsUrl = 'http://localhost:3000/';
-
-  constructor(private http: HttpClient) { }
-
-  getFormFields(): Observable<any[]> {
-    return this.http.get<any[]>(this.formFieldsUrl);
-  }
+  
 }

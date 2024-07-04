@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApplyingFormService {
-
-  private baseUrl = 'http://localhost:3000/'; // Update with your backend URL
+  private baseUrl = 'http://localhost:3000/formFields'; // Adjusted URL
 
   constructor(private http: HttpClient) { }
 
