@@ -34,6 +34,7 @@
     padding: 10px;          /* Padding inside the container */
     display: flex;          /* Use flexbox for layout */
     justify-content: flex-end; /* Align items to the right */
+    margin-bottom: 20px;
   }
   .button-bottom {
     display: flex;          /* Flexbox for button layout */
@@ -96,3 +97,9 @@
     flex: 1;
   }
 
+  .wide-input {
+    width: 100%; /* Makes the input take the full width of its container */
+    max-width: 500px; /* Optional: Set a maximum width */
+    padding: 0px; /* Optional: Add some padding for better appearance */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+  }

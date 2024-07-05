@@ -29,21 +29,7 @@ export class ApplicantDataComponent implements OnChanges, OnInit{
   constructor( private applyingFormService: ApplyingFormService) {}
 
   ngOnInit(): void {
-    // this.applicantFormData = this.fb.group({
-    //   clearancePWD: [false],
-    //   clearanceWRD: [false],
-    //   clearanceCSEB: [false],
-    //   clearanceCECB: [false],
-    //   clearanceNHAI: [false],
-    //   clearancePHED: [false],
-    //   clearancePMGSY: [false],
-    //   clearanceFOREST: [false],
-    //   clearanceFireNOC: [false],
-    //   clearanceGramPanchayat: [false],
-    //   clearanceNNNPTP: [false],
-    //   clearanceRevenue: [false],
-    //   clearanceRES: [false]
-    // });
+  
   }
 
   ngOnChanges(changes: SimpleChanges) {

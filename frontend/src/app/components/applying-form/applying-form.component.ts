@@ -60,20 +60,21 @@ export class ApplyingFormComponent implements OnInit {
       village5: [''],
       neighbourhoodColony5: [''],
       district5: ['', Validators.required],
-      relinquishment: [''],
+      relinquishment: ['', [Validators.required, Validators.pattern('^(yes|no)$')]],
       permitPurpose: ['', Validators.required],
-      mobileNumber: [''],
-      email: [''],
-      tinGstnNumber: [''],
-      EWS: [''],
-      EWSb: [''],
-      side: [''],
-      CGRResidential: [''],
-      CGRLand: [''],
-      EWSAreaResidential: [''],
-      EWSAreaLand: [''],
+      mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      email: ['', [Validators.required, Validators.email]],
+      tinGstnNumber: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{15}$')]],
+      EWS: ['', [Validators.required, Validators.pattern('^(proposed layout is less than one acre|proposed layout is one acre or more)$')]],
+      EWSLess: ['', [Validators.required, Validators.pattern('^(Payment of Land|Plot)$')]],
+      outside_res_area: [false],
+      inside_res_area: [false],
+      CGR_Residential_Area: [''],
+      CGR_Land_Area: [''],
+      EWS_Residential_Area: [''],
+      EWS_Land_Area: [''],
       CGRAmount: [''],
-      clearances: this.fb.group({
+      // clearances: this.fb.group({
         clearancePWD: [false],
         clearanceWRD: [false],
         clearanceCSEB: [false],
@@ -87,7 +88,7 @@ export class ApplyingFormComponent implements OnInit {
         clearanceNNNPTP: [false],
         clearanceRevenue: [false],
         clearanceRES: [false]
-      })
+      // })
     });
 
     // Subscribe to changes in the 'khasraIntegrated' form control to show/hide additional form fields

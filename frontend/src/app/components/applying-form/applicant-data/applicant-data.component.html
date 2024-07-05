@@ -180,61 +180,53 @@
           </div>
         </div>
         <div class="col-lg-6">
-          <label><b>13. The following information will be submitted by me/us to the Town and Village Investment
-              Department for development permission, land diversion from the competent authority, and colony development
-              permission from the urban body/competent authority. The details are as follows:
-            </b></label>
+          <label><b>13. The following information will be submitted by me/us...</b></label>
           <div class="container">
-            <label>(a) Proposed development map (including Khasra superimpose) (Attach as Annexure in the prescribed
-              format in the Annexure Section)
-            </label>
-            <label class="required">(b) Details of 9% of the land earmarked for transfer to the Economically Weaker
-              Section (EWS):</label>
+            <label>(a) Proposed development map (including Khasra superimpose) (Attach as Annexure in the prescribed format in the Annexure Section)</label>
+            <label class="required">(b) Details of 9% of the land earmarked for transfer to the Economically Weaker Section (EWS):</label>
             <div class="radio-buttonsEWS left">
-              <input type="radio" id="EWS-less" formControlName="EWS" value="EWS-less">
+              <input type="radio" id="EWS-less" formControlName="EWS" value="proposed layout is less than one acre">
               <label for="EWS-less">If the proposed layout is less than one acre</label>
-              <input type="radio" id="EWS-more" formControlName="EWS" value="EWS-more">
+              <input type="radio" id="EWS-more" formControlName="EWS" value="proposed layout is one acre or more">
               <label for="EWS-more">If the proposed layout is one acre or more</label>
             </div>
-            <div *ngIf="applicantFormData.get('EWS')?.value === 'EWS-less'" class="container">
+            <div *ngIf="applicantFormData.get('EWS')?.value === 'proposed layout is less than one acre'" class="container">
               <label><b>If the proposed layout is less than one acre</b></label>
               <div class="radio-buttonsEWS-b-a left">
-                <input type="radio" id="EWS-b-a-PaymentOfLand" formControlName="EWSb" value="PaymentOfLand">
+                <input type="radio" id="EWS-b-a-PaymentOfLand" formControlName="EWSLess" value="Payment_Of_Land">
                 <label for="EWS-b-a-PaymentOfLand">Payment of Land</label>
-                <input type="radio" id="EWS-b-a-Plot" formControlName="EWSb" value="Plot">
+                <input type="radio" id="EWS-b-a-Plot" formControlName="EWSLess" value="Plot">
                 <label for="EWS-b-a-Plot">Plot</label>
               </div>
             </div>
-            <div *ngIf="applicantFormData.get('EWS')?.value === 'EWS-more'" class="container">
+            <div *ngIf="applicantFormData.get('EWS')?.value === 'proposed layout is one acre or more'" class="container">
               <label><b>If the proposed layout is one acre or more</b></label>
               <div class="container">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="outside" formControlName="side">
+                  <input class="form-check-input" type="checkbox" id="outside" formControlName="outside_res_area">
                   <label class="form-check-label" for="outside">Outside of Proposed non-residential area</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inside" formControlName="side">
-                  <label class="form-check-label" for="inside">Within a radius of 01 kilometer (in the Gram Panchayat
-                    area) or within a radius of 03 kilometers (in the urban local body area) from the proposed
-                    non-residential area</label>
+                  <input class="form-check-input" type="checkbox" id="inside" formControlName="inside_res_area">
+                  <label class="form-check-label" for="inside">Within a radius of 01 kilometer (in the Gram Panchayat area) or within a radius of 03 kilometers (in the urban local body area) from the proposed non-residential area</label>
                 </div>
               </div>
               <br>
               <label><b>Collector guideline rate in the proposed residential area</b></label>
               <div class="container">
-                <input type="text" id="CGR-Res" name="CGR-Res" class="right" formControlName="CGRResidential">
+                <input type="text" id="CGR-Res" name="CGR-Res" class="right" formControlName="CGR_Residential_Area">
               </div>
               <label><b>Collector guideline rate in the proposed land area</b></label>
               <div class="container">
-                <input type="text" id="CGR-land" name="CGR-land" class="right" formControlName="CGRLand">
+                <input type="text" id="CGR-land" name="CGR-land" class="right" formControlName="CGR_Land_Area">
               </div>
               <label><b>Area of EWS land in the proposed residential area</b></label>
               <div class="container">
-                <input type="text" id="Area-Res" name="Area-Res" class="right" formControlName="EWSAreaResidential">
+                <input type="text" id="Area-Res" name="Area-Res" class="right" formControlName="EWS_Residential_Area">
               </div>
               <label><b>Area of the proposed EWS land</b></label>
               <div class="container">
-                <input type="text" id="Area-land" name="Area-land" class="right" formControlName="EWSAreaLand">
+                <input type="text" id="Area-land" name="Area-land" class="right" formControlName="EWS_Land_Area">
               </div>
               <label><b>Total amount as per collector guideline rate in lieu of 9 percent EWS land</b></label>
               <div class="container">
@@ -243,11 +235,12 @@
             </div>
           </div>
         </div>
+        
       </div>
     </div>
-
+ 
     <br>
-    <div class="form-group" formGroupName="clearances">
+     <div class="form-group" > <!-- formGroupName="clearances" -->
       <label for="Clearance"><b>14. Clearance from various departments</b></label>
       <div class="container">
         <div class="form-check form-check-inline">
