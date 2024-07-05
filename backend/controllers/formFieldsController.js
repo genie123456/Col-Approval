@@ -3,8 +3,6 @@ const pool = require('../dbConfig');
 // Controller to save applying form data
 const saveApplyingFormData = (req, res) => {
   const data = req.body;
-  //console.log('Received Applying form data:', data);
-
 
   const sql = `INSERT INTO formfields (
     selectedDistrict, area, body, choosingCorporation, choosingCouncil, choosingJury, 
@@ -42,27 +40,22 @@ const saveApplyingFormData = (req, res) => {
     data.applicantData.clearanceRevenue || null, data.applicantData.clearanceRES || null
   ];
 
-  // console.log('SQL Query:', sql);
-  // console.log('Values:', values);
-
   pool.getConnection()
     .then(conn => {
       conn.query(sql, values)
         .then(result => {
-        //  console.log('Applying form Data inserted successfully:', result);
-          conn.query(sql1, values1).then(result1 => {
-            console.log( data.applicantData.surveyNumber,'1')
-
-            console.log('Done');
-          });
-          console.log('DOneeee');
-          res.status(200).json({ message: 'Applying form data saved successfully' });
-          
+          console.log('Applying form data saved successfully');
+          return conn.query(sql1, values1)
+            .then(result1 => {
+              console.log('Applicant data saved successfully');
+              res.status(200).json({ message: 'Data saved successfully' });
+              conn.release();
+            });
         })
         .catch(err => {
           console.error('Database error:', err);
           res.status(500).json({ error: err.message });
-           
+          conn.release();
         });
     })
     .catch(err => {
