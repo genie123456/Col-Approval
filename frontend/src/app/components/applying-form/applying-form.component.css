@@ -168,10 +168,6 @@
   .form-check-input{
     border: 1px solid #000;
   }
- 
-  select option[disabled][hidden] {
-    display: none;
-  }
   
   .wide-input {
     width: 100%; /* Makes the input take the full width of its container */
@@ -179,3 +175,127 @@
     padding: 0px; /* Optional: Add some padding for better appearance */
     box-sizing: border-box; /* Ensures padding is included in the width */
   }
+
+/* Button container styling */
+.button-container {
+  display: flex;
+  /* justify-content: center; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0.5px solid #474747;
+}
+
+.button-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Styling individual buttons */
+.button-bottom .btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.button-bottom .btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+}
+
+.button-bottom .btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.button-bottom .btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: white;
+}
+
+.button-bottom .btn-dark {
+  background-color: #343a40;
+  border-color: #343a40;
+  color: white;
+}
+
+.button-bottom .btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.button-bottom .btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Common style for modal header */
+.modal-header {
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+
+/* Common style for modal title */
+.modal-title {
+  font-weight: bold;
+}
+
+/* Common style for close button */
+.modal-header .close {
+  font-size: 1.5rem;
+  outline: none;
+  color: #000;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.modal-header .close:hover {
+  opacity: 0.75;
+}
+
+/* Success modal specific styles */
+.success-modal .modal-header {
+  background-color: #d4edda; /* Light green background */
+  border-bottom: 1px solid #c3e6cb; /* Border to separate the header from the body */
+}
+
+.success-modal .modal-title {
+  color: #155724; /* Dark green text */
+}
+
+.success-modal .modal-body {
+  background-color: #d4edda; /* Light green background */
+  color: #155724; /* Dark green text */
+}
+
+/* Error modal specific styles */
+.error-modal .modal-header {
+  background-color: #f8d7da; /* Light red background */
+  border-bottom: 1px solid #f5c6cb; /* Border to separate the header from the body */
+}
+
+.error-modal .modal-title {
+  color: #721c24; /* Dark red text */
+}
+
+.error-modal .modal-body {
+  background-color: #f8d7da; /* Light red background */
+  color: #721c24; /* Dark red text */
+}
+
+/* Style for the paragraph inside the modal body */
+.modal-body p {
+  margin: 0;
+}
+
+/* Add some padding and border-radius for the modal content */
+.modal-content {
+  border-radius: 0.3rem;
+}

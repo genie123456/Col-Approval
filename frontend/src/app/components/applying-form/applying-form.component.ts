@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
 
 @Component({
   selector: 'app-applying-form',
@@ -9,6 +9,9 @@ import { ApplyingFormService } from 'src/app/services/applying-form.service';
   styleUrls: ['./applying-form.component.css']
 })
 export class ApplyingFormComponent implements OnInit {
+  @ViewChild('successModal') successModal!: ElementRef;
+  @ViewChild('errorModal') errorModal!: ElementRef;
+
   districts: string[] = [
     'Balod', 'Baloda Bazar - Bhatapara', 'Balrampur - Ramanujganj', 'Bastar', 'Bemetara', 'Bijapur',
     'Bilaspur', 'Dakshin Bastar Dantewada', 'Dhamtari', 'Durg', 'Gariaband', 'Gaurela-Pendra-Marwahi',
@@ -18,26 +21,73 @@ export class ApplyingFormComponent implements OnInit {
     'Sukma', 'Surajpur', 'Surguja', 'Uttar Bastar Kanker'
   ].sort();
 
-  selectedDistrict: string = '';
   applyingForm: FormGroup;
+  applicantFormData: FormGroup;
+
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
-  applicantFormData: any = {}; // Property to store applicant form data
 
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private applyingFormService: ApplyingFormService) {
+  constructor(private fb: FormBuilder, private applyingFormService: ApplyingFormService, private modalService: NgbModal) {
     this.applyingForm = this.fb.group({
-      selectedDistrict: ['', Validators.required], // form control for selected district
-      area: ['', [Validators.required, Validators.pattern('^(rural|urban)$')]], // form control for area with specific values
-      body: [{ value: '', disabled: true }, Validators.pattern('^(Corporation|Council|Jury)?$')], // form control for body with specific values
-      choosingCorporation: [''], // form control for choosing corporation
-      choosingCouncil: [''], // form control for choosing council
-      choosingJury: [''], // form control for choosing jury
-      khasraIntegrated: ['', [Validators.required, Validators.pattern('^(yes|no)$')]], // form control for khasra integration with specific values
-      integratedKhasraNumber: [''], // form control for integrated khasra number
-      office: [{ value: '', disabled: true }] // form control for office
+      selectedDistrict: ['', Validators.required],
+      area: ['', [Validators.required, Validators.pattern('^(rural|urban)$')]], 
+      body: [{ value: '', disabled: true }, Validators.pattern('^(Corporation|Council|Jury)?$')], 
+      choosingCorporation: [''], 
+      choosingCouncil: [''],
+      choosingJury: [''], 
+      khasraIntegrated: ['', [Validators.required, Validators.pattern('^(yes|no)$')]], 
+      integratedKhasraNumber: [''], 
+      office: [{ value: '', disabled: true }] 
+    });
+
+    this.applicantFormData = this.fb.group({
+      fullName: [''],
+      LUB: [''],
+      Srno: [''],
+      registrationDate: [''],
+      Hno: [''],
+      neighbourhoodColony: [''],
+      district: ['', Validators.required],
+      surveyNumber: [''],
+      area: [''],
+      village: [''],
+      neighbourhoodColony4: [''],
+      district4: ['', Validators.required],
+      developedLandName: [''],
+      village5: [''],
+      neighbourhoodColony5: [''],
+      district5: ['', Validators.required],
+      relinquishment: [''],
+      permitPurpose: ['', Validators.required],
+      mobileNumber: [''],
+      email: [''],
+      tinGstnNumber: [''],
+      EWS: [''],
+      EWSb: [''],
+      side: [''],
+      CGRResidential: [''],
+      CGRLand: [''],
+      EWSAreaResidential: [''],
+      EWSAreaLand: [''],
+      CGRAmount: [''],
+      clearances: this.fb.group({
+        clearancePWD: [false],
+        clearanceWRD: [false],
+        clearanceCSEB: [false],
+        clearanceCECB: [false],
+        clearanceNHAI: [false],
+        clearancePHED: [false],
+        clearancePMGSY: [false],
+        clearanceFOREST: [false],
+        clearanceFireNOC: [false],
+        clearanceGramPanchayat: [false],
+        clearanceNNNPTP: [false],
+        clearanceRevenue: [false],
+        clearanceRES: [false]
+      })
     });
 
     // Subscribe to changes in the 'khasraIntegrated' form control to show/hide additional form fields
@@ -52,12 +102,11 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Subscribe to changes in the 'area' form control to show/hide the body options
     this.applyingForm.get('area')!.valueChanges.subscribe(value => {
       if (value === 'urban') {
-        this.applyingForm.get('body')!.enable(); // Enable the body options
+        this.applyingForm.get('body')!.enable();
       } else {
-        this.applyingForm.get('body')!.disable(); // Disable the body options for other areas
+        this.applyingForm.get('body')!.disable();
       }
     });
   }
@@ -74,7 +123,7 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   onApplicantFormSubmit(formData: any) {
-    this.applicantFormData = formData;
+    this.applicantFormData.patchValue(formData);
     this.onSubmit();
   }
 
@@ -82,22 +131,20 @@ export class ApplyingFormComponent implements OnInit {
     if (this.isKhasraIntegrated) {
       const combinedFormData = {
         ...this.applyingForm.value,
-        office: this.applyingForm.get('office')?.value, // Ensure 'office' is included
-        applicantData: this.applicantFormData
+        office: this.applyingForm.get('office')?.value,
+        applicantData: this.applicantFormData.value
       };
-  
-      console.log('Form data before submission:', combinedFormData); // Debug line
-  
+
       this.applyingFormService.saveApplyingFormData(combinedFormData).subscribe(
         response => {
           this.successMessage = 'Form submitted successfully';
-          this.errorMessage = null; // Clear any previous error message
-          console.log('Form submitted:', response);
+          this.errorMessage = null;
+          this.openSuccessModal();
         },
         error => {
           this.errorMessage = 'Error submitting form.';
-          this.successMessage = null; // Clear any previous success message
-          console.error('Error submitting form:', error);
+          this.successMessage = null;
+          this.openErrorModal();
         }
       );
     } else {
@@ -105,10 +152,18 @@ export class ApplyingFormComponent implements OnInit {
     }
   }
 
+  openSuccessModal() {
+    this.modalService.open(this.successModal, { centered: true });
+  }
+
+  openErrorModal() {
+    this.modalService.open(this.errorModal, { centered: true });
+  }
+
   saveDraft() {
     const combinedFormData = {
       ...this.applyingForm.value,
-      applicantData: this.applicantFormData
+      applicantData: this.applicantFormData.value
     };
 
     this.applyingFormService.saveDraft(combinedFormData).subscribe(
@@ -124,7 +179,7 @@ export class ApplyingFormComponent implements OnInit {
   onReset() {
     this.applyingForm.reset();
     this.isKhasraIntegrated = true;
-    this.applicantFormData = {};
+    this.applicantFormData.reset();
   }
 
   onCancel() {

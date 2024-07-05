@@ -1,5 +1,5 @@
 <div class="form-container" id="additional-form">
-  <form [formGroup]="applicantFormData">
+  <form [formGroup]="applicantFormData" (ngSubmit)="onSubmit()">
     <span class="bannerISW">Format for Application for Colony Approval</span>
     <hr class="dotted-line">
     <div class="form-group">
@@ -38,14 +38,15 @@
             <input type="text" id="Hno" name="Hno" class="right" formControlName="Hno">
             <label for="NeiCol3" class="required left">3.2 Neighbourhood / Colony</label>
             <input type="text" id="NeiCol3" name="NeiCol3" class="right" formControlName="neighbourhoodColony">
+            
             <label class="required left">3.3 District</label>
-            <select id="district3" name="district3" [(ngModel)]="selectedDistrict" class="right"
-              formControlName="district">
-              <option value="" disabled selected>Please Select</option>
+            <select id="district3" formControlName="district" class="right">
+              <option value="" disabled>Please Select</option>
               <option *ngFor="let district of districts" [value]="district.toLowerCase()">
                 {{ district }}
               </option>
             </select>
+         
           </div>
         </div>
       </div>
@@ -68,9 +69,8 @@
             <label for="NeiCol4" class="required left">4.4 Neighbourhood / Colony</label>
             <input type="text" id="NeiCol4" name="NeiCol4" class="right" formControlName="neighbourhoodColony4">
             <label for="district4" class="required left">4.5 District</label>
-            <select id="district4" name="district4" [(ngModel)]="selectedDistrict" class="required right"
-              formControlName="district4">
-              <option value="" disabled selected>Please Select</option>
+            <select id="district4" formControlName="district4" class="required right">
+              <option value="" disabled>Please Select</option>
               <option *ngFor="let district of districts" [value]="district.toLowerCase()">
                 {{ district }}
               </option>
@@ -88,9 +88,8 @@
             <label for="NeiCol5" class="left">5.3 Neighbourhood / Colony</label>
             <input type="text" id="NeiCol5" name="NeiCol5" class="right" formControlName="neighbourhoodColony5">
             <label for="district5" class="left">5.4 District</label>
-            <select id="district5" name="district5" [(ngModel)]="selectedDistrict" class="right"
-              formControlName="district5">
-              <option value="" disabled selected>Please Select</option>
+            <select id="district5" formControlName="district5" class="right">
+              <option value="" disabled>Please Select</option>
               <option *ngFor="let district of districts" [value]="district.toLowerCase()">
                 {{ district }}
               </option>
@@ -125,9 +124,8 @@
         <div class="col-lg-6">
           <label class="required"><b>8. For what purpose is the permit being requested?</b></label>
           <div class="container">
-            <select id="purpose" name="purpose" [(ngModel)]="selectedPurpose" class="left"
-              formControlName="permitPurpose" required>
-              <option value="" disabled selected>Please Select</option>
+            <select id="purpose" formControlName="permitPurpose" class="left" required>
+              <option value="" disabled>Please Select</option>
               <option *ngFor="let purpose of purposes" [value]="purpose.value">
                 {{ purpose.label }}
               </option>
@@ -249,7 +247,7 @@
     </div>
 
     <br>
-    <div class="form-group">
+    <div class="form-group" formGroupName="clearances">
       <label for="Clearance"><b>14. Clearance from various departments</b></label>
       <div class="container">
         <div class="form-check form-check-inline">
@@ -285,23 +283,19 @@
           <label class="form-check-label" for="FOREST">FOREST</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="Fire-NOC" formControlName="clearanceFireNOC"
-            value="Fire-NOC">
+          <input class="form-check-input" type="checkbox" id="Fire-NOC" formControlName="clearanceFireNOC" value="Fire-NOC">
           <label class="form-check-label" for="Fire-NOC">Fire NOC (Home Department)</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="Gram-Pan" formControlName="clearanceGramPanchayat"
-            value="Gram-Pan">
+          <input class="form-check-input" type="checkbox" id="Gram-Pan" formControlName="clearanceGramPanchayat" value="Gram-Pan">
           <label class="form-check-label" for="Gram-Pan">Gram Panchayat</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="NN-NP-TP" formControlName="clearanceNNNPTP"
-            value="NN-NP-TP">
+          <input class="form-check-input" type="checkbox" id="NN-NP-TP" formControlName="clearanceNNNPTP" value="NN-NP-TP">
           <label class="form-check-label" for="NN-NP-TP">NN / NP / TP</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="Revenue" formControlName="clearanceRevenue"
-            value="Revenue">
+          <input class="form-check-input" type="checkbox" id="Revenue" formControlName="clearanceRevenue" value="Revenue">
           <label class="form-check-label" for="Revenue">Revenue Department</label>
         </div>
         <div class="form-check form-check-inline">

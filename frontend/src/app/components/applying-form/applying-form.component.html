@@ -228,22 +228,41 @@
       </div>
     </form>
   </div>  
-  
-  <div class="button-container">
-    <div class="button-bottom">
-      <button type="button" class="btn btn-warning mr-2" [disabled]="!isKhasraIntegrated" (click)="saveDraft()">Save Draft</button>
-      <button type="button" class="btn btn-success mr-2" [disabled]="!isKhasraIntegrated" (click)="onSubmit()">Submit</button>
-      <a class="btn btn-info mr-2" [class.disabled]="!isKhasraIntegrated" href="/attachments">Attachments</a>
-      <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
-      <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
-    </div>
+
+<!-- Success Modal -->
+<ng-template #successModal let-modal>
+  <div class="modal-header success-modal">
+    <h4 class="modal-title">Success!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-</div>
+  <div class="modal-body success-modal">
+    <p>{{ successMessage }}</p>
+  </div>
+</ng-template>
 
-<div *ngIf="successMessage" class="alert alert-success" role="alert">
-  {{ successMessage }}
-</div>
+<!-- Error Modal -->
+<ng-template #errorModal let-modal>
+  <div class="modal-header error-modal">
+    <h4 class="modal-title">Error!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body error-modal">
+    <p>{{ errorMessage }}</p>
+  </div>
+</ng-template>
 
-<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-  {{ errorMessage }}
+  
+ <!-- Button Container -->
+<div class="button-container">
+  <div class="button-bottom">
+    <button type="button" class="btn btn-warning mr-2" [disabled]="!isKhasraIntegrated" (click)="saveDraft()">Save Draft</button>
+    <button type="button" class="btn btn-success mr-2" [disabled]="!isKhasraIntegrated" (click)="onSubmit()">Submit</button>
+    <a class="btn btn-info mr-2" [class.disabled]="!isKhasraIntegrated" href="/attachments">Attachments</a>
+    <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
+    <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
+  </div>
 </div>
