@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppFormService } from './app-form.service';
+import { AttachmentsService } from './attachments.service';
 
-describe('AppFormService', () => {
-  let service: AppFormService;
+describe('AttachmentsService', () => {
+  let service: AttachmentsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AppFormService);
+    service = TestBed.inject(AttachmentsService);
   });
 
   it('should be created', () => {

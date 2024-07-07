@@ -239,12 +239,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 /* Common style for modal title */
 .modal-title {
   font-weight: bold;
+  font-size: 1.25rem;
+  color: #333;
 }
 
 /* Common style for close button */
@@ -253,11 +255,16 @@
   outline: none;
   color: #000;
   opacity: 0.5;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 .modal-header .close:hover {
   opacity: 0.75;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
 }
 
 /* Success modal specific styles */
@@ -298,4 +305,26 @@
 /* Add some padding and border-radius for the modal content */
 .modal-content {
   border-radius: 0.3rem;
+}
+
+/* Style for modal footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Additional styles for positioning modals */
+.top-center-modal {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+/* Custom modal width and height */
+.custom-modal {
+  width: 11cm;
+  height: 4.5cm;
 }

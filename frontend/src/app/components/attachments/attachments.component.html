@@ -15,18 +15,19 @@
                 <p class="required">File Reference</p>
             </div>
         </div>
-        </div>
-        <div class="flex-container">
-       <form>
+    </div>
+
+    <form [formGroup]="attachmentsForm">
         <div class="row">
             <div class="col-lg-4">
-                <p class="required">Layout as per CG Bhumi Vikas Niyam 1984, Development Plan's provisions and Zoning Regulations (Softcopy) with Khasra Superimpose
+                <p class="required">Layout as per CG Bhumi Vikas Niyam 1984, Development Plan's provisions and Zoning
+                    Regulations (Softcopy) with Khasra Superimpose
                 </p>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="layout" formControlName="layout" class="left">
+                        <select id="layout" class="left">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -34,9 +35,10 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="layoutIP" 
-                        aria-describedby="layoutIP" aria-label="Upload">
+                    <input type="file" class="form-control" id="layout" formControlName="layout"
+                        aria-describedby="layout">
                     <button class="btn btn-primary" type="button" id="layoutIP">Scan</button>
+
                 </div>
             </div>
         </div>
@@ -48,7 +50,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="declaration" formControlName="declaration" class="right">
+                        <select id="declaration" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -56,8 +58,8 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="inputGroupFile04"
-                        aria-describedby="declarationIP" aria-label="Upload">
+                    <input type="file" class="form-control" id="declaration" formControlName="declaration"
+                        aria-describedby="declaration" aria-label="Upload">
                     <button class="btn btn-primary" type="button" id="declarationIP">Scan</button>
                 </div>
             </div>
@@ -70,7 +72,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="surveyMap" formControlName="surveyMap" class="right">
+                        <select id="surveyMap" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -78,8 +80,8 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="surveyMapIP"
-                        aria-describedby="surveyMapIP" aria-label="Upload">
+                    <input type="file" class="form-control" id="surveyMap" formControlName="surveyMap"
+                        aria-describedby="surveyMap" aria-label="Upload">
                     <button class="btn btn-primary" type="button" id="surveyMapIP">Scan</button>
                 </div>
             </div>
@@ -93,7 +95,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="sateliteMap" formControlName="sateliteMap" class="right">
+                        <select id="satelliteMap" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -101,9 +103,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="sateliteMapIP"
-                        aria-describedby="sateliteMapIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="sateliteMapIP">Scan</button>
+                    <input type="file" class="form-control" id="satelliteMap" formControlName="satelliteMap"
+                        aria-describedby="satelliteMap" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="satelliteMapIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -115,7 +117,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="landuse" formControlName="landuse" class="right">
+                        <select id="landUse" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -123,9 +125,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="landuseIP"
-                        aria-describedby="landuseIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="landuseIP">Scan</button>
+                    <input type="file" class="form-control" id="landUse" formControlName="landUse"
+                        aria-describedby="landUse" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="landUseIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -137,7 +139,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="alotLetter" formControlName="alotLetter" class="right">
+                        <select id="allotLetter" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -145,9 +147,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="alotLetterIP"
-                        aria-describedby="alotLetterIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="alotLetterIP">Scan</button>
+                    <input type="file" class="form-control" id="allotLetter" formControlName="allotLetter"
+                        aria-describedby="allotLetter" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="allotLetterIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -159,7 +161,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="parking" formControlName="parking" class="right">
+                        <select id="parkingPlan" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -167,9 +169,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="parkingIP"
-                        aria-describedby="parkingIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="parkingIP">Scan</button>
+                    <input type="file" class="form-control" id="parkingPlan" formControlName="parkingPlan"
+                        aria-describedby="parkingPlan" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="parkingPlanIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -181,7 +183,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="soilTest" formControlName="soilTest" class="right">
+                        <select id="soilTestReport" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -189,9 +191,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="soilTestIP"
-                        aria-describedby="soilTestIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="soilTestIP">Scan</button>
+                    <input type="file" class="form-control" id="soilTestReport" formControlName="soilTestReport"
+                        aria-describedby="soilTestReport" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="soilTestReportIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -203,7 +205,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="location" formControlName="location" class="right">
+                        <select id="locationMap" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -211,9 +213,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="locationIP"
-                        aria-describedby="locationIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="locationIP">Scan</button>
+                    <input type="file" class="form-control" id="locationMap" formControlName="locationMap"
+                        aria-describedby="locationMap" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="locationMapIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -225,7 +227,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="stability" formControlName="stability" class="right">
+                        <select id="structuralStability" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -233,9 +235,10 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="stabilityIP"
-                        aria-describedby="stabilityIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="stabilityIP">Scan</button>
+                    <input type="file" class="form-control" id="structuralStability"
+                        formControlName="structuralStability" aria-describedby="structuralStability"
+                        aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="structuralStabilityIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -247,7 +250,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="EWSland" formControlName="EWSland" class="right">
+                        <select id="EWSlandLocation" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -255,9 +258,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="EWSlandIP"
-                        aria-describedby="EWSlandIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="EWSlandIP">Scan</button>
+                    <input type="file" class="form-control" id="EWSlandLocation" formControlName="EWSlandLocation"
+                        aria-describedby="EWSlandLocation" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="EWSlandLocationIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -269,7 +272,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="service" formControlName="service" class="right">
+                        <select id="servicePlan" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -277,9 +280,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="serviceIP"
-                        aria-describedby="serviceIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="serviceIP">Scan</button>
+                    <input type="file" class="form-control" id="servicePlan" formControlName="servicePlan"
+                        aria-describedby="servicePlan" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="servicePlanIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -291,7 +294,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="deed" formControlName="deed" class="right">
+                        <select id="partnershipDeed" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -299,21 +302,22 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="deedIP"
-                        aria-describedby="deedIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="deedIP">Scan</button>
+                    <input type="file" class="form-control" id="partnershipDeed" formControlName="partnershipDeed"
+                        aria-describedby="partnershipDeed" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="partnershipDeedIP">Scan</button>
                 </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-lg-4">
-                <p>Affidavit in prescribed format for cases in which fees is to be deposited in "Services to the poor fund" account</p>
+                <p>Affidavit in prescribed format for cases in which fees is to be deposited in "Services to the poor
+                    fund" account</p>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="affidavit" formControlName="affidavit" class="right">
+                        <select id="affidavitFormat" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -321,9 +325,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="affidavitIP"
-                        aria-describedby="affidavitIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="affidavitIP">Scan</button>
+                    <input type="file" class="form-control" id="affidavitFormat" formControlName="affidavitFormat"
+                        aria-describedby="affidavitFormat" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="affidavitFormatIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -335,7 +339,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="CRC" formControlName="CRC" class="right">
+                        <select id="colonizerRegistration" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -343,9 +347,10 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="CRCIP"
-                        aria-describedby="CRCIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="CRCIP">Scan</button>
+                    <input type="file" class="form-control" id="colonizerRegistration"
+                        formControlName="colonizerRegistration" aria-describedby="colonizerRegistration"
+                        aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="colonizerRegistrationIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -357,7 +362,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="netWorth" formControlName="netWorth" class="right">
+                        <select id="colonizerNetWorth" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -365,9 +370,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="netWorthIP"
-                        aria-describedby="netWorthIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="netWorthIP">Scan</button>
+                    <input type="file" class="form-control" id="colonizerNetWorth" formControlName="colonizerNetWorth"
+                        aria-describedby="colonizerNetWorth" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="colonizerNetWorthIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -379,7 +384,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="otherDoc" formControlName="otherDoc" class="right">
+                        <select id="otherDocuments" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -387,21 +392,22 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="otherDocIP"
-                        aria-describedby="otherDocIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="otherDocIP">Scan</button>
+                    <input type="file" class="form-control" id="otherDocuments" formControlName="otherDocuments"
+                        aria-describedby="otherDocuments" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="otherDocumentsIP">Scan</button>
                 </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-lg-4">
-                <p class="required">Khasra Samviliyan-Aggregation all Khasras for colony into a single Khasra (khasra integration order)</p>
+                <p class="required">Khasra Samviliyan-Aggregation all Khasras for colony into a single Khasra (khasra
+                    integration order)</p>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="KIO" formControlName="KIO" class="right">
+                        <select id="KhasraSamviliyan" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -409,21 +415,22 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="KIOIP"
-                        aria-describedby="KIOIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="KIOIP">Scan</button>
+                    <input type="file" class="form-control" id="KhasraSamviliyan" formControlName="KhasraSamviliyan"
+                        aria-describedby="KhasraSamviliyan" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="KhasraSamviliyanIP">Scan</button>
                 </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-lg-4">
-                <p class="required">Seemankan of Integrated Khasra - Signed by Tehsildar alongwith Total Station Survey</p>
+                <p class="required">Seemankan of Integrated Khasra - Signed by Tehsildar alongwith Total Station Survey
+                </p>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="seemankan" formControlName="seemankan" class="right">
+                        <select id="SeemankanIntegratedKhasra" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -431,9 +438,10 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="seemankanIP"
-                        aria-describedby="seemankanIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="seemankanIP">Scan</button>
+                    <input type="file" class="form-control" id="SeemankanIntegratedKhasra"
+                        formControlName="SeemankanIntegratedKhasra" aria-describedby="SeemankanIntegratedKhasra"
+                        aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="SeemankanIntegratedKhasraIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -445,7 +453,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="b1p2" formControlName="b1p2" class="right">
+                        <select id="B1P2KhasraMap" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -453,21 +461,22 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="b1p2IP"
-                        aria-describedby="b1p2IP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon04">Scan</button>
+                    <input type="file" class="form-control" id="B1P2KhasraMap" formControlName="B1P2KhasraMap"
+                        aria-describedby="B1P2KhasraMap" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="B1P2KhasraMap">Scan</button>
                 </div>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-lg-4">
-                <p class="required">Registry Documents Details of all khasras used to make integrated khasra if will inheritance then mutation order</p>
+                <p class="required">Registry Documents Details of all khasras used to make integrated khasra if will
+                    inheritance then mutation order</p>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="regDoc" formControlName="regDoc" class="right">
+                        <select id="RegistryDocuments" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -475,9 +484,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="regDocIP"
-                        aria-describedby="regDocIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="regDocIP">Scan</button>
+                    <input type="file" class="form-control" id="RegistryDocuments" formControlName="RegistryDocuments"
+                        aria-describedby="RegistryDocuments" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="RegistryDocumentsIP">Scan</button>
                 </div>
             </div>
         </div>
@@ -489,7 +498,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <div class="flex-container">
-                        <select id="panchshala" formControlName="panchshala" class="right">
+                        <select id="PanchshalaKhasra" class="right">
                             <option value="">Please Select</option>
                         </select>
                     </div>
@@ -497,37 +506,36 @@
             </div>
             <div class="col-lg-4">
                 <div class="input-group">
-                    <input type="file" class="form-control" id="panchshalaIP"
-                        aria-describedby="panchshalaIP" aria-label="Upload">
-                    <button class="btn btn-primary" type="button" id="panchshalaIP">Scan</button>
-                </div>
-            </div>
-        </div>
-       </form>
-    </div>
-</div>
-  
-<div class="container">
-<div class="formA-container">
-    <form>
-        <span class="bannerISW">Additional Details</span>
-        <div class="form-group">
-            <div class="container">
-                <label class="required">Apply to the Office</label>
-                <div>
-                    <input class="wide-input" type="text" id="office" name="office">
+                    <input type="file" class="form-control" id="PanchshalaKhasra" formControlName="PanchshalaKhasra"
+                        aria-describedby="PanchshalaKhasra" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="PanchshalaKhasraIP">Scan</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 
-<div class="button-container">
-    <div class="button-bottom">
-      <button type="button" class="btn btn-warning mr-2">Save Draft</button>
-      <a type="submit" role="button" class="btn btn-success mr-2" href="/enclosureList">Submit</a>
-      <button type="button" class="btn btn-primary">Reset</button>
-      <button type="button" class="btn btn-danger mr-2">Cancel</button>
+<div class="container">
+    <div class="formA-container">
+        <form [formGroup]="attachmentsForm">
+            <span class="bannerISW">Additional Details</span>
+            <div class="form-group">
+                <div class="container">
+                    <label class="required">Apply to the Office</label>
+                    <div>
+                        <input class="wide-input" type="text" id="office" formControlName="office">
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-  </div>
+
+    <div class="button-container">
+        <div class="button-bottom">
+            <button type="button" class="btn btn-warning mr-2">Save Draft</button>
+            <a type="submit" role="button" class="btn btn-success mr-2" href="/enclosureList">Submit</a>
+            <button type="button" class="btn btn-primary">Reset</button>
+            <button type="button" class="btn btn-danger mr-2">Cancel</button>
+        </div>
+    </div>
 </div>

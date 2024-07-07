@@ -229,39 +229,59 @@
   </div>  
 
 <!-- Success Modal -->
-<ng-template #successModal let-modal>
-  <div class="modal-header success-modal">
-    <h4 class="modal-title">Success!</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body success-modal">
-    <p>{{ successMessage }}</p>
-  </div>
-</ng-template>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <ng-template #successModal let-modal>
+    <div class="modal-dialog modal-dialog-centered top-center-modal" role="document">
+      <div class="modal-content custom-modal">
+        <div class="modal-header success-modal">
+          <h4 class="modal-title" id="successModalLabel">Success!</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body success-modal">
+          <p>{{ successMessage }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
 
 <!-- Error Modal -->
-<ng-template #errorModal let-modal>
-  <div class="modal-header error-modal">
-    <h4 class="modal-title">Error!</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body error-modal">
-    <p>{{ errorMessage }}</p>
-  </div>
-</ng-template>
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <ng-template #errorModal let-modal>
+    <div class="modal-dialog modal-dialog-centered top-center-modal" role="document">
+      <div class="modal-content custom-modal">
+        <div class="modal-header error-modal">
+          <h4 class="modal-title" id="errorModalLabel">Error!</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body error-modal">
+          <p>{{ errorMessage }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
 
-  
  <!-- Button Container -->
 <div class="button-container">
   <div class="button-bottom">
-    <button type="button" class="btn btn-warning mr-2" [disabled]="!isKhasraIntegrated" (click)="saveDraft()">Save Draft</button>
+    <button type="button" class="btn btn-warning mr-2"  [disabled]="!isKhasraIntegrated" (click)="saveDraft()">Save Draft</button>
     <button type="button" class="btn btn-success mr-2" [disabled]="!isKhasraIntegrated" (click)="onSubmit()">Submit</button>
     <a class="btn btn-info mr-2" [class.disabled]="!isKhasraIntegrated" href="/attachments">Attachments</a>
     <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
     <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
   </div>
 </div>
+
+<!-- <button type="button" class="btn btn-success" (click)="openSuccessModal()">Open Success Modal</button>
+<button type="button" class="btn btn-danger" (click)="openErrorModal()">Open Error Modal</button> -->

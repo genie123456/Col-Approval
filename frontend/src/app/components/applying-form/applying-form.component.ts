@@ -27,8 +27,8 @@ export class ApplyingFormComponent implements OnInit {
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
 
-  successMessage: string | null = null;
-  errorMessage: string | null = null;
+  successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private applyingFormService: ApplyingFormService, private modalService: NgbModal) {
     this.applyingForm = this.fb.group({
@@ -138,13 +138,13 @@ export class ApplyingFormComponent implements OnInit {
 
       this.applyingFormService.saveApplyingFormData(combinedFormData).subscribe(
         response => {
-          this.successMessage = 'Form submitted successfully';
-          this.errorMessage = null;
+          this.successMessage = 'Form submitted successfully.';
+          this.errorMessage = '';
           this.openSuccessModal();
         },
         error => {
           this.errorMessage = 'Error submitting form.';
-          this.successMessage = null;
+          this.successMessage = '';
           this.openErrorModal();
         }
       );
@@ -154,11 +154,13 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   openSuccessModal() {
-    this.modalService.open(this.successModal, { centered: true });
+    this.successMessage = 'Form submitted successfully.';
+    this.modalService.open(this.successModal, {  });
   }
 
   openErrorModal() {
-    this.modalService.open(this.errorModal, { centered: true });
+    this.errorMessage = 'Error submitting form.';
+    this.modalService.open(this.errorModal, {  });
   }
 
   saveDraft() {
