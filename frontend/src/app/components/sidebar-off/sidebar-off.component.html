@@ -1,7 +1,10 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <span class="fs-4">Menu</span>
-    </a>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" [ngClass]="{'expand': sidebarExpanded}" style="width: 260px;">
+  <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <span class="fs-4">Menu</span>
+    <!-- <button class="toggle-btn ms-auto" (click)="toggleSidebar()">
+      <i class="bi bi-chevron-left text-white"></i>
+    </button> -->
+  </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">

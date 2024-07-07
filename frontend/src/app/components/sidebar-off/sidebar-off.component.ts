@@ -13,6 +13,7 @@ export class SidebarOffComponent implements AfterViewInit, OnInit {
   loggedIn: boolean = false;
   username: string = '';
   inboxLink: string = '';
+  sidebarExpanded: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -42,24 +43,21 @@ export class SidebarOffComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    const hamBurger: HTMLElement | null = document.querySelector(".toggle-btn");
-
-    if (hamBurger) {
-      hamBurger.addEventListener("click", () => {
-        const sidebar: HTMLElement | null = document.querySelector("#sidebar");
-        if (sidebar) {
-          sidebar.classList.toggle("expand");
-        }
-      });
-    }
-
-    // Manually initialize Bootstrap collapse
+    // Initialize Bootstrap collapse manually
     const collapseElements = document.querySelectorAll('.collapse');
     collapseElements.forEach(collapseElement => {
       new bootstrap.Collapse(collapseElement, {
         toggle: false
       });
     });
+  }
+
+  toggleSidebar(): void {
+    this.sidebarExpanded = !this.sidebarExpanded;
+    const sidebar: HTMLElement | null = document.querySelector("#sidebar");
+    if (sidebar) {
+      sidebar.classList.toggle("expand");
+    }
   }
 
   private setInboxLink(): void {

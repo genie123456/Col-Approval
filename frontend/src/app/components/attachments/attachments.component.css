@@ -103,3 +103,46 @@
     padding: 0px; /* Optional: Add some padding for better appearance */
     box-sizing: border-box; /* Ensures padding is included in the width */
   }
+
+  /* Add this CSS for the select element */
+.select-container {
+  max-width: 100%;
+  width: 100%;
+}
+
+.select-container select {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Optional: If you want to make sure the options themselves also don't stretch the dropdown */
+.select-container select option {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* .btn-primary {
+  background-color: #286090; 
+  border-color: #204d74; 
+} */
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #204d74; /* Slightly darker shade when hovered or focused */
+  border-color: #183c5f; /* Adjust border color accordingly */
+}
+
+.btn-primary[disabled] {
+  background-color: #d9edf7; /* Lighter shade for disabled state */
+  border-color: #bce8f1; /* Adjust border color accordingly */
+  color: #31708f; /* Text color for disabled state */
+}
+
+.btn-primary[disabled]:hover {
+  background-color: #d9edf7; /* Maintain lighter shade when hovered */
+  border-color: #bce8f1; /* Maintain border color when hovered */
+}
