@@ -18,6 +18,9 @@
             </option>
           </select>
         </div>
+        <div *ngIf="applyingForm.get('selectedDistrict')?.invalid && (applyingForm.get('selectedDistrict')?.dirty || applyingForm.get('selectedDistrict')?.touched)" class="error-message">
+          <span style="color: red;">This Field is Required.</span>
+        </div>
       </div>
       
       <div class="form-group">
@@ -29,6 +32,9 @@
             <input type="radio" id="urban" formControlName="area" [value]="'urban'">
             <label for="urban">शहरी क्षेत्र (Urban Area)</label>
           </div>
+        </div>
+        <div *ngIf="applyingForm.get('area')?.invalid && (applyingForm.get('area')?.dirty || applyingForm.get('area')?.touched)" class="error-message">
+          <span style="color: red;">This Field is Required.</span>
         </div>
       </div>
 
@@ -195,6 +201,9 @@
             <label for="no">No</label>
           </div>
         </div>
+        <div *ngIf="applyingForm.get('khasraIntegrated')?.invalid && (applyingForm.get('khasraIntegrated')?.dirty || applyingForm.get('khasraIntegrated')?.touched)" class="error-message">
+          <span style="color: red;">This Field is Required.</span>
+        </div>
       </div>
 
       <div *ngIf="showAdditionalForm">
@@ -202,6 +211,9 @@
           <div class="flex-container">
             <label for="integrated-khasra" class="left required">Enter the integrated khasra number received from the revenue department</label>
             <input type="text" id="integrated-khasra" formControlName="integratedKhasraNumber" class="right">
+          </div>
+          <div *ngIf="applyingForm.get('integratedKhasraNumber')?.invalid && (applyingForm.get('integratedKhasraNumber')?.dirty || applyingForm.get('integratedKhasraNumber')?.touched)" class="error-message">
+            <span style="color: red;">This Field is Required.</span>
           </div>
         </div>
       </div>
@@ -275,9 +287,9 @@
  <!-- Button Container -->
 <div class="button-container">
   <div class="button-bottom">
-    <button type="button" class="btn btn-warning mr-2"  [disabled]="!isKhasraIntegrated" (click)="saveDraft()">Save Draft</button>
-    <button type="button" class="btn btn-success mr-2" [disabled]="!isKhasraIntegrated" (click)="onSubmit()">Submit</button>
-    <a class="btn btn-info mr-2" [class.disabled]="!isKhasraIntegrated" href="/attachments">Attachments</a>
+    <button type="button" class="btn btn-warning mr-2"  [disabled]="!applyingForm.valid || !applicantFormData.valid" (click)="saveDraft()">Save Draft</button> <!-- [disabled]="!isKhasraIntegrated" -->
+    <button type="button" class="btn btn-success mr-2" [disabled]="!applyingForm.valid || !applicantFormData.valid" (click)="onSubmit()">Submit</button> <!-- [disabled]="!isKhasraIntegrated" -->
+    <a class="btn btn-info mr-2" [class.disabled]="!applyingForm.valid || !applicantFormData.valid" href="/attachments">Attachments</a> <!-- [class.disabled]="!isKhasraIntegrated" -->
     <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
     <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
   </div>

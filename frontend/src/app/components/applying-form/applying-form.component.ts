@@ -30,6 +30,8 @@ export class ApplyingFormComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
+  required: string = 'This Field is Required';
+
   constructor(private fb: FormBuilder, private applyingFormService: ApplyingFormService, private modalService: NgbModal) {
     this.applyingForm = this.fb.group({
       selectedDistrict: ['', Validators.required],
@@ -143,7 +145,7 @@ export class ApplyingFormComponent implements OnInit {
           this.openSuccessModal();
         },
         error => {
-          this.errorMessage = 'Error submitting form.';
+          this.errorMessage = 'Error submitting form. Please check all the required Fields as they are mandatory.';
           this.successMessage = '';
           this.openErrorModal();
         }
@@ -159,7 +161,7 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   openErrorModal() {
-    this.errorMessage = 'Error submitting form.';
+    this.errorMessage = 'Error submitting form.  Please check all the required Fields as they are mandatory.';
     this.modalService.open(this.errorModal, {  });
   }
 

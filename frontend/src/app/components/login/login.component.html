@@ -13,11 +13,11 @@
       <div class="form-group">
         <label for="password">Password:</label>
         <div class="input-group position-relative">
-          <input type="password" id="password" class="form-control" formControlName="password" #passwordInput>
+          <input type="password" id="password" class="form-control custom-width" formControlName="password" #passwordInput>
           <div class="input-group-append position-absolute" style="right: 0; top: 0; height: 100%;">
             <button type="button" class="btn btn-dark" (click)="togglePasswordVisibility()" #togglePassword>
-              <i class="bi bi-eye-slash"></i>
               <i class="bi bi-eye d-none"></i>
+              <i class="bi bi-eye-slash"></i>
             </button>
           </div>
         </div>
@@ -25,6 +25,7 @@
           Password is required.
         </div>
       </div>
+      
 
       <br>
 
@@ -52,8 +53,6 @@
     </form>
   </div>
 </div>
-
-
 
 <!-- Bootstrap modal for error message -->
 <!-- <div class="modal fade" #errorModal tabindex="-1" role="dialog">

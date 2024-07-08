@@ -325,6 +325,12 @@
 
 /* Custom modal width and height */
 .custom-modal {
-  width: 11cm;
-  height: 4.5cm;
+  width: auto;
+  height: auto;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
 }

@@ -36,6 +36,17 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
     const passwordInput = document.getElementById('password') as HTMLInputElement;
     passwordInput.type = this.showPassword ? 'text' : 'password';
+
+    // Toggle the eye icon visibility
+    const eyeIcon = this.togglePasswordButton.nativeElement.querySelector('i.bi-eye');
+    const eyeSlashIcon = this.togglePasswordButton.nativeElement.querySelector('i.bi-eye-slash');
+    if (this.showPassword) {
+      eyeIcon.classList.remove('d-none');
+      eyeSlashIcon.classList.add('d-none');
+    } else {
+      eyeIcon.classList.add('d-none');
+      eyeSlashIcon.classList.remove('d-none');
+    }
   }
   
 
@@ -81,17 +92,17 @@ export class LoginComponent {
     }
   }
 
-  ngAfterViewInit() {
-    this.togglePasswordButton.nativeElement.addEventListener('click', () => {
-      const password = document.getElementById('password') as HTMLInputElement;
-      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-      password.setAttribute('type', type);
+  // ngAfterViewInit() {
+  //   this.togglePasswordButton.nativeElement.addEventListener('click', () => {
+  //     const password = document.getElementById('password') as HTMLInputElement;
+  //     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+  //     password.setAttribute('type', type);
   
-      // Toggle the eye icon directly using classList
-      this.togglePasswordButton.nativeElement.querySelector('i.bi-eye').classList.toggle('d-none');
-      this.togglePasswordButton.nativeElement.querySelector('i.bi-eye-slash').classList.toggle('d-none');
-    });
-  }
+  //     // Toggle the eye icon directly using classList
+  //     this.togglePasswordButton.nativeElement.querySelector('i.bi-eye').classList.toggle('d-none');
+  //     this.togglePasswordButton.nativeElement.querySelector('i.bi-eye-slash').classList.toggle('d-none');
+  //   });
+  // }
 
   openErrorModal() {
     this.modalService.open(this.errorModal);
