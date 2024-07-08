@@ -5,6 +5,7 @@ const pool = require('./dbConfig'); // Import the database connection pool
 const crypto = require('crypto'); // Import the crypto module
 
 const formFieldsRoutes = require('./routes/formFields');
+const fileUploadsRoute = require('./routes/fileUploads');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ app.use(cors({
 
 // Configure JSON parsing middleware
 app.use(express.json());
+// app.use(fileUpload());
 
 // Session middleware
 app.use(session({
@@ -35,6 +37,7 @@ app.use(session({
 
 // Use the formFields route for form submissions
 app.use('/formFields', formFieldsRoutes);
+app.use('/api/fileUploads', fileUploadsRoute);
 
 app.get('/get', async (req, res) => {
   res.send('working');

@@ -34,11 +34,19 @@
     padding: 10px;          /* Padding inside the container */
     display: flex;          /* Use flexbox for layout */
     justify-content: flex-end; /* Align items to the right */
+    margin-top: 20px;
     margin-bottom: 20px;
   }
   .button-bottom {
-    display: flex;          /* Flexbox for button layout */
-    gap: 10px;              /* Space between buttons */
+    display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;           /* Space between buttons */
+  }
+
+  .button-bottom .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
   }
 
   .outer-container {
