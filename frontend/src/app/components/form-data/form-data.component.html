@@ -1,0 +1,286 @@
+<div class="container my-3 rounded">
+  <div class="form-container">
+    <h4><strong>Preview</strong></h4>
+    <hr>
+        <div class="text-danger"><p>The Application has not yet been Submitted. To proceed, click the appropriate button at the bottom of this page.</p></div>
+  </div> 
+  </div>
+
+<!-- <div class="outer-container"> -->
+<div *ngIf="formData">
+  <!-- Box 1: Integrated Single Window System Approval -->
+  <div class="container p-3 my-3 rounded">
+    <h4><strong>Integrated Single Window System Approval</strong></h4>
+    <hr>
+    <div class="row">
+      <div class="col-7"><strong>In which district is colony development permission sought?</strong></div>
+      <div class="col-5">{{ formData.formFieldsData.selectedDistrict }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7"><strong>For which area is permission sought?</strong></div>
+      <div class="col-5">{{ formData.formFieldsData.area }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7"><strong>In an urban area, which body should be approached for colony
+        development permission?</strong></div>
+      <div class="col-5">{{ formData.formFieldsData.body }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7"><strong>Choose the Municipal Corporation</strong></div>
+      <div class="col-5">{{ formData.formFieldsData.choosingCorporation }} </div>
+    </div>
+    <div class="row">
+      <div class="col-7"><strong>Choose the Municipal Council</strong></div>
+      <div class="col-5">{{ formData.formFieldsData.choosingCouncil }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7"><strong>Choose the Municipal Jury</strong></div>
+      <div class="col-5">{{ formData.formFieldsData.choosingJury }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7"><strong>Has the khasra been integrated?</strong></div>
+      <div class="col-5">{{ formData.formFieldsData.khasraIntegrated }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7"><strong>Enter the integrated khasra number received from the revenue department</strong></div>
+      <div class="col-5">{{ formData.formFieldsData.integratedKhasraNumber }}</div>
+    </div>
+  </div>
+  
+  <!-- Box 2: Format for Application for Colony Approval -->
+  <div class="container p-3 my-3 rounded">
+    <h4><strong>Format for Application for Colony Approval</strong></h4>
+    <hr>
+    <div class="row">
+      <div class="col-7"><strong>1. Applicant's full name</strong></div>
+      <div class="col-5">{{ formData.applicantData.fullName }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>2. Colonizer Registration Certificate(Attach a copy in PDF format of the issuing local urban body’s name, serial number, and date as an annexure in the Annexure Section.)</strong></div>
+      <!-- <div class="col-5">{{ formData.applicantData.email }}</div> -->
+    </div>
+    <div class="row">
+      <div class="col-7">2.1 Name of the Issuing Local Urban Body</div>
+      <div class="col-5">{{ formData.applicantData.LUB }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">2.2 Serial Number</div>
+      <div class="col-5">{{ formData.applicantData.Srno }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">2.3 Date</div>
+      <div class="col-5">{{ formData.applicantData.registrationDate }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>3. Current Address</strong></div>
+      <!-- <div class="col-5">{{ formData.applicantData.email }}</div> -->
+    </div>
+    <div class="row">
+      <div class="col-7">3.1 House Number</div>
+      <div class="col-5">{{ formData.applicantData.Hno }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">3.2 Neighbourhood / Colony</div>
+      <div class="col-5">{{ formData.applicantData.neighbourhoodColony }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">3.3 District</div>
+      <div class="col-5">{{ formData.applicantData.district }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>4. Details of the land, including survey number, which is intended
+        to be developed.</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-7">4.1 Survey Number</div>
+      <div class="col-5">{{ formData.applicantData.surveyNumber }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">4.2 Area of the land</div>
+      <div class="col-5">{{ formData.applicantData.area }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">4.3 Village</div>
+      <div class="col-5">{{ formData.applicantData.village }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">4.4 Neighbourhood / Colony</div>
+      <div class="col-5">{{ formData.applicantData.neighbourhoodColony4 }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">4.5 District</div>
+      <div class="col-5">{{ formData.applicantData.district4 }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>5. Has the applicant developed any land before submitting this application form? If yes, please
+        provide the details.</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-7">5.1 Name (Developed Land)</div>
+      <div class="col-5">{{ formData.applicantData.developedLandName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">5.2 Village</div>
+      <div class="col-5">{{ formData.applicantData.village5 }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">5.3 Neighbourhood / Colony</div>
+      <div class="col-5">{{ formData.applicantData.neighbourhoodColony5 }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">5.4 District</div>
+      <div class="col-5">{{ formData.applicantData.district5 }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>6. Details of financial resources for the establishment of the colony (mention net worth). Attach in
+        PDF format as an annexure in the Annexure Section.</strong></div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>7. Relinquishment of land rights (1. In the case of 'Yes', the land for roads and
+        open areas will be relinquished and recorded in the revenue records. 2. In the case of 'No', the land
+        diversion fee and premium amount will be payable on the entire ownership of the land.)</strong></div>
+        <div class="col-5">{{ formData.applicantData.relinquishment }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>8. For what purpose is the permit being requested?</strong></div>
+        <div class="col-5">{{ formData.applicantData.permitPurpose }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>9. Mobile Number</strong></div>
+      <div class="col-5">{{ formData.applicantData.mobileNumber }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>10. Email</strong></div>
+      <div class="col-5">{{ formData.applicantData.email }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>11. If the applicant is a firm, provide the TIN/GSTN number.</strong></div>
+      <div class="col-5">{{ formData.applicantData.tinGstnNumber }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7"><strong>12. Proof of Applicant's Rights, Land or Plot Ownership, including Evidence of Rights: The following
+        proofs will be attached:</strong></div>
+        <div>
+          <div class="col-7"><label>(a) An attested copy of the original sale deed, lease deed, or any other document under which the
+            rights, claims, and interests in the land or plot are claimed. (Attach as Annexure in PDF format in the
+            Annexure Section)
+          </label></div>
+          <div class="col-7"><label>(b) If there is a will, an attested copy of the mutation and Khasra amalgamation (Attach as Annexure
+            in PDF format in the Annexure Section)
+          </label></div>
+          <div class="col-7"><label>(c) An attested copy of the Khasra map and Khatoni records (Khasra map B-1, P-II) (Attach as Annexure
+            in PDF format in the Annexure Section)
+          </label></div>
+          <div class="col-7">(d) Other documents acceptable to the authority (Attach as Annexure in PDF format in the Annexure
+            Section)</div>
+        </div>
+    </div>
+    <br>
+ 
+      <div><strong>13. The following information will be submitted by me/us...</strong>
+        <div class="col-7"><label>(a) Proposed development map (including Khasra superimpose) (Attach as Annexure in the prescribed format in the Annexure Section)</label></div>
+        <div class="row">
+        <div class="col-7">
+        <label class="required">(b) Details of 9% of the land earmarked for transfer to the Economically Weaker Section (EWS):</label>
+      </div>
+      <div class="col-5">{{ formData.applicantData.EWS }}</div>
+      </div>    
+  </div>
+
+    
+    <div class="row">
+      <div class="col-7">If the proposed layout is less than one acre</div>
+      <div class="col-5">{{ formData.applicantData.EWS_Less }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7"><strong>If the proposed layout is one acre or more</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-7">Outside of Proposed non-residential area</div>
+      <div class="col-5">{{ formData.applicantData.outside_res_area }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">Within a radius of 01 kilometer (in the Gram Panchayat area) or within a radius of 03 kilometers (in the urban local body area) from the proposed non-residential area</div>
+      <div class="col-5">{{ formData.applicantData.inside_res_area }}</div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-7">Collector guideline rate in the proposed residential area</div>
+      <div class="col-5">{{ formData.applicantData.CGR_Residential_Area }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">Collector guideline rate in the proposed land area</div>
+      <div class="col-5">{{ formData.applicantData.CGR_Land_Area }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">Area of EWS land in the proposed residential area</div>
+      <div class="col-5">{{ formData.applicantData.EWS_Residential_Area }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">Area of the proposed EWS land</div>
+      <div class="col-5">{{ formData.applicantData.EWS_Land_Area }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7">Total amount as per collector guideline rate in lieu of 9 percent EWS land</div>
+      <div class="col-5">{{ formData.applicantData.CGRAmount }}</div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-7"><strong>14. Clearance from various departments</strong></div>
+      <div class="col-5">
+        <div *ngIf="formData && formData.applicantData">
+          <div *ngIf="formData.applicantData.clearancePWD !== 'null'">{{ formData.applicantData.clearancePWD }}</div>
+          <div *ngIf="formData.applicantData.clearanceWRD !== 'null'">{{ formData.applicantData.clearanceWRD }}</div>
+          <div *ngIf="formData.applicantData.clearanceCSEB !== 'null'">{{ formData.applicantData.clearanceCSEB }}</div>
+          <div *ngIf="formData.applicantData.clearanceCECB !== 'null'">{{ formData.applicantData.clearanceCECB }}</div>
+          <div *ngIf="formData.applicantData.clearanceNHAI !== 'null'">{{ formData.applicantData.clearanceNHAI }}</div>
+          <div *ngIf="formData.applicantData.clearancePHED !== 'null'">{{ formData.applicantData.clearancePHED }}</div>
+          <div *ngIf="formData.applicantData.clearancePMGSY !== 'null'">{{ formData.applicantData.clearancePMGSY }}</div>
+          <div *ngIf="formData.applicantData.clearanceFOREST !== 'null'">{{ formData.applicantData.clearanceFOREST }}</div>
+          <div *ngIf="formData.applicantData.clearanceFireNOC !== 'null'">{{ formData.applicantData.clearanceFireNOC }}</div>
+          <div *ngIf="formData.applicantData.clearanceGramPanchayat !== 'null'">{{ formData.applicantData.clearanceGramPanchayat }}</div>
+          <div *ngIf="formData.applicantData.clearanceNNNPTP !== 'null'">{{ formData.applicantData.clearanceNNNPTP }}</div>
+          <div *ngIf="formData.applicantData.clearanceRevenue !== 'null'">{{ formData.applicantData.clearanceRevenue }}</div>
+          <div *ngIf="formData.applicantData.clearanceRES !== 'null'">{{ formData.applicantData.clearanceRES }}</div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
+<!-- </div> -->
+
+<div class="container rounded">
+<div class="form-container">
+  <h4><strong>Additional Details</strong></h4>
+  <hr>
+    <div class="row">
+      <div class="col-2"><b>Apply to the Office</b></div>
+        <div class="col-9">{{ formData.formFieldsData.office }}</div>
+    </div>
+</div> 
+</div>
+
+<div class="button-container">
+  <div class="button-bottom">
+    <button type="button" class="btn btn-warning mr-2" >Save
+      Draft</button>
+    <button type="button" class="btn btn-success mr-2" >Submit</button> <!-- && !applicantFormData.valid -->
+    <a class="btn btn-info mr-2" href="/attachments">Attachments</a> <!-- && !applicantFormData.valid -->
+    <button type="button" class="btn btn-dark" >Reset</button>
+    <button type="button" class="btn btn-danger mr-2" >Cancel</button>
+  </div>
+</div>

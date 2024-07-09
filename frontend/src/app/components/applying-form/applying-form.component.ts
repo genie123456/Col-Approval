@@ -68,7 +68,7 @@ export class ApplyingFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       tinGstnNumber: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{15}$')]],
       EWS: ['', [Validators.required, Validators.pattern('^(proposed layout is less than one acre|proposed layout is one acre or more)$')]],
-      EWSLess: ['', [Validators.required, Validators.pattern('^(Payment of Land|Plot)$')]],
+      EWS_Less: ['', [Validators.required, Validators.pattern('^(Payment of Land|Plot)$')]],
       outside_res_area: [false],
       inside_res_area: [false],
       CGR_Residential_Area: [''],

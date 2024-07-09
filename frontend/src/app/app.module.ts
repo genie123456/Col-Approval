@@ -47,6 +47,7 @@ import { DevelopmentPermissionComponent } from './components/verify-sdm/developm
 import { FinalColDevComponent } from './components/adm-verification/final-col-dev/final-col-dev.component';
 import { ApplicantDataComponent } from './components/applying-form/applicant-data/applicant-data.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
+import { FormDataComponent } from './components/form-data/form-data.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
     DevelopmentPermissionComponent,
     FinalColDevComponent,
     ApplicantDataComponent,
-    SplashScreenComponent
+    SplashScreenComponent,
+    FormDataComponent
   ],
   imports: [
     HttpClientModule,
