@@ -43,11 +43,19 @@
   
         <!-- Hidden input field for type -->
         <input type="hidden" id="type" formControlName="type" value="applicant">
+
+        <br>
   
         <button type="submit" [disabled]="signupForm.invalid" class="signup-button btn btn-primary">Sign Up</button>
   
         <!-- Display success message if signup was successful -->
         <div *ngIf="signupSuccess" class="text-success mt-3">Signup successful!</div>
+
+        <br>
+
+        <div class="text-center">
+          <p>Have an Account? <a routerLink="/login">Sign In</a></p>
+        </div>
       </form>
     </div>
   </div>

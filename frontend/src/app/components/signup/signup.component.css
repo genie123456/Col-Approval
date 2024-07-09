@@ -69,7 +69,7 @@ button:hover {
   align-items: flex-start; /* Align items to the top */
   padding-top: 50px; /* Adjust the padding-top as needed */
   padding-bottom: 50px; /* Add padding-bottom to adjust the gap to the footer */
-  height: 100vh; /* Vertically center the container */
+  /* height: 100vh; Vertically center the container */
 }
 
 .signup-container {
