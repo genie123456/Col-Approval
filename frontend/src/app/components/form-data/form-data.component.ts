@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
 
 @Component({
@@ -9,10 +10,16 @@ import { ApplyingFormService } from 'src/app/services/applying-form.service';
 export class FormDataComponent implements OnInit {
 
   formData: any;
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor(private applyingFormService: ApplyingFormService) { }
+  @ViewChild('successModal') successModal!: ElementRef;
+  @ViewChild('errorModal') errorModal!: ElementRef;
+
+  constructor(private applyingFormService: ApplyingFormService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    // Fetch the form data and initialize formData here
     const id = 1; // Replace with the actual ID you want to fetch
     this.applyingFormService.getApplyingFormData(id).subscribe(
       data => {
@@ -27,7 +34,7 @@ export class FormDataComponent implements OnInit {
   }
 
   processClearanceTexts(): void {
-    if (this.formData && this.formData.applicantData) {
+    if (this.formData && this.formData?.applicantData) {
       // Define clearance mappings with type assertion
       const clearanceTexts: { [key: string]: { [value: string]: string } } = {
         clearancePWD: {
@@ -86,13 +93,61 @@ export class FormDataComponent implements OnInit {
 
       // Process each clearance property
       Object.keys(clearanceTexts).forEach(key => {
-        const clearanceValue = this.formData.applicantData[key];
-        if (clearanceValue !== null && clearanceTexts[key][clearanceValue.toString()]) {
+        const clearanceValue = this.formData.applicantData?.[key];
+        if (clearanceValue !== null && clearanceValue !== undefined && clearanceTexts[key][clearanceValue.toString()]) {
           this.formData.applicantData[key] = clearanceTexts[key][clearanceValue.toString()];
         } else {
           this.formData.applicantData[key] = 'null';
         }
       });
     }
+  }
+
+  submitForm() {
+    this.applyingFormService.saveApplyingFormData(this.formData).subscribe(
+      response => {
+        this.successMessage = 'Form submitted successfully.';
+        this.errorMessage = '';
+        this.openSuccessModal();
+      },
+      error => {
+        this.errorMessage = 'Error submitting form. Please check all the required Fields as they are mandatory.';
+        this.successMessage = '';
+        this.openErrorModal();
+      }
+    );
+  }
+
+  // Subscribe to events from ApplyingFormComponent
+  onFormSubmitSuccess() {
+    this.successMessage = 'Form submitted successfully.';
+    this.errorMessage = '';
+    this.openSuccessModal();
+  }
+
+  onFormSubmitError() {
+    this.errorMessage = 'Error submitting form. Please check all the required Fields as they are mandatory.';
+    this.successMessage = '';
+    this.openErrorModal();
+  }
+
+  openSuccessModal() {
+    this.modalService.open(this.successModal, {});
+  }
+
+  openErrorModal() {
+    this.modalService.open(this.errorModal, {});
+  }
+
+  onSaveDraft() {
+    // Implement save draft logic
+  }
+
+  onReset() {
+    // Implement reset logic
+  }
+
+  onCancel() {
+    // Implement cancel logic
   }
 }
