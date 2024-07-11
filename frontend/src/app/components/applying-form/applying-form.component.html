@@ -287,11 +287,9 @@
 <!-- Button Container -->
 <div class="button-container">
   <div class="button-bottom">
-    <button type="button" class="btn btn-warning mr-2" [disabled]="!applyingForm.valid " (click)="saveDraft()">Save
-      Draft</button> <!-- && !applicantFormData.valid-->
     <button type="button" class="btn btn-success mr-2" [disabled]="!applyingForm.valid "
       (click)="onSubmit()">Submit</button> <!-- && !applicantFormData.valid -->
-    <a class="btn btn-info mr-2" [class.disabled]="!applyingForm.valid " href="/attachments">Attachments</a> <!-- && !applicantFormData.valid -->
+    <a class="btn btn-info mr-2" [class.disabled]="!applyingForm.valid " href="/form-data">Preview</a>
     <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
     <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
 
@@ -12,9 +12,6 @@ export class FormDataComponent implements OnInit {
   formData: any;
   successMessage: string = '';
   errorMessage: string = '';
-
-  @ViewChild('successModal') successModal!: ElementRef;
-  @ViewChild('errorModal') errorModal!: ElementRef;
 
   constructor(private applyingFormService: ApplyingFormService, private modalService: NgbModal) { }
 
@@ -34,7 +31,7 @@ export class FormDataComponent implements OnInit {
   }
 
   processClearanceTexts(): void {
-    if (this.formData && this.formData?.applicantData) {
+    if (this.formData && this.formData.applicantData) {
       // Define clearance mappings with type assertion
       const clearanceTexts: { [key: string]: { [value: string]: string } } = {
         clearancePWD: {

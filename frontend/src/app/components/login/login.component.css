@@ -7,7 +7,6 @@ label {
   margin-bottom: 5px;
 }
 
-
 input[type="text"],
 input[type="password"],
 select {
@@ -78,17 +77,17 @@ button {
 }
 
 /* Add flex display to the form-group for aligning the label and select */
-.form-group.d-flex {
+.d-flex {
   display: flex;
   align-items: center;
 }
 
-.form-group .mr-2 {
+.mr-2 {
   margin-right: 10px;
   font-size: large;
 }
 
-.form-group select {
+select {
   flex: 1;
   border: 1px solid #363636;
   border-radius: 4px;
@@ -125,4 +124,10 @@ button {
 .custom-width {
   max-width: 356px; /* Adjust this value as needed */
   width: 100%;
+}
+
+.form-select {
+  width: 200px; /* Reset width to auto */
+  /* min-width: 200px;  Set a minimum width */
+  margin-left: 100px;
 }
