@@ -20,7 +20,7 @@ export class FormDataComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetch the form data and initialize formData here
-    const id = 1; // Replace with the actual ID you want to fetch
+    const id = 2; // Replace with the actual ID you want to fetch
     this.applyingFormService.getApplyingFormData(id).subscribe(
       data => {
         this.formData = data;
@@ -101,53 +101,5 @@ export class FormDataComponent implements OnInit {
         }
       });
     }
-  }
-
-  submitForm() {
-    this.applyingFormService.saveApplyingFormData(this.formData).subscribe(
-      response => {
-        this.successMessage = 'Form submitted successfully.';
-        this.errorMessage = '';
-        this.openSuccessModal();
-      },
-      error => {
-        this.errorMessage = 'Error submitting form. Please check all the required Fields as they are mandatory.';
-        this.successMessage = '';
-        this.openErrorModal();
-      }
-    );
-  }
-
-  // Subscribe to events from ApplyingFormComponent
-  onFormSubmitSuccess() {
-    this.successMessage = 'Form submitted successfully.';
-    this.errorMessage = '';
-    this.openSuccessModal();
-  }
-
-  onFormSubmitError() {
-    this.errorMessage = 'Error submitting form. Please check all the required Fields as they are mandatory.';
-    this.successMessage = '';
-    this.openErrorModal();
-  }
-
-  openSuccessModal() {
-    this.modalService.open(this.successModal, {});
-  }
-
-  openErrorModal() {
-    this.modalService.open(this.errorModal, {});
-  }
-
-  onSaveDraft() {
-    // Implement save draft logic
-  }
-
-  onReset() {
-    // Implement reset logic
-  }
-
-  onCancel() {
-    // Implement cancel logic
   }
 }

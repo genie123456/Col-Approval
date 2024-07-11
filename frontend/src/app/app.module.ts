@@ -88,7 +88,7 @@ import { FormDataComponent } from './components/form-data/form-data.component';
     FinalColDevComponent,
     ApplicantDataComponent,
     SplashScreenComponent,
-    FormDataComponent
+    FormDataComponent,
   ],
   imports: [
     HttpClientModule,

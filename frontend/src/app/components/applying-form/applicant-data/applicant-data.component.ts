@@ -28,9 +28,7 @@ export class ApplicantDataComponent implements OnChanges, OnInit{
 
   constructor( private applyingFormService: ApplyingFormService) {}
 
-  ngOnInit(): void {
-  
-  }
+  ngOnInit(): void {  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['applicantFormData'] && changes['applicantFormData'].currentValue) {

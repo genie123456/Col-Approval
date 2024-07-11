@@ -272,50 +272,13 @@
 </div> 
 </div>
 
-<app-applying-form
-  (formSubmitSuccess)="onFormSubmitSuccess()"
-  (formSubmitError)="onFormSubmitError()">
-</app-applying-form>
-
-<!-- Include your modals here -->
-<ng-template #successModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Success</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>{{ successMessage }}</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.close('Close click')">Close</button>
-  </div>
-</ng-template>
-
-<ng-template #errorModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Error</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>{{ errorMessage }}</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.close('Close click')">Close</button>
-  </div>
-</ng-template>
-
-
-
 <div class="button-container">
   <div class="button-bottom">
-    <button type="button" class="btn btn-warning mr-2" (click)="onSaveDraft()">Save Draft</button>
-    <button type="button" class="btn btn-success mr-2" (click)="submitForm()">Submit</button>
-    <a class="btn btn-info mr-2" href="/attachments">Attachments</a>
-    <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
-    <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
+    <button type="button" class="btn btn-warning mr-2" >Save
+      Draft</button>
+    <button type="button" class="btn btn-success mr-2" >Submit</button> <!-- && !applicantFormData.valid -->
+    <a class="btn btn-info mr-2" href="/attachments">Attachments</a> <!-- && !applicantFormData.valid -->
+    <button type="button" class="btn btn-dark" >Reset</button>
+    <button type="button" class="btn btn-danger mr-2" >Cancel</button>
   </div>
 </div>

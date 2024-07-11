@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
@@ -11,9 +11,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ApplyingFormComponent implements OnInit {
   @ViewChild('successModal') successModal!: ElementRef;
   @ViewChild('errorModal') errorModal!: ElementRef;
-  
-  @Output() formSubmitSuccess = new EventEmitter<void>();
-  @Output() formSubmitError = new EventEmitter<void>();
 
   districts: string[] = [
     'Balod', 'Baloda Bazar - Bhatapara', 'Balrampur - Ramanujganj', 'Bastar', 'Bemetara', 'Bijapur',
@@ -143,15 +140,29 @@ export class ApplyingFormComponent implements OnInit {
 
       this.applyingFormService.saveApplyingFormData(combinedFormData).subscribe(
         response => {
-          this.formSubmitSuccess.emit();
+          this.successMessage = 'Form submitted successfully.';
+          this.errorMessage = '';
+          this.openSuccessModal();
         },
         error => {
-          this.formSubmitError.emit();
+          this.errorMessage = 'Error submitting form. Please check all the required Fields as they are mandatory.';
+          this.successMessage = '';
+          this.openErrorModal();
         }
       );
     } else {
       alert('Please get the Khasra integrated from the revenue department before applying for colony approval.');
     }
+  }
+
+  openSuccessModal() {
+    this.successMessage = 'Form submitted successfully.';
+    this.modalService.open(this.successModal, {  });
+  }
+
+  openErrorModal() {
+    this.errorMessage = 'Error submitting form.  Please check all the required Fields as they are mandatory.';
+    this.modalService.open(this.errorModal, {  });
   }
 
   saveDraft() {
