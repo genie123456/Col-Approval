@@ -41,23 +41,4 @@ export class ApplicantDataComponent implements OnChanges, OnInit{
       this.formSubmit.emit(this.applicantFormData.value); 
     }
   }
-
-  saveDraft() {
-    this.applyingFormService.saveDraft(this.applicantFormData.value).subscribe(
-      response => {
-        console.log('Draft saved:', response);
-      },
-      error => {
-        console.error('Error saving draft:', error);
-      }
-    );
-  }
-
-  onReset() {
-    this.applicantFormData.reset();
-  }
-
-  onCancel() {
-    console.log('Form cancelled');
-  }
 }
