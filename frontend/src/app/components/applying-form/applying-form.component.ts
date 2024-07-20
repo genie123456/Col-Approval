@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
+import { Modal } from 'bootstrap';
+// import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-applying-form',
@@ -24,6 +26,8 @@ export class ApplyingFormComponent implements OnInit {
   applyingForm: FormGroup;
   applicantFormData: FormGroup;
 
+  formData: any;
+
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
 
@@ -31,8 +35,27 @@ export class ApplyingFormComponent implements OnInit {
   errorMessage: string = '';
 
   required: string = 'This Field is Required';
+  clearanceLabels: { [key: string]: string } = {
+    clearancePWD: 'PWD (Public Works Department)',
+    clearanceWRD: 'WRD (Water Resources Department)',
+    clearanceCSEB: 'CSEB (CG Electricity Board)',
+    clearanceCECB: 'CECB (Environment)',
+    clearanceNHAI: 'NHAI (National Highway)',
+    clearancePHED: 'PHED (Public Health Engineering)',
+    clearancePMGSY: 'PMGSY (PM Gramin Sadak Yojna)',
+    clearanceFOREST: 'FOREST',
+    clearanceFireNOC: 'Fire NOC (Home Department)',
+    clearanceGramPanchayat: 'Gram Panchayat',
+    clearanceNNNPTP: 'NN / NP / TP',
+    clearanceRevenue: 'Revenue Department',
+    clearanceRES: 'RES (Rural Engineering Services)',
+  };  
 
-  constructor(private fb: FormBuilder, private applyingFormService: ApplyingFormService, private modalService: NgbModal) {
+  constructor(
+    private fb: FormBuilder, 
+    private applyingFormService: ApplyingFormService, 
+    private modalService: NgbModal,
+  ) {
     this.applyingForm = this.fb.group({
       selectedDistrict: ['', Validators.required],
       area: ['', [Validators.required, Validators.pattern('^(rural|urban)$')]], 
@@ -104,7 +127,7 @@ export class ApplyingFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.applyingForm.get('area')!.valueChanges.subscribe(value => {
       if (value === 'urban') {
         this.applyingForm.get('body')!.enable();
@@ -112,6 +135,13 @@ export class ApplyingFormComponent implements OnInit {
         this.applyingForm.get('body')!.disable();
       }
     });
+
+     // This ensures Bootstrap's JavaScript is loaded
+     if (typeof Modal !== 'undefined') {
+      console.log('Bootstrap Modal is available');
+    } else {
+      console.error('Bootstrap Modal is not available');
+    }
   }
 
   onKhasraIntegratedChange(value: string) {
@@ -189,5 +219,53 @@ export class ApplyingFormComponent implements OnInit {
 
   onCancel() {
     console.log('Form cancelled');
+  }
+
+  openPreviewModal() {
+    console.log('openPreviewModal called');
+  
+    // Combine data from both forms
+    this.formData = {
+      formFieldsData: {
+        ...this.applyingForm.value,
+        office: this.applyingForm.get('office')?.value // Add this line
+      },
+      applicantData: this.applicantFormData.value
+    };
+  
+    // Filter the clearances
+    this.processClearanceTexts();
+    
+    // Open the modal
+    const modalElement = document.getElementById('previewModal');
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    } else {
+      console.error('Modal element not found');
+    }
+  }
+
+  processClearanceTexts(): void {
+    if (this.formData && this.formData.applicantData) {
+      const clearanceLabels: { [key: string]: string } = {
+        clearancePWD: 'PWD (Public Works Department)',
+        clearanceWRD: 'WRD (Water Resources Department)',
+        clearanceCSEB: 'CSEB (CG Electricity Board)',
+        clearanceCECB: 'CECB (Environment)',
+        clearanceNHAI: 'NHAI (National Highway)',
+        clearancePHED: 'PHED (Public Health Engineering)',
+        clearancePMGSY: 'PMGSY (PM Gramin Sadak Yojna)',
+        clearanceFOREST: 'FOREST',
+        clearanceFireNOC: 'Fire NOC (Home Department)',
+        clearanceGramPanchayat: 'Gram Panchayat',
+        clearanceNNNPTP: 'NN / NP / TP',
+        clearanceRevenue: 'Revenue Department',
+        clearanceRES: 'RES (Rural Engineering Services)',
+      };
+  
+      // Filter only checked clearances
+      this.formData.filteredClearances = Object.keys(clearanceLabels).filter(key => this.formData.applicantData[key]);
+    }
   }
 }

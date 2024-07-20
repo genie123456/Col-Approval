@@ -32,7 +32,7 @@ import { ProvisionalLayoutComponent } from './components/verify-tncp/provisional
 import { DiversionCertificateComponent } from './components/verify-sdm/diversion-certificate/diversion-certificate.component';
 import { DevelopmentPermissionComponent } from './components/verify-sdm/development-permission/development-permission.component';
 import { FinalColDevComponent } from './components/adm-verification/final-col-dev/final-col-dev.component';
-import { FormDataComponent } from './components/form-data/form-data.component';
+// import { FormDataComponent } from './components/form-data/form-data.component';
 
 // Define routes
 const routes: Routes = [
@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent }, // , canActivate: [authGuard]
   { path: 'apply', component: ApplyingFormComponent },
   { path: 'applicant-dashboard', component: DashApplicantComponent },
-  { path: 'form-data', component: FormDataComponent },
+  // { path: 'form-data', component: FormDataComponent },
   { path: 'attachments', component: AttachmentsComponent },
   { path: 'enclosureList', component: EnclosureListComponent },
   { path: 'enclosurePrint', component: EnclosurePrintComponent },

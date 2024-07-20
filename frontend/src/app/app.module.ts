@@ -47,7 +47,9 @@ import { DevelopmentPermissionComponent } from './components/verify-sdm/developm
 import { FinalColDevComponent } from './components/adm-verification/final-col-dev/final-col-dev.component';
 import { ApplicantDataComponent } from './components/applying-form/applicant-data/applicant-data.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
-import { FormDataComponent } from './components/form-data/form-data.component';
+// import { FormDataComponent } from './components/form-data/form-data.component';
+import { ApplyingFormService } from './services/applying-form.service';
+// import { ModalService } from './services/modal.service';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,7 @@ import { FormDataComponent } from './components/form-data/form-data.component';
     FinalColDevComponent,
     ApplicantDataComponent,
     SplashScreenComponent,
-    FormDataComponent,
+    // FormDataComponent,
   ],
   imports: [
     HttpClientModule,
@@ -100,7 +102,7 @@ import { FormDataComponent } from './components/form-data/form-data.component';
     FormsModule,
     NoopAnimationsModule,
   ],
-  providers: [],
+  providers: [ApplyingFormService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

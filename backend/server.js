@@ -3,6 +3,8 @@ const cors = require('cors');
 const session = require('express-session');
 const pool = require('./dbConfig'); // Import the database connection pool
 const crypto = require('crypto'); // Import the crypto module
+const path = require('path');
+// const mime = require('mime'); 
 
 const formFieldsRoutes = require('./routes/formFields');
 const fileUploadsRoute = require('./routes/fileUploads');
@@ -34,6 +36,21 @@ app.use(session({
     sameSite: 'lax', // Add SameSite attribute
   },
 }));
+
+// Middleware to set correct MIME types for static files
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/officer1')) {
+    const mimeModule = await import('mime');
+    const mimeType = mimeModule.default.getType(req.path);
+    if (mimeType) {
+      res.type(mimeType);
+    }
+  }
+  next();
+});
+
+// Serve static files from the Angular app
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
 
 // Use the formFields route for form submissions
 app.use('/formFields', formFieldsRoutes);
@@ -119,6 +136,13 @@ app.post('/logout', (req, res) => {
     }
     res.status(200).json({ message: 'Logout successful' });
   });
+});
+
+
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/officer1') && !req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'dist', 'index.html'));
+  }
 });
 
 // Start the server
