@@ -1,0 +1,142 @@
+.container{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-bordered{
+    border: 1px solid #b9b8b8;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000000;
+}
+
+.noc-application {
+    border: 1px solid #666666;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 10px;
+  }
+  
+  .noc-application__heading {
+    margin-bottom: 16px;
+  }
+  
+  .noc-application__details {
+
+    margin-bottom: 13px;
+  }
+  
+  .noc-application__details__label {
+    font-weight: bold;
+  }
+  
+  .bannerISW {
+    background-color: rgb(255, 190, 206);
+    padding: 5px;
+    display: flex;
+    justify-content: left;
+   
+    margin: 3px 3px 5px 3px;; /* Adds 7px space on all sides */
+    border-radius: 10px; /* Adds rounded corners */
+    color: black;
+    font-size: 20px; /* Adjust font size if necessary */
+    text-align: left; /* Center the text */
+  }
+
+  .dotted-line {
+    border: none;
+    border-top: 2.5px dotted #000;
+    margin: 20px 0; /* Adjust the vertical margin as needed */
+  }
+
+  .form-c {
+    background-color: rgb(254, 224, 224);
+    padding: 10px;
+    border-radius: 7px; /* Adds rounded corners */
+    margin: 10px 0; /* Adds some space between form containers */
+    border: 0.7px solid gray;
+  }
+  
+  .button-container {
+    border: 1px solid #ccc; /* Border for the container */
+    border-top: 3px solid rgb(84, 164, 212);
+    border-radius: 7px;
+    padding: 10px;          /* Padding inside the container */
+    display: flex;          /* Use flexbox for layout */
+    justify-content: flex-end; /* Align items to the right */
+  }
+  
+  .button-bottom {
+    display: flex;          /* Flexbox for button layout */
+    gap: 10px;              /* Space between buttons */
+  }
+   
+  .required::after {
+    content: " *";
+    color: red;
+  }
+
+  input[type="radio"] {
+    margin-right: 2.5mm;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 2.5mm;
+  }
+
+  .custom-input{
+    width: 10cm;
+    height: 1cm;
+    box-sizing: border-box; 
+  }
+
+  .search-box {
+    border: 2px solid #ddd;
+    border-top: 4px solid #000;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 10px;
+  }
+  
+  .search-box__heading {
+    margin-bottom: 16px;
+  }
+  
+  .search-box__heading__text {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .search-box__filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  
+  .search-box__filter {
+    margin-right: 16px;
+    flex: 1 1 200px;
+  }
+  
+  .search-box__filter label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  
+  .search-box__button {
+    text-align: right;
+    margin-top: 16px;
+  }
+
+  .left {
+    flex: 1;
+  }
+  
+  .right {
+    flex: 1;
+    text-align: right;
+  }
+
+  .table-bordered{
+    border: 1.5px solid #000;
+  }

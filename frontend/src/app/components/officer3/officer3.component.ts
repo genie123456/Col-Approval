@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-interface EWSdata {
-  serviceName: string;
-  currentTask: string;
-  appRefNo: string;
-  appReceivedDate: string;
+interface EWSData {
+  sno: number;
+  appNo: string;
+  status: string;
+  action: string;
+  RtP: string;
+  date: string;
 }
 
 @Component({
@@ -13,11 +15,39 @@ interface EWSdata {
   styleUrls: ['./officer3.component.css']
 })
 export class Officer3Component implements OnInit {
-  data: EWSdata[] = [];
+  data: EWSData[] = [];
+  filteredData: EWSData[] = [];
+  selectedService: string = 'Single Window Colony Approval';
+  selectedTask: string = 'EWS Verification-Rural';
+  selectedAppNo: string = '';
+  selectedDate: string = '';
+
+  constructor() {}
+
   ngOnInit() {
     this.data = [
-      { serviceName: 'Single Window Colony Approval', currentTask: 'EWS Verification-Rural', appRefNo: 'CGAWAAS/2024/00012', appReceivedDate: '08-04-2024' }
+      { sno: 1, appNo: 'Application 1', status: 'Initiated', action: 'Verify', RtP: '', date: '2024-06-11' },
+      { sno: 2, appNo: 'Application 2', status: 'Initiated', action: 'Verify', RtP: '', date: '2023-06-10' },
     ];
+    this.filteredData = this.data; // Initialize filteredData to display all data initially
   }
 
+  filterData() {
+    const fromDate = (document.getElementById('from-date') as HTMLInputElement).value;
+    const toDate = (document.getElementById('to-date') as HTMLInputElement).value;
+
+    if (fromDate && toDate) {
+      this.filteredData = this.data.filter(item => {
+        const itemDate = new Date(item.date);
+        return itemDate >= new Date(fromDate) && itemDate <= new Date(toDate);
+      });
+    } else {
+      this.filteredData = this.data; // If no date filter is applied, show all data
+    }
+  }
+
+  setSelectedApp(item: EWSData) {
+    this.selectedAppNo = item.appNo;
+    this.selectedDate = item.date;
+  }
 }
