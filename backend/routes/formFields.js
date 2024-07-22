@@ -14,6 +14,6 @@ router.post('/applying-form', saveApplyingFormData);
 router.get('/applying-form/:id', getApplyingFormData);
 
 // Route to get all form fields data
-router.get('/form-fields', getAllFormFieldsData);
+router.get('/applying-form', getAllFormFieldsData);
 
 module.exports = router;

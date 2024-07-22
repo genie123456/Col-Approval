@@ -88,7 +88,22 @@ const getApplyingFormData = async (req, res) => {
 
 // Controller to get all form fields data
 const getAllFormFieldsData = async (req, res) => {
-  const sql = 'SELECT * FROM formfields';
+  const sql = `
+    SELECT 
+      ff.id, ff.selectedDistrict, ff.area, ff.body, ff.choosingCorporation, 
+      ff.choosingCouncil, ff.choosingJury, ff.khasraIntegrated, ff.integratedKhasraNumber, ff.office,
+      ad.fullName, ad.LUB, ad.Srno, ad.registrationDate, ad.Hno, ad.neighbourhoodColony, ad.district, 
+      ad.surveyNumber, ad.area AS applicantArea, ad.village, ad.neighbourhoodColony4, ad.district4, 
+      ad.developedLandName, ad.village5, ad.neighbourhoodColony5, ad.district5, ad.relinquishment, 
+      ad.permitPurpose, ad.mobileNumber, ad.email, ad.tinGstnNumber, ad.EWS, ad.EWS_Less, ad.outside_res_area, 
+      ad.inside_res_area, ad.CGR_Residential_Area, ad.CGR_Land_Area, ad.EWS_Residential_Area, 
+      ad.EWS_Land_Area, ad.CGRAmount, ad.clearancePWD, ad.clearanceWRD, ad.clearanceCSEB, 
+      ad.clearanceCECB, ad.clearanceNHAI, ad.clearancePHED, ad.clearancePMGSY, ad.clearanceFOREST, 
+      ad.clearanceFireNOC, ad.clearanceGramPanchayat, ad.clearanceNNNPTP, ad.clearanceRevenue, 
+      ad.clearanceRES
+    FROM formfields ff
+    LEFT JOIN applicantdata ad ON ff.id = ad.formId
+  `;
 
   try {
     const conn = await pool.getConnection();
@@ -105,6 +120,7 @@ const getAllFormFieldsData = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 module.exports = {
   saveApplyingFormData,

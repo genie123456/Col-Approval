@@ -62,16 +62,16 @@ export class LoginComponent {
           // Navigate based on user type
           switch (response.user.type) {
             case 'official1':
-              this.router.navigateByUrl('/officer1/inbox');
+              this.router.navigateByUrl('/officer1');
               break;
             case 'official2':
-              this.router.navigateByUrl('/officer2/inbox');
+              this.router.navigateByUrl('/officer2');
               break;
             case 'official3':
-              this.router.navigateByUrl('/officer3/inbox');
+              this.router.navigateByUrl('/officer3');
               break;
             case 'official4':
-              this.router.navigateByUrl('/officer4/inbox');
+              this.router.navigateByUrl('/officer4');
               break;
             case 'applicant':
               this.router.navigateByUrl('/applicant-dashboard');
@@ -91,18 +91,6 @@ export class LoginComponent {
       console.log('Form is invalid. Please check your inputs.');
     }
   }
-
-  // ngAfterViewInit() {
-  //   this.togglePasswordButton.nativeElement.addEventListener('click', () => {
-  //     const password = document.getElementById('password') as HTMLInputElement;
-  //     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-  //     password.setAttribute('type', type);
-  
-  //     // Toggle the eye icon directly using classList
-  //     this.togglePasswordButton.nativeElement.querySelector('i.bi-eye').classList.toggle('d-none');
-  //     this.togglePasswordButton.nativeElement.querySelector('i.bi-eye-slash').classList.toggle('d-none');
-  //   });
-  // }
 
   openErrorModal() {
     this.modalService.open(this.errorModal);
