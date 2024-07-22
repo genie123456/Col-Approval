@@ -22,7 +22,7 @@ const saveApplyingFormData = async (req, res) => {
 
     const sqlApplicantData = `INSERT INTO applicantdata (
       formId, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
-      surveyNumber, area, village, neighbourhoodColony4, district4, developedLandName, 
+      surveyNumber, land_area, village, neighbourhoodColony4, district4, developedLandName, 
       village5, neighbourhoodColony5, district5, relinquishment, permitPurpose, 
       mobileNumber, email, tinGstnNumber, EWS, EWS_Less, outside_res_area, inside_res_area, 
       CGR_Residential_Area, CGR_Land_Area, EWS_Residential_Area, EWS_Land_Area, CGRAmount, 
@@ -33,7 +33,7 @@ const saveApplyingFormData = async (req, res) => {
 
     const valuesApplicantData = [
       formId, data.applicantData.fullName, data.applicantData.LUB, data.applicantData.Srno, data.applicantData.registrationDate, data.applicantData.Hno, 
-      data.applicantData.neighbourhoodColony, data.applicantData.district, data.applicantData.surveyNumber, data.applicantData.area, data.applicantData.village, 
+      data.applicantData.neighbourhoodColony, data.applicantData.district, data.applicantData.surveyNumber, data.applicantData.land_area, data.applicantData.village, 
       data.applicantData.neighbourhoodColony4, data.applicantData.district4, data.applicantData.developedLandName, data.applicantData.village5, 
       data.applicantData.neighbourhoodColony5, data.applicantData.district5, data.applicantData.relinquishment, data.applicantData.permitPurpose, 
       data.applicantData.mobileNumber, data.applicantData.email, data.applicantData.tinGstnNumber, data.applicantData.EWS, data.applicantData.EWS_Less, data.applicantData.outside_res_area, 
@@ -72,12 +72,12 @@ const getApplyingFormData = async (req, res) => {
       const formFieldsData = resultFormFields[0];
       const [resultApplicantData] = await conn.query(sqlApplicantData, [id]);
       
-      if (resultApplicantData.length === 0) {
-        res.status(404).json({ message: 'Applicant data not found' });
-      } else {
-        const applicantData = resultApplicantData[0];
-        res.status(200).json({ formFieldsData, applicantData });
-      }
+      const responseData = {
+        formFieldsData,
+        applicantData: resultApplicantData.length > 0 ? resultApplicantData[0] : null
+      };
+
+      res.status(200).json(responseData);
     }
     conn.release();
   } catch (err) {
@@ -85,34 +85,31 @@ const getApplyingFormData = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-// Controller to get all form fields data
 const getAllFormFieldsData = async (req, res) => {
   const sql = `
     SELECT 
-      ff.id, ff.selectedDistrict, ff.area, ff.body, ff.choosingCorporation, 
-      ff.choosingCouncil, ff.choosingJury, ff.khasraIntegrated, ff.integratedKhasraNumber, ff.office,
-      ad.fullName, ad.LUB, ad.Srno, ad.registrationDate, ad.Hno, ad.neighbourhoodColony, ad.district, 
-      ad.surveyNumber, ad.area AS applicantArea, ad.village, ad.neighbourhoodColony4, ad.district4, 
-      ad.developedLandName, ad.village5, ad.neighbourhoodColony5, ad.district5, ad.relinquishment, 
-      ad.permitPurpose, ad.mobileNumber, ad.email, ad.tinGstnNumber, ad.EWS, ad.EWS_Less, ad.outside_res_area, 
-      ad.inside_res_area, ad.CGR_Residential_Area, ad.CGR_Land_Area, ad.EWS_Residential_Area, 
-      ad.EWS_Land_Area, ad.CGRAmount, ad.clearancePWD, ad.clearanceWRD, ad.clearanceCSEB, 
-      ad.clearanceCECB, ad.clearanceNHAI, ad.clearancePHED, ad.clearancePMGSY, ad.clearanceFOREST, 
-      ad.clearanceFireNOC, ad.clearanceGramPanchayat, ad.clearanceNNNPTP, ad.clearanceRevenue, 
-      ad.clearanceRES
+      ff.*, ad.*
     FROM formfields ff
     LEFT JOIN applicantdata ad ON ff.id = ad.formId
   `;
 
   try {
     const conn = await pool.getConnection();
-    const [result] = await conn.query(sql);
+    console.log('Connected to database');
 
-    if (result.length === 0) {
+    const rows = await conn.query(sql);
+    console.log('Query executed');
+    console.log('SQL Query:', sql);
+    console.log('Number of rows fetched:', rows.length);
+    console.log('Rows:', JSON.stringify(rows, null, 2));
+
+    // Convert rows to a plain JavaScript array
+    const plainRows = rows.map(row => ({...row}));
+
+    if (plainRows.length === 0) {
       res.status(404).json({ message: 'No form fields data found' });
     } else {
-      res.status(200).json(result);
+      res.status(200).json(plainRows);
     }
     conn.release();
   } catch (err) {
@@ -120,7 +117,6 @@ const getAllFormFieldsData = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 
 module.exports = {
   saveApplyingFormData,
@@ -128,64 +124,39 @@ module.exports = {
   getAllFormFieldsData
 };
 
-// const getApplyingFormData = (req, res) => {
-//   const id = req.params.id;
-//   console.log(`Received request for applying form data with ID: ${id}`);
-//   const sql = 'SELECT * FROM formfields WHERE id = ?';
+// Controller to get all form fields data
+// const getAllFormFieldsData = async (req, res) => {
+//   const sql = `
+//     SELECT 
+//       ff.id, ff.selectedDistrict, ff.area, ff.body, ff.choosingCorporation, 
+//       ff.choosingCouncil, ff.choosingJury, ff.khasraIntegrated, ff.integratedKhasraNumber, ff.office,
+//       ad.fullName, ad.LUB, ad.Srno, ad.registrationDate, ad.Hno, ad.neighbourhoodColony, ad.district, 
+//       ad.surveyNumber, ad.area AS applicantArea, ad.village, ad.neighbourhoodColony4, ad.district4, 
+//       ad.developedLandName, ad.village5, ad.neighbourhoodColony5, ad.district5, ad.relinquishment, 
+//       ad.permitPurpose, ad.mobileNumber, ad.email, ad.tinGstnNumber, ad.EWS, ad.EWS_Less, ad.outside_res_area, 
+//       ad.inside_res_area, ad.CGR_Residential_Area, ad.CGR_Land_Area, ad.EWS_Residential_Area, 
+//       ad.EWS_Land_Area, ad.CGRAmount, ad.clearancePWD, ad.clearanceWRD, ad.clearanceCSEB, 
+//       ad.clearanceCECB, ad.clearanceNHAI, ad.clearancePHED, ad.clearancePMGSY, ad.clearanceFOREST, 
+//       ad.clearanceFireNOC, ad.clearanceGramPanchayat, ad.clearanceNNNPTP, ad.clearanceRevenue, 
+//       ad.clearanceRES
+//     FROM formfields ff
+//     LEFT JOIN applicantdata ad ON ff.id = ad.formId
+//   `;
 
-//   pool.getConnection()
-//     .then(conn => {
-//       conn.query(sql, [id])
-//         .then(result => {
-//           console.log(`Executing query: ${sql} with id: ${id}`);
-//           if (result.length === 0) {
-//             console.log(`No data found for id: ${id}`);
-//             res.status(404).json({ message: 'Applying form data not found' });
-//           } else {
-//             console.log(`Data found for id: ${id}`, result[0]);
-//             res.status(200).json(result[0]);
-//           }
-//           conn.release(); // Release the connection
-//         })
-//         .catch(err => {
-//           console.error('Database error:', err);
-//           res.status(500).json({ error: err.message });
-//           conn.release(); // Release the connection on error
-//         });
-//     })
-//     .catch(err => {
-//       console.error('Error getting connection:', err);
-//       res.status(500).json({ error: err.message });
-//     });
-// };
+//   try {
+//     const conn = await pool.getConnection();
+//     const [result] = await conn.query(sql);
 
-// const getApplicantData = (req, res) => {
-//   const id = req.params.id;
-//   console.log(`Received request for applicant data with ID: ${id}`);
-//   const sql = 'SELECT * FROM applicantdata WHERE application_id = ?';
+//     console.log('Fetched form fields and applicant data:', result); // Add this line for logging
 
-//   pool.getConnection()
-//     .then(conn => {
-//       conn.query(sql, [id])
-//         .then(result => {
-//           console.log(`Executing query: ${sql} with id: ${id}`);
-//           if (result.length === 0) {
-//             console.log(`No data found for id: ${id}`);
-//             res.status(404).json({ message: 'Applicant data not found' });
-//           } else {
-//             console.log(`Data found for id: ${id}`, result[0]);
-//             res.status(200).json(result[0]);
-//           }
-//           conn.release(); // Release the connection
-//         })
-//         .catch(err => {
-//           console.error('Database error:', err);
-//           res.status(500).json({ error: err.message });
-//           conn.release(); // Release the connection on error
-//         });
-//     })
-//     .catch(err => {
-//       console.error('Error getting connection:', err);
-//       res.status(500).json({ error: err.message });
-//     });
+//     if (result.length === 0) {
+//       res.status(404).json({ message: 'No form fields data found' });
+//     } else {
+//       res.status(200).json(result);
+//     }
+//     conn.release();
+//   } catch (err) {
+//     console.error('Database error:', err);
+//     res.status(500).json({ error: err.message });
+//   }
 // };

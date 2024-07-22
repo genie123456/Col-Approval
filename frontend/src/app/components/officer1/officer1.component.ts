@@ -24,27 +24,30 @@ export class Officer1Component implements OnInit {
 
   fetchData() {
     this.applyingFormService.getAllFormFieldsData().subscribe(
-      (response: PullData[] | any) => {
-        console.log('Fetched form fields data:', response); // Log the response
+      (response: any[]) => {
+        console.log('Raw API response:', response);
+        console.log('Number of items in response:', response.length);
   
-        // Check if the response is an array or a single object
-        const dataArray = Array.isArray(response) ? response : [response];
-  
-        this.data = dataArray.map((item, index) => ({
-          sno: index + 1, // You can keep this if needed elsewhere
-          appNo: item.id || '', // Assuming id is appNo
+        this.data = response.map((item: any) => ({
+          sno: item.id,
+          appNo: item.id,
           status: item.status || 'Initiated',
           action: item.action || 'Verify',
           ReviewApp: item.ReviewApp || 'Pull',
-          date: item.registrationDate ? new Date(item.registrationDate).toLocaleDateString('en-GB') : '' // Assuming registrationDate is the date field
+          date: item.created_at ? new Date(item.created_at).toLocaleDateString('en-GB') : ''
         }));
-        this.filteredData = this.data; // Initialize filteredData to display all data initially
+  
+        console.log('Mapped data:', this.data);
+        console.log('Number of items after mapping:', this.data.length);
+  
+        this.filteredData = this.data;
+        console.log('Filtered data:', this.filteredData);
       },
       (error) => {
         console.error('Error fetching form fields data:', error);
       }
     );
-  }  
+  }
 
   filterData() {
     const fromDate = (document.getElementById('from-date') as HTMLInputElement).value;
@@ -63,15 +66,24 @@ export class Officer1Component implements OnInit {
   setSelectedApp(item: PullData) {
     this.applyingFormService.getApplyingFormData(item.appNo).subscribe(
       (data: { formFieldsData: any; applicantData: any }) => {
-        if (data && data.applicantData) {
-          item.appNo = data.applicantData.application_id; // Adjust as needed
+        console.log('Fetched application data:', data);
+  
+        if (data && data.formFieldsData) {
+          item.appNo = data.formFieldsData.id;
           const createdAt = new Date(data.formFieldsData.created_at);
-          item.date = createdAt.toLocaleDateString('en-GB'); // Set the formatted date
-          console.log('Fetched data:', data);
+          item.date = createdAt.toLocaleDateString('en-GB');
+          console.log('Form fields data:', data.formFieldsData);
+          
+          if (data.applicantData) {
+            console.log('Applicant data:', data.applicantData);
+          } else {
+            console.warn('Applicant data not found for form ID:', item.appNo);
+          }
+  
           this.selectedAppNo = item.appNo;
           this.selectedDate = item.date;
         } else {
-          console.error('Applicant data not found:', data);
+          console.error('Form fields data not found:', data);
         }
       },
       (error) => {
@@ -79,7 +91,6 @@ export class Officer1Component implements OnInit {
       }
     );
   }
-  
   onTaskChange(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     if (selectedValue === 'Final Colony Development Permission') {

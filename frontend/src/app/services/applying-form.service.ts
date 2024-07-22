@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { PullData } from 'src/app/models/pull-data.model'; // Import the interface
+import { catchError, map } from 'rxjs/operators';
+import { PullData } from 'src/app/models/pull-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,8 @@ export class ApplyingFormService {
 
   // Function to get all form fields data
   getAllFormFieldsData(): Observable<PullData[]> {
-    return this.http.get<PullData[]>(`${this.baseUrl}/applying-form`).pipe(
+    return this.http.get<any[]>(`${this.baseUrl}/applying-form`).pipe(
+      map((response: any[]) => Array.isArray(response) ? response : [response]),
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching form fields data:', error);
         return throwError(() => new Error('Error fetching form fields data'));
