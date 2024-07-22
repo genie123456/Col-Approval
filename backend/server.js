@@ -50,11 +50,11 @@ app.use(async (req, res, next) => {
 });
 
 // Serve static files from the Angular app
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
+app.use(express.static(path.join(__dirname, '../frontend/dist/frontend')));
 
 // Use the formFields route for form submissions
 app.use('/formFields', formFieldsRoutes);
-app.use('/api/fileUploads', fileUploadsRoute);
+app.use('/fileUploads', fileUploadsRoute);
 
 app.get('/get', async (req, res) => {
   res.send('working');
@@ -141,27 +141,12 @@ app.post('/logout', (req, res) => {
 
 app.get('*', (req, res) => {
   if (!req.path.startsWith('/officer1') && !req.path.startsWith('/api')) {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'dist', 'index.html'));
-  }
+    res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'));
+    }
 });
 
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-
-// app.get('/officials', async (req, res) => {
-//     let connection;
-//     try {
-//         connection = await pool.getConnection(); // Get a connection from the pool
-//         const results = await connection.query('SELECT id, username, type, email, phone_number FROM users'); // Execute the query with necessary fields
-//         res.json(results);
-//     } catch (error) {
-//         console.error('Error fetching officials data:', error);
-//         res.status(500).send('Error fetching officials data');
-//     } finally {
-//         if (connection) connection.release(); // Release the connection back to the pool
-//     }
-// });
 

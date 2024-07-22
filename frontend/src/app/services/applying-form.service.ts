@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,16 @@ export class ApplyingFormService {
   // Function to get applicant data
   getApplicantData(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/applicant-data/${id}`);
+  }
+
+  // Function to get all form fields data
+  getAllFormFieldsData(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/applying-form`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching form fields data:', error);
+        return throwError(() => new Error('Error fetching form fields data'));
+      })
+    );
   }
 
   // Method to save the form data as a draft (if applicable)

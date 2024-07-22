@@ -52,15 +52,16 @@
             </thead>
             <tbody class="table-group-divider">
               <tr *ngFor="let item of filteredData; let i = index" (click)="setSelectedApp(item)">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.appNo }}</td>
-                <td>{{ item.status }}</td>
-                <td>{{ item.date }}</td>
-                <td><a [routerLink]="['/officer1/verification', selectedService, selectedTask, item.appNo, item.date]">{{ item.action }}</a></td>
-                <td>{{ item.RtP }}</td>
+                <th scope="row">{{ item.sno }}</th> <!-- Display serial number -->
+                <td>{{ item.appNo }}</td>          <!-- Display application number -->
+                <td>{{ item.status }}</td>         <!-- Display status -->
+                <td>{{ item.date }}</td>            <!-- Display date -->
+                <td>{{ item.ReviewApp }}</td>      <!-- Display review app -->
+                <td><a [routerLink]="['/officer1/verification', selectedService, selectedTask, item.appNo, item.date]">{{ item.action }}</a></td> <!-- Action link -->
               </tr>
             </tbody>
           </table>
+          
         </div>
         <div class="container">
           <div class="button-container">

@@ -6,7 +6,7 @@ interface PullData {
   appNo: string;
   status: string;
   action: string;
-  RtP: string;
+  ReviewApp: string;
   date: string;
 }
 
@@ -26,12 +26,26 @@ export class Officer1Component implements OnInit {
   constructor(private applyingFormService: ApplyingFormService) {}
 
   ngOnInit() {
-    // Initial data can be set here if you have a source for it, otherwise leave it empty or fetch initial data
-    this.data = [
-      { sno: 1, appNo: '', status: 'Initiated', action: 'Verify', RtP: '', date: '' },
-      // { sno: 2, appNo: '', status: 'Initiated', action: 'Verify', RtP: '', date: '' },
-    ];
-    this.filteredData = this.data; // Initialize filteredData to display all data initially
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.applyingFormService.getAllFormFieldsData().subscribe(
+      (response: PullData[]) => {
+        this.data = response.map((item, index) => ({
+          sno: index + 1,
+          appNo: item.appNo || '',
+          status: item.status || 'Initiated',
+          action: item.action || 'Verify',
+          ReviewApp: item.ReviewApp || 'Pull',
+          date: item.date ? new Date(item.date).toLocaleDateString('en-GB') : ''
+        }));
+        this.filteredData = this.data; // Initialize filteredData to display all data initially
+      },
+      (error) => {
+        console.error('Error fetching form fields data:', error);
+      }
+    );
   }
 
   filterData() {
@@ -49,19 +63,12 @@ export class Officer1Component implements OnInit {
   }
 
   setSelectedApp(item: PullData) {
-    // Assuming `item.sno` is the application ID, replace `1` with `item.sno`
     this.applyingFormService.getApplyingFormData(item.sno).subscribe(
       data => {
-        // Update the clicked item's application data with the fetched data
         item.appNo = data.applicantData.application_id; // Adjust as needed
-
-        // Extract only the date part from the timestamp
         const createdAt = new Date(data.formFieldsData.created_at);
-        const formattedDate = createdAt.toLocaleDateString('en-GB'); // Format as DD-MM-YYYY
-        item.date = formattedDate; // Set the formatted date
+        item.date = createdAt.toLocaleDateString('en-GB'); // Set the formatted date
         console.log('Fetched data:', data);
-
-        // Update the selected values
         this.selectedAppNo = item.appNo;
         this.selectedDate = item.date;
       },

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplyingFormService } from 'src/app/services/applying-form.service';
 
 interface EWSData {
   sno: number;
   appNo: string;
   status: string;
   action: string;
-  RtP: string;
+  ReviewApp: string;
   date: string;
 }
 
@@ -22,12 +23,12 @@ export class Officer3Component implements OnInit {
   selectedAppNo: string = '';
   selectedDate: string = '';
 
-  constructor() {}
+  constructor(private applyingFormService: ApplyingFormService) {}
 
   ngOnInit() {
     this.data = [
-      { sno: 1, appNo: 'Application 1', status: 'Initiated', action: 'Verify', RtP: '', date: '2024-06-11' },
-      { sno: 2, appNo: 'Application 2', status: 'Initiated', action: 'Verify', RtP: '', date: '2023-06-10' },
+      { sno: 1, appNo: '', status: 'Initiated', ReviewApp: '', action: 'Verify', date: '' },
+      { sno: 2, appNo: '', status: 'Initiated', ReviewApp: '', action: 'Verify', date: '' },
     ];
     this.filteredData = this.data; // Initialize filteredData to display all data initially
   }
@@ -47,7 +48,24 @@ export class Officer3Component implements OnInit {
   }
 
   setSelectedApp(item: EWSData) {
-    this.selectedAppNo = item.appNo;
-    this.selectedDate = item.date;
+    this.applyingFormService.getApplyingFormData(item.sno).subscribe(
+      data => {
+        // Update the clicked item's application data with the fetched data
+        item.appNo = data.applicantData.application_id; // Adjust as needed
+
+        // Extract only the date part from the timestamp
+        const createdAt = new Date(data.formFieldsData.created_at);
+        const formattedDate = createdAt.toLocaleDateString('en-GB'); // Format as DD-MM-YYYY
+        item.date = formattedDate; // Set the formatted date
+        console.log('Fetched data:', data);
+
+        // Update the selected values
+        this.selectedAppNo = item.appNo;
+        this.selectedDate = item.date;
+      },
+      error => {
+        console.error('Error fetching application data:', error);
+      }
+    );
   }
 }
