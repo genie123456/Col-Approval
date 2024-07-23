@@ -44,23 +44,27 @@
             <tr>
               <th scope="col">Sr. No.</th>
               <th scope="col">Application Number</th>
-              <th scope="col">Status</th>
+              <!-- <th scope="col">Status</th> -->
               <th scope="col">Date</th>
+              <th scope="col">View</th>
               <th scope="col">Action</th>
-              <th scope="col">Return to Pool</th>
             </tr>
           </thead>
           <tbody class="table-group-divider">
             <tr *ngFor="let item of filteredData; let i = index" (click)="setSelectedApp(item)">
-              <th scope="row">{{ item.sno }}</th>
-              <td>{{ item.appNo }}</td>
-              <td>{{ item.status }}</td>
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ 'CGAWAAS/2024/0000' + item.appNo }}</td> <!-- Add prefix here -->
+              <!-- <td>{{ item.status }}</td> -->
               <td>{{ item.date }}</td>
               <td>{{ item.ReviewApp }}</td>
-              <td><a [routerLink]="['/officer1/verification', selectedService, selectedTask, item.appNo, item.date]">{{ item.action }}</a></td>
-            </tr>            
-          </tbody>                   
-        </table>
+              <td>
+                <a [routerLink]="['/officer1/verification', selectedService, selectedTask, item.appNo, item.date]">
+                  {{ item.action }}
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>               
       </div>
     </div>
   </div>

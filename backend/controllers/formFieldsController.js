@@ -18,7 +18,11 @@ const saveApplyingFormData = async (req, res) => {
   try {
     const conn = await pool.getConnection();
     const result = await conn.query(sqlFormFields, valuesFormFields);
-    const formId = result[0].insertId; // Get the ID of the inserted formfields row
+    const formId = result.insertId || result[0].insertId;
+
+    console.log('FormFields query result:', result);
+console.log('FormId:', formId);
+
 
     const sqlApplicantData = `INSERT INTO applicantdata (
       formId, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
@@ -44,6 +48,8 @@ const saveApplyingFormData = async (req, res) => {
       data.applicantData.clearanceFireNOC || null, data.applicantData.clearanceGramPanchayat || null, data.applicantData.clearanceNNNPTP || null, 
       data.applicantData.clearanceRevenue || null, data.applicantData.clearanceRES || null
     ];
+
+    console.log('ApplicantData:', data.applicantData);
 
     await conn.query(sqlApplicantData, valuesApplicantData);
     res.status(200).json({ message: 'Data saved successfully' });
