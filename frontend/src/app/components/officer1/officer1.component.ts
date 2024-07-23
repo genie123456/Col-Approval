@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
 import { Router } from '@angular/router';
 import { PullData } from 'src/app/models/pull-data.model'; // Import the interface
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PreviewModalComponent } from '../preview-modal/preview-modal.component';
 
 @Component({
   selector: 'app-officer1',
@@ -15,8 +17,30 @@ export class Officer1Component implements OnInit {
   selectedTask: string = 'ADM Verification';
   selectedAppNo!: number;
   selectedDate: string = '';
+  formData: any = {}; // Add this to hold the form data for the modal
 
-  constructor(private applyingFormService: ApplyingFormService, private router: Router) {}
+  // Add the clearanceLabels property here
+  clearanceLabels: { [key: string]: string } = {
+    clearancePWD: 'PWD (Public Works Department)',
+    clearanceWRD: 'WRD (Water Resources Department)',
+    clearanceCSEB: 'CSEB (CG Electricity Board)',
+    clearanceCECB: 'CECB (Environment)',
+    clearanceNHAI: 'NHAI (National Highway)',
+    clearancePHED: 'PHED (Public Health Engineering)',
+    clearancePMGSY: 'PMGSY (PM Gramin Sadak Yojna)',
+    clearanceFOREST: 'FOREST',
+    clearanceFireNOC: 'Fire NOC (Home Department)',
+    clearanceGramPanchayat: 'Gram Panchayat',
+    clearanceNNNPTP: 'NN / NP / TP',
+    clearanceRevenue: 'Revenue Department',
+    clearanceRES: 'RES (Rural Engineering Services)',
+  };
+
+  constructor(
+    private applyingFormService: ApplyingFormService,
+    private router: Router,
+    private modalService: NgbModal // Inject NgbModal
+  ) {}
 
   ngOnInit() {
     this.fetchData();
@@ -91,10 +115,53 @@ export class Officer1Component implements OnInit {
       }
     );
   }
+
   onTaskChange(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     if (selectedValue === 'Final Colony Development Permission') {
       this.router.navigate(['/final']);
     }
   }
+
+  openPreviewModal(item: PullData) {
+    this.applyingFormService.getApplyingFormData(item.appNo).subscribe(
+      (data: { formFieldsData: any; applicantData: any }) => {
+        console.log('Fetched preview data:', data);
+        
+        this.formData = data;
+        
+        // Extract and process clearances
+        this.formData.filteredClearances = this.processClearances(data.formFieldsData.clearances);
+  
+        // Open the modal with component
+        const modalRef = this.modalService.open(PreviewModalComponent, {
+          ariaLabelledBy: 'modal-basic-title'
+        });
+    
+        // Pass data to the modal component instance
+        modalRef.componentInstance.data = this.formData;
+    
+        modalRef.result.then(
+          (result) => {
+            console.log('Modal closed with: ', result);
+          },
+          (reason) => {
+            console.log('Modal dismissed with: ', reason);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error fetching preview data:', error);
+      }
+    );
+  }
+  
+  processClearances(clearances: any): any[] {
+    // Implement the logic to filter and format clearances as needed
+    return Object.keys(clearances).map(key => ({
+      key,
+      value: this.clearanceLabels[key] || 'Unknown'
+    }));
+  }
+  
 }

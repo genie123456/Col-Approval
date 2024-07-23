@@ -105,9 +105,9 @@ const getAllFormFieldsData = async (req, res) => {
 
     const rows = await conn.query(sql);
     console.log('Query executed');
-    console.log('SQL Query:', sql);
+    // console.log('SQL Query:', sql);
     console.log('Number of rows fetched:', rows.length);
-    console.log('Rows:', JSON.stringify(rows, null, 2));
+    // console.log('Rows:', JSON.stringify(rows, null, 2));
 
     // Convert rows to a plain JavaScript array
     const plainRows = rows.map(row => ({...row}));

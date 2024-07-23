@@ -49,6 +49,7 @@ import { ApplicantDataComponent } from './components/applying-form/applicant-dat
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 // import { FormDataComponent } from './components/form-data/form-data.component';
 import { ApplyingFormService } from './services/applying-form.service';
+import { PreviewModalComponent } from './components/preview-modal/preview-modal.component';
 // import { ModalService } from './services/modal.service';
 
 @NgModule({
@@ -90,6 +91,7 @@ import { ApplyingFormService } from './services/applying-form.service';
     FinalColDevComponent,
     ApplicantDataComponent,
     SplashScreenComponent,
+    PreviewModalComponent,
     // FormDataComponent,
   ],
   imports: [
