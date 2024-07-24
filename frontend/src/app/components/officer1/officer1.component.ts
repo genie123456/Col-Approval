@@ -74,13 +74,23 @@ export class Officer1Component implements OnInit {
   }
 
   filterData() {
-    const fromDate = (document.getElementById('from-date') as HTMLInputElement).value;
-    const toDate = (document.getElementById('to-date') as HTMLInputElement).value;
+    const fromDateStr = (document.getElementById('from-date') as HTMLInputElement).value;
+    const toDateStr = (document.getElementById('to-date') as HTMLInputElement).value;
 
-    if (fromDate && toDate) {
+    if (fromDateStr && toDateStr) {
+      // Parse the input dates from 'dd/mm/yyyy' to Date objects
+      const fromDateParts = fromDateStr.split('-');
+      const toDateParts = toDateStr.split('-');
+      const fromDate = new Date(+fromDateParts[0], +fromDateParts[1] - 1, +fromDateParts[2]);
+      const toDate = new Date(+toDateParts[0], +toDateParts[1] - 1, +toDateParts[2]);
+
       this.filteredData = this.data.filter(item => {
-        const itemDate = new Date(item.date);
-        return itemDate >= new Date(fromDate) && itemDate <= new Date(toDate);
+        // Parse the item.date from 'dd/mm/yyyy' to Date object
+        const itemDateParts = item.date.split('/');
+        const itemDate = new Date(+itemDateParts[2], +itemDateParts[1] - 1, +itemDateParts[0]);
+
+        // Compare the dates
+        return itemDate >= fromDate && itemDate <= toDate;
       });
     } else {
       this.filteredData = this.data; // If no date filter is applied, show all data
@@ -133,25 +143,31 @@ export class Officer1Component implements OnInit {
         // Extract and process clearances
         this.formData.filteredClearances = this.processClearances(data.formFieldsData.clearances);
   
-        // Open the modal with component
-        const modalRef = this.modalService.open(PreviewModalComponent, {
-          ariaLabelledBy: 'modal-basic-title'
-        });
-    
-        // Pass data to the modal component instance
-        modalRef.componentInstance.data = this.formData;
-    
-        modalRef.result.then(
-          (result) => {
-            console.log('Modal closed with: ', result);
-          },
-          (reason) => {
-            console.log('Modal dismissed with: ', reason);
-          }
-        );
+        try {
+          // Open the modal with component
+          const modalRef = this.modalService.open(PreviewModalComponent, {
+            ariaLabelledBy: 'modal-basic-title'
+          });
+  
+          // Pass data to the modal component instance
+          modalRef.componentInstance.data = this.formData;
+  
+          modalRef.result.then(
+            (result) => {
+              console.log('Modal closed with: ', result);
+            },
+            (reason) => {
+              console.log('Modal dismissed with: ', reason);
+            }
+          );
+        } catch (error) {
+          console.error('Error opening modal:', error);
+          alert('An error occurred while trying to open the modal. Please try again.');
+        }
       },
       (error) => {
         console.error('Error fetching preview data:', error);
+        alert('An error occurred while fetching preview data. Please try again.');
       }
     );
   }
@@ -163,5 +179,4 @@ export class Officer1Component implements OnInit {
       value: this.clearanceLabels[key] || 'Unknown'
     }));
   }
-  
 }

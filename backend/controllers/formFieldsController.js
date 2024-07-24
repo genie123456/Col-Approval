@@ -101,8 +101,6 @@ const getAllFormFieldsData = async (req, res) => {
 
   try {
     const conn = await pool.getConnection();
-    console.log('Connected to database');
-
     const rows = await conn.query(sql);
     console.log('Query executed');
     // console.log('SQL Query:', sql);
