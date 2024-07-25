@@ -11,8 +11,6 @@ export class FormDataComponent implements OnInit {
 
   formFieldsData: any = {};
   applicantData: any = {};
-  successMessage: string = '';
-  errorMessage: string = '';
 
   constructor(
     private applyingFormService: ApplyingFormService,
