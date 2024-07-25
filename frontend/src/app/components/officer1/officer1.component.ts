@@ -28,7 +28,7 @@ export class Officer1Component implements OnInit {
   fetchData() {
     this.applyingFormService.getAllFormFieldsData().subscribe(
       (response: any[]) => {
-        console.log('Raw API response:', response);
+        // console.log('Raw API response:', response);
         console.log('Number of items in response:', response.length);
 
         this.data = response.map((item: any) => ({
@@ -40,11 +40,11 @@ export class Officer1Component implements OnInit {
           date: item.created_at ? new Date(item.created_at).toLocaleDateString('en-GB') : ''
         }));
 
-        console.log('Mapped data:', this.data);
+        // console.log('Mapped data:', this.data);
         console.log('Number of items after mapping:', this.data.length);
 
         this.filteredData = this.data;
-        console.log('Filtered data:', this.filteredData);
+        // console.log('Filtered data:', this.filteredData);
       },
       (error) => {
         console.error('Error fetching form fields data:', error);

@@ -141,7 +141,7 @@ const getJoinedFormFieldsDataById = async (req, res) => {
     conn = await pool.getConnection();
     const [rows] = await conn.query(sql, [id]);
     console.log('Query executed');
-    console.log('Raw query result:', rows);
+    // console.log('Raw query result:', rows);
 
     // Since rows is an object, we don't need to check if it's an array
     if (rows === null) {

@@ -35,7 +35,7 @@
                 </div>
                 <hr>
                 <div class="search-box__button">
-                    <button type="button" class="btn btn-primary" (click)="filterData()">→ Get Data</button>
+                    <button type="button" class="btn btn-primary" (click)="filterData()"><i class="bi bi-arrow-right-short"></i>Get Data</button>
                 </div>
             </div>
             <div class="container">
@@ -44,33 +44,23 @@
                         <tr>
                             <th scope="col">Sr. No.</th>
                             <th scope="col">Application Number</th>
-                            <th scope="col">Status</th>
                             <th scope="col">Date</th>
+                            <th scope="col">View</th>
                             <th scope="col">Action</th>
-                            <th scope="col">Return to Pool</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <tr *ngFor="let item of filteredData; let i = index" (click)="item">
+                        <tr *ngFor="let item of filteredData; let i = index" (click)="setSelectedApp(item)">
                             <th scope="row">{{ i + 1 }}</th>
-                            <td>{{ item.appNo }}</td>
-                            <td>{{ item.status }}</td>
+                            <td>{{ 'CGAWAAS/2024/0000' + item.appNo }}</td>
                             <td>{{ item.date }}</td>
-                            <td>{{ item.ReviewApp }}</td>
+                            <td>
+                              <a [routerLink]="['/form-data', item.sno]" class="text-primary" style="text-decoration: underline;">Preview</a>
+                            </td>
                             <td><a [routerLink]="['/officer4/verification', selectedService, selectedTask, item.appNo, item.date]">{{ item.action }}</a></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="container">
-                <div class="button-container">
-                    <div class="button-bottom">
-                        <button type="button" class="btn btn-warning mr-2">Save Draft</button>
-                        <button type="submit" class="btn btn-success mr-2">Submit</button>
-                        <button type="button" class="btn btn-primary">Reset</button>
-                        <button type="button" class="btn btn-danger mr-2">Cancel</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
