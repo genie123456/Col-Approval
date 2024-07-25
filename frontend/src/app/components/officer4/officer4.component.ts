@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
 import { Router } from '@angular/router';
-import { TNCPData } from 'src/app/models/tncp-model';
+import { TNCPData } from 'src/app/models/tncp-data.model';
 
 @Component({
   selector: 'app-officer4',
