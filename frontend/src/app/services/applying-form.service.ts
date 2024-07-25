@@ -19,9 +19,21 @@ export class ApplyingFormService {
 
   // Function to get applying form data
   getApplyingFormData(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/applying-form/${id}`);
+    return this.http.get(`${this.baseUrl}/applying-form/${id}`).pipe(
+      map((response: any) => {
+        console.log('Full API response:', response);
+        return {
+          formFieldsData: response.formFieldsData || {}, // Ensure correct default value
+          applicantData: response.applicantData || {}    // Ensure correct default value
+        };
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching form data:', error);
+        return throwError(() => new Error('Error fetching form data'));
+      })
+    );
   }
-
+  
   // Function to save applicant data
   saveApplicantData(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/applicant-data`, data);
@@ -42,7 +54,6 @@ export class ApplyingFormService {
       })
     );
   }
-
   // Method to save the form data as a draft (if applicable)
   saveDraft(data: any): Observable<any> {
     // Assuming drafts are saved similarly, you can update the endpoint if needed

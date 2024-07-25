@@ -6,7 +6,7 @@ const pool = mariadb.createPool({
     user: 'root',
     password: '',
     database: 'cas',
-    connectionLimit: 5
+    connectionLimit: 30
 });
 
 // Test database connection

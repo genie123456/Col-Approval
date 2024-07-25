@@ -21,8 +21,7 @@ const saveApplyingFormData = async (req, res) => {
     const formId = result.insertId || result[0].insertId;
 
     console.log('FormFields query result:', result);
-console.log('FormId:', formId);
-
+    console.log('FormId:', formId);
 
     const sqlApplicantData = `INSERT INTO applicantdata (
       formId, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
@@ -64,22 +63,24 @@ console.log('FormId:', formId);
 const getApplyingFormData = async (req, res) => {
   const id = req.params.id;
   console.log(`Received request for applying form data with ID: ${id}`);
-  
+
   const sqlFormFields = 'SELECT * FROM formfields WHERE id = ?';
   const sqlApplicantData = 'SELECT * FROM applicantdata WHERE formId = ?';
 
   try {
     const conn = await pool.getConnection();
     const [resultFormFields] = await conn.query(sqlFormFields, [id]);
-    
-    if (resultFormFields.length === 0) {
+    console.log('Form Fields Data:', resultFormFields);
+
+    if (!resultFormFields || resultFormFields.length === 0) {
       res.status(404).json({ message: 'Applying form data not found' });
     } else {
       const formFieldsData = resultFormFields[0];
       const [resultApplicantData] = await conn.query(sqlApplicantData, [id]);
-      
+      console.log('Applicant Data:', resultApplicantData);
+
       const responseData = {
-        formFieldsData,
+        formFieldsData: formFieldsData,
         applicantData: resultApplicantData.length > 0 ? resultApplicantData[0] : null
       };
 
@@ -91,6 +92,7 @@ const getApplyingFormData = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 const getAllFormFieldsData = async (req, res) => {
   const sql = `
     SELECT 
@@ -106,7 +108,6 @@ const getAllFormFieldsData = async (req, res) => {
     // console.log('SQL Query:', sql);
     console.log('Number of rows fetched:', rows.length);
     // console.log('Rows:', JSON.stringify(rows, null, 2));
-
     // Convert rows to a plain JavaScript array
     const plainRows = rows.map(row => ({...row}));
 
