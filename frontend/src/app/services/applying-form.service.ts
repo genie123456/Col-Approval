@@ -21,7 +21,7 @@ export class ApplyingFormService {
   getApplyingFormData(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/applying-form/${id}`).pipe(
       map((response: any) => {
-        console.log('Full API response:', response);
+        // console.log('Full API response:', response);
         return {
           formFieldsData: response.formFieldsData || {}, // Ensure correct default value
           applicantData: response.applicantData || {}    // Ensure correct default value
@@ -51,6 +51,22 @@ export class ApplyingFormService {
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching form fields data:', error);
         return throwError(() => new Error('Error fetching form fields data'));
+      })
+    );
+  }
+
+  getJoinedFormFieldsDataById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/applying-form/joined/${id}`).pipe(
+      map((response: any) => {
+        // console.log('Full API response:', response);
+        return {
+          formFieldsData: response || {}, // Ensure correct default value
+          applicantData: response || {}    // Ensure correct default value
+        };
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching joined form data:', error);
+        return throwError(() => new Error('Error fetching joined form data'));
       })
     );
   }

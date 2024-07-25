@@ -123,10 +123,45 @@ const getAllFormFieldsData = async (req, res) => {
   }
 };
 
+const getJoinedFormFieldsDataById = async (req, res) => {
+  const id = req.params.id;
+  console.log(`Received request for joined form data with ID: ${id}`);
+
+  const sql = `
+    SELECT 
+      ff.*, ad.*
+    FROM formfields ff
+    LEFT JOIN applicantdata ad ON ff.id = ad.formId
+    WHERE ff.id = ?
+  `;
+
+  let conn; // Define the connection variable outside the try block
+
+  try {
+    conn = await pool.getConnection();
+    const [rows] = await conn.query(sql, [id]);
+    console.log('Query executed');
+    console.log('Raw query result:', rows);
+
+    // Since rows is an object, we don't need to check if it's an array
+    if (rows === null) {
+      res.status(404).json({ message: 'No form fields data found' });
+    } else {
+      res.status(200).json(rows); // Directly return the object
+    }
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: err.message });
+  } finally {
+    if (conn) conn.release(); // Ensure the connection is released
+  }
+};
+
 module.exports = {
   saveApplyingFormData,
   getApplyingFormData,
-  getAllFormFieldsData
+  getAllFormFieldsData,
+  getJoinedFormFieldsDataById
 };
 
 // Controller to get all form fields data

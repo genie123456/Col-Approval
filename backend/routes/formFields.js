@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  saveApplyingFormData, getApplyingFormData, getAllFormFieldsData // Import the new controller method
+  saveApplyingFormData,
+  getApplyingFormData,
+  getAllFormFieldsData,
+  getJoinedFormFieldsDataById  // Import the new controller method
 } = require('../controllers/formFieldsController');
 
 // Route to save applying form data
@@ -14,4 +17,7 @@ router.get('/applying-form/:id', getApplyingFormData);
 // Route to get all form fields data
 router.get('/applying-form', getAllFormFieldsData);
 
-module.exports = router; 
+// New Route to get joined form fields data by ID
+router.get('/applying-form/joined/:id', getJoinedFormFieldsDataById);
+
+module.exports = router;

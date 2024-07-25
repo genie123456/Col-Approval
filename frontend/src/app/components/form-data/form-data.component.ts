@@ -11,6 +11,21 @@ export class FormDataComponent implements OnInit {
 
   formFieldsData: any = {};
   applicantData: any = {};
+  clearanceLabels: { [key: string]: string } = {
+    clearancePWD: 'PWD (Public Works Department)',
+    clearanceWRD: 'WRD (Water Resources Department)',
+    clearanceCSEB: 'CSEB (CG Electricity Board)',
+    clearanceCECB: 'CECB (Environment)',
+    clearanceNHAI: 'NHAI (National Highway)',
+    clearancePHED: 'PHED (Public Health Engineering)',
+    clearancePMGSY: 'PMGSY (PM Gramin Sadak Yojna)',
+    clearanceFOREST: 'FOREST',
+    clearanceFireNOC: 'Fire NOC (Home Department)',
+    clearanceGramPanchayat: 'Gram Panchayat',
+    clearanceNNNPTP: 'NN / NP / TP',
+    clearanceRevenue: 'Revenue Department',
+    clearanceRES: 'RES (Rural Engineering Services)',
+  };
 
   constructor(
     private applyingFormService: ApplyingFormService,
@@ -21,20 +36,18 @@ export class FormDataComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = +params.get('id')!;
       console.log('Route ID:', id);
-      this.fetchFormData(id);
+      this.fetchJoinedFormData(id);
     });
   }
 
-  fetchFormData(id: number) {
-    this.applyingFormService.getApplyingFormData(id).subscribe(
+  fetchJoinedFormData(id: number) {
+    this.applyingFormService.getJoinedFormFieldsDataById(id).subscribe(
       data => {
         console.log('Fetched data:', data);
         this.formFieldsData = data.formFieldsData || {}; // Ensure correct default value
         this.applicantData = data.applicantData || {};  // Ensure correct default value
-  
-        console.log('Updated formFieldsData:', this.formFieldsData);
-        console.log('Updated applicantData:', this.applicantData);
-  
+        // console.log('Updated formFieldsData:', this.formFieldsData);
+        // console.log('Updated applicantData:', this.applicantData);
         this.processClearanceTexts();
       },
       error => {
@@ -42,37 +55,13 @@ export class FormDataComponent implements OnInit {
       }
     );
   }
-  
+
   processClearanceTexts(): void {
-    console.log('Before processing:', this.applicantData);
+    // console.log('Before processing:', this.applicantData);
     if (this.applicantData) {
-      if (this.applicantData) {
-        const clearanceTexts: { [key: string]: string } = {
-          clearancePWD: 'PWD (Public Works Department)',
-          clearanceWRD: 'WRD (Water Resources Department)',
-          clearanceCSEB: 'CSEB (CG Electricity Board)',
-          clearanceCECB: 'CECB (Environment)',
-          clearanceNHAI: 'NHAI (National Highway)',
-          clearancePHED: 'PHED (Public Health Engineering)',
-          clearancePMGSY: 'PMGSY (PM Gramin Sadak Yojna)',
-          clearanceFOREST: 'FOREST',
-          clearanceFireNOC: 'Fire NOC (Home Department)',
-          clearanceGramPanchayat: 'Gram Panchayat',
-          clearanceNNNPTP: 'NN / NP / TP',
-          clearanceRevenue: 'Revenue Department',
-          clearanceRES: 'RES (Rural Engineering Services)',
-        };
-    
-        Object.keys(clearanceTexts).forEach(key => {
-          const clearanceValue = this.applicantData?.[key];
-          if (clearanceValue !== null && clearanceValue !== undefined && clearanceTexts[key][clearanceValue.toString()]) {
-            this.applicantData[key] = clearanceTexts[key][clearanceValue.toString()];
-          } else {
-            this.applicantData[key] = 'null';
-          }
-        });
-      }
+      // Filter only checked clearances
+      this.applicantData.filteredClearances = Object.keys(this.clearanceLabels).filter(key => this.applicantData[key]);
     }
-    console.log('After processing:', this.applicantData);
+    // console.log('After processing:', this.applicantData);
   }
 }

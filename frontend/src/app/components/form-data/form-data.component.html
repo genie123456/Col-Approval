@@ -3,6 +3,9 @@
     <!-- Box 1: Integrated Single Window System Approval -->
     <div class="container p-3 my-3 rounded">
       <h4><strong>Integrated Single Window System Approval</strong></h4>
+      <div class="text-center">
+        <strong>{{ 'CGAWAAS/2024/0000' + formFieldsData?.id }}</strong>
+      </div>
       <hr>
       <div class="row">
         <div class="col-7"><strong>In which district is colony development permission sought?</strong></div>
@@ -229,33 +232,11 @@
       <div class="row">
         <div class="col-7"><strong>14. Clearance from various departments</strong></div>
         <div class="col-5">
-           <div > <!-- *ngIf="applicantData" -->
-            <div *ngIf="applicantData?.clearancePWD !== 'null'">{{ applicantData?.clearancePWD }}</div>
-            <div *ngIf="applicantData?.clearanceWRD !== 'null'">{{ applicantData?.clearanceWRD }}</div>
-            <div *ngIf="applicantData?.clearanceCSEB !== 'null'">{{ applicantData?.clearanceCSEB }}
+          <div *ngIf="applicantData && applicantData.filteredClearances">
+            <div *ngFor="let clearanceKey of applicantData.filteredClearances">
+                {{ clearanceLabels[clearanceKey] }}
             </div>
-            <div *ngIf="applicantData?.clearanceCECB !== 'null'">{{ applicantData?.clearanceCECB }}
-            </div>
-            <div *ngIf="applicantData?.clearanceNHAI !== 'null'">{{ applicantData?.clearanceNHAI }}
-            </div>
-            <div *ngIf="applicantData?.clearancePHED !== 'null'">{{ applicantData?.clearancePHED }}
-            </div>
-            <div *ngIf="applicantData?.clearancePMGSY !== 'null'">{{ applicantData?.clearancePMGSY }}
-            </div>
-            <div *ngIf="applicantData?.clearanceFOREST !== 'null'">{{ applicantData?.clearanceFOREST }}
-            </div>
-            <div *ngIf="applicantData?.clearanceFireNOC !== 'null'">{{ applicantData?.clearanceFireNOC
-              }}
-            </div>
-            <div *ngIf="applicantData?.clearanceGramPanchayat !== 'null'">{{
-              applicantData?.clearanceGramPanchayat }}</div>
-            <div *ngIf="applicantData?.clearanceNNNPTP !== 'null'">{{ applicantData?.clearanceNNNPTP }}
-            </div>
-            <div *ngIf="applicantData?.clearanceRevenue !== 'null'">{{ applicantData?.clearanceRevenue
-              }}
-            </div>
-            <div *ngIf="applicantData?.clearanceRES !== 'null'">{{ applicantData?.clearanceRES }}</div>
-          </div>
+        </div>
         </div>
       </div>
       </div>
