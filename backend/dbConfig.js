@@ -10,13 +10,14 @@ const pool = mariadb.createPool({
 });
 
 // Test database connection
-pool.getConnection()
-    .then(conn => {
-        console.log('Connected to MariaDB');
-        conn.release();
-    })
-    .catch(err => {
-        console.error('Error connecting to MariaDB:', err);
-    });
+pool
+  .getConnection()
+  .then((conn) => {
+    console.log('Connected to MariaDB')
+    conn.release()
+  })
+  .catch((err) => {
+    console.error('Error connecting to MariaDB:', err)
+  })
 
-    module.exports = pool;
+module.exports = pool

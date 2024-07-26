@@ -1,6 +1,59 @@
 <div class="banner">
     <span>ATTACH ENCLOSURE(S)</span>
 </div>
+<div class="outer-container">
+    <div class="container">
+        <div class="form-container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <p class="required">Type of Enclosure</p>
+                </div>
+                <div class="col-lg-4">
+                    <p class="required">Enclosure Document</p>
+                </div>
+                <div class="col-lg-4">
+                    <p class="required">File Reference</p>
+                </div>
+            </div>
+        </div>
+        <form [formGroup]="attachmentsForm">
+            <div class="row" *ngFor="let field of fields; let i = index">
+                <div class="col-lg-4">
+                    <p class="required">{{field.label}}</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="select-container col-4">
+                            <select [id]="field.selectId" class="left" [formControlName]="field.selectFormControlName">
+                                <option value="" selected disabled>Please Select</option>
+                                <option [value]="field.selectOption">{{field.label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input type="file" class="form-control" [id]="field.inputId" (change)="onFileChange($event, field.formControlName)">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="button-container">
+        <div class="button-bottom">
+            <button type="button" class="btn btn-primary mr-2">Save Anexure</button>
+            <button type="button" class="btn btn-success mr-2" (click)="onSubmit()">Submit</button>
+            <button type="button" class="btn btn-danger mr-2">Cancel</button>
+            <button type="button" class="btn btn-primary">Back</button>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="banner">
+    <span>ATTACH ENCLOSURE(S)</span>
+</div>
 
 <div class="outer-container">
     <div class="container">
@@ -505,4 +558,4 @@
             <button type="button" class="btn btn-primary">Back</button>
         </div>
     </div>
-</div>
+</div> -->

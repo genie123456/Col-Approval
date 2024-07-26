@@ -5,6 +5,8 @@ const pool = require('./dbConfig'); // Import the database connection pool
 const crypto = require('crypto'); // Import the crypto module
 const path = require('path');
 // const mime = require('mime'); 
+const multer = require('multer');
+const fs = require('fs');
 
 const formFieldsRoutes = require('./routes/formFields');
 const fileUploadsRoute = require('./routes/fileUploads');
@@ -14,6 +16,19 @@ const PORT = process.env.PORT || 3000;
 
 // Generate a random secret key
 const secretKey = crypto.randomBytes(64).toString('hex');
+
+// Ensure uploads directory exists
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  try {
+    fs.mkdirSync(uploadDir);
+    console.log('Created uploads directory');
+  } catch (err) {
+    console.error('Failed to create uploads directory:', err);
+  }
+} else {
+  console.log('Uploads directory already exists');
+}
 
 // Configure CORS
 app.use(cors({
@@ -137,7 +152,6 @@ app.post('/logout', (req, res) => {
     res.status(200).json({ message: 'Logout successful' });
   });
 });
-
 
 app.get('*', (req, res) => {
   if (!req.path.startsWith('/officer1') && !req.path.startsWith('/api')) {
