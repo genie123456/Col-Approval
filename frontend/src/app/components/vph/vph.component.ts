@@ -18,10 +18,10 @@ export class VPHComponent implements OnInit {
   };
 
   taskDetails: TaskDetails[] = [
-    { taskName: 'EWS Verification', user: 'SDM', receivedDate: '', processedDate: '', actionDetails: '' },
-    { taskName: 'Verification by TNCP', user: 'Deputy Director', receivedDate: '', processedDate: '', actionDetails: '' },
-    { taskName: 'NOC Application to CSEB', user: 'Executive Engineer', receivedDate: '', processedDate: '', actionDetails: '' },
-    { taskName: 'ADM Verification', user: 'ADM', receivedDate: '', processedDate: '', actionDetails: '' },
+    { taskName: 'Verification by TNCP', user: 'Deputy Director', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
+    { taskName: 'EWS Verification', user: 'SDM', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
+    { taskName: 'NOC Application to CSEB', user: 'Executive Engineer', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
+    { taskName: 'ADM Verification', user: 'ADM', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
     { taskName: 'Application Submission', user: 'Citizen', receivedDate: 'NA', processedDate: '', actionDetails: 'Completed' }
   ];
 
@@ -31,8 +31,10 @@ export class VPHComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const appReceivedDate = params.get('appReceivedDate')!;
       const appNo = Number(params.get('appRefNo')!);
+      const currentTask = params.get('currentTask')!;
   
       console.log(`AppNo: ${appNo}`);  // Add this line to log the application number
+      console.log(`Current Task: ${currentTask}`);  // Add this line to log the current task
   
       this.applicationDetails = {
         referenceNumber: params.get('appRefNo')!,
@@ -48,8 +50,56 @@ export class VPHComponent implements OnInit {
       const submissionTask = this.taskDetails.find(task => task.user === 'Citizen');
       if (submissionTask) {
         const formattedDate = this.datePipe.transform(parsedDate, 'dd/MM/yyyy');
-        // Log the formatted date
         submissionTask.processedDate = formattedDate!;
+      }
+
+      // Update actionDetails based on the current task
+      this.updateActionDetails(currentTask);
+    });
+  }
+
+  updateActionDetails(currentTask: string) {
+    this.taskDetails.forEach(task => {
+      if (task.user === 'Citizen') return;
+
+      switch (currentTask) {
+        case 'ADM Verification':
+          if (task.user === 'ADM') {
+            task.actionDetails = 'Under Process';
+          } else {
+            task.actionDetails = 'Waiting to be pulled';
+          }
+          break;
+        case 'NOC Application to CSEB':
+          if (task.user === 'Executive Engineer') {
+            task.actionDetails = 'Under Process';
+          } else if (task.user === 'ADM') {
+            task.actionDetails = 'Forwarded';
+          } else {
+            task.actionDetails = 'Waiting to be pulled';
+          }
+          break;
+        case 'EWS Verification':
+          if (task.user === 'SDM') {
+            task.actionDetails = 'Under Process';
+          } else if (task.user === 'ADM' || task.user === 'Executive Engineer') {
+            task.actionDetails = 'Forwarded';
+          } else {
+            task.actionDetails = 'Waiting to be pulled';
+          }
+          break;
+        case 'Verification by TNCP':
+          if (task.user === 'Deputy Director') {
+            task.actionDetails = 'Under Process';
+          } else {
+            task.actionDetails = 'Forwarded';
+          }
+          break;
+        case 'Final Colony Development Permission':
+          task.actionDetails = 'Forwarded';
+          break;
+        default:
+          task.actionDetails = 'Waiting to be pulled';
       }
     });
   }
