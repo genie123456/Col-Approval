@@ -70,6 +70,7 @@ export class ApplyingFormService {
       })
     );
   }
+  
   // Method to save the form data as a draft (if applicable)
   saveDraft(data: any): Observable<any> {
     // Assuming drafts are saved similarly, you can update the endpoint if needed

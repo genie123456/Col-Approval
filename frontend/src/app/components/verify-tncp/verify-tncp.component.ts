@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { VerificationData } from 'src/app/models/verification-data.model';
 
-interface VerificationData {
-  serviceName: string;
-  currentTask: string;
-  appRefNo: string;
-  appReceivedDate: string;
-}
 
 @Component({
   selector: 'app-verify-tncp',

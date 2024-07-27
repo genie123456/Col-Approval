@@ -5,7 +5,7 @@ const {
   saveApplyingFormData,
   getApplyingFormData,
   getAllFormFieldsData,
-  getJoinedFormFieldsDataById  // Import the new controller method
+  getJoinedFormFieldsDataById,
 } = require('../controllers/formFieldsController');
 
 // Route to save applying form data

@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { LOCALE_ID } from '@angular/core';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localeEnGb from '@angular/common/locales/en-GB';
+
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -53,6 +57,8 @@ import { PreviewModalComponent } from './components/preview-modal/preview-modal.
 import { CommonModule } from '@angular/common';
 import { ModalService } from './services/modal.service';
 import { VPHComponent } from './components/vph/vph.component';
+
+registerLocaleData(localeEnGb);
 
 @NgModule({
   declarations: [
@@ -108,7 +114,11 @@ import { VPHComponent } from './components/vph/vph.component';
     NoopAnimationsModule,
     CommonModule
   ],
-  providers: [ApplyingFormService],
+  providers: [
+    ApplyingFormService,
+    DatePipe,
+    { provide: LOCALE_ID, useValue: 'en-GB' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

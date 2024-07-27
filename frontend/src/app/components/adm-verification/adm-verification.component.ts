@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-interface VerificationData {
-  serviceName: string;
-  currentTask: string;
-  appRefNo: string;
-  appReceivedDate: string;
-}
+import { VerificationData } from 'src/app/models/verification-data.model';
 
 @Component({
   selector: 'app-adm-verification',
