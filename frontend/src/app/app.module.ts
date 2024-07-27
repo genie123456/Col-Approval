@@ -37,7 +37,7 @@ import { Officer2InComponent } from './components/officer2/officer2-in/officer2-
 import { VerifyEEComponent } from './components/verify-ee/verify-ee.component';
 import { VerifySDMComponent } from './components/verify-sdm/verify-sdm.component';
 import { Officer3InComponent } from './components/officer3/officer3-in/officer3-in.component';
-import { VPHComponent } from './components/adm-verification/vph/vph.component';
+// import { VPHComponent } from './components/adm-verification/vph/vph.component';
 import { Officer4Component } from './components/officer4/officer4.component';
 import { Officer4InComponent } from './components/officer4/officer4-in/officer4-in.component';
 import { VerifyTNCPComponent } from './components/verify-tncp/verify-tncp.component';
@@ -52,6 +52,7 @@ import { ApplyingFormService } from './services/applying-form.service';
 import { PreviewModalComponent } from './components/preview-modal/preview-modal.component';
 import { CommonModule } from '@angular/common';
 import { ModalService } from './services/modal.service';
+import { VPHComponent } from './components/vph/vph.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { ModalService } from './services/modal.service';
     VerifyEEComponent,
     VerifySDMComponent,
     Officer3InComponent,
-    VPHComponent,
+    // VPHComponent,
     Officer4Component,
     Officer4InComponent,
     VerifyTNCPComponent,
@@ -94,6 +95,7 @@ import { ModalService } from './services/modal.service';
     SplashScreenComponent,
     PreviewModalComponent,
     FormDataComponent,
+    VPHComponent,
   ],
   imports: [
     HttpClientModule,
