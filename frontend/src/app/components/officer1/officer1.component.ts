@@ -111,9 +111,14 @@ export class Officer1Component implements OnInit {
   }
 
   onTaskChange(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement).value;
-    if (selectedValue === 'Final Colony Development Permission') {
-      this.router.navigate(['/final']);
+    this.selectedTask = (event.target as HTMLSelectElement).value;
+  }
+
+  getRouterLink(item: PullData): string[] {
+    if (this.selectedTask === 'Final Colony Development Permission') {
+      return ['/officer1/final', this.selectedService, this.selectedTask, item.appNo.toString(), item.date];
+    } else {
+      return ['/officer1/verification', this.selectedService, this.selectedTask, item.appNo.toString(), item.date];
     }
   }
 }

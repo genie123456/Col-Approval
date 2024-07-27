@@ -58,6 +58,7 @@ const routes: Routes = [
   { path: 'officer4/inbox', component: Officer4InComponent },
 
   { path: 'officer1/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: AdmVerificationComponent },
+  { path: 'officer1/final/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: FinalColDevComponent },
   { path: 'officer2/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: VerifyEEComponent },
   { path: 'officer3/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: VerifySDMComponent },
   { path: 'officer4/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: VerifyTNCPComponent },
@@ -65,7 +66,7 @@ const routes: Routes = [
   { path: 'provisional', component: ProvisionalLayoutComponent },
   { path: 'diversion', component: DiversionCertificateComponent },
   { path: 'development', component: DevelopmentPermissionComponent },
-  { path: 'final', component: FinalColDevComponent },
+  // { path: 'final', component: FinalColDevComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

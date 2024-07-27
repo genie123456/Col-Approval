@@ -81,8 +81,18 @@
   color: red;
 }
 
-input[type="radio"] {
-  margin-right: 2.5mm;
+.radio-buttons {
+  /* display: flex; */
+  align-items: center;
+  margin-bottom: 10px; /* Add spacing between the rows if needed */
+}
+
+.radio-buttons input[type="radio"] {
+  margin-right: 5px; /* Adjust spacing between radio button and label */
+}
+
+.radio-buttons label[type="radio"] {
+  margin-right: 5px; /* Adjust spacing between radio button and label */
 }
 
 input[type="checkbox"] {
@@ -93,8 +103,4 @@ input[type="checkbox"] {
   width: 10cm;
   height: 1cm;
   box-sizing: border-box; 
-}
-
-.radio-buttons {
-  display: flex;
 }

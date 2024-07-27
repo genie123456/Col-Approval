@@ -58,7 +58,7 @@
                 <a [routerLink]="['/form-data', item.sno]" class="text-primary" style="text-decoration: underline;">Preview</a>
               </td>
               <td>
-                <a [routerLink]="['/officer1/verification', selectedService, selectedTask, item.appNo, item.date]">
+                <a [routerLink]="getRouterLink(item)">
                   {{ item.action }}
                 </a>
               </td>

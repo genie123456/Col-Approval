@@ -1,4 +1,29 @@
 <div class="container">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th scope="col">Service Name</th>
+        <td>{{ data.serviceName }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Current Task</th>
+        <td>{{ data.currentTask }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Application Reference Number</th>
+        <td>{{ 'CGAWAAS/2024/0000' + data.appRefNo }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Application Received Date</th>
+        <td>{{ data.appReceivedDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <app-vph></app-vph>
+</div>
+<div class="container">
   <form [formGroup]="finalColDevForm" (ngSubmit)="onSubmit()" class="form-c">
       <h5>Final Colony Development Permission</h5>
       <div class="noc-application">
