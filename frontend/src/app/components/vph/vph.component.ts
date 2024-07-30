@@ -22,7 +22,7 @@ export class VPHComponent implements OnInit {
     { taskName: 'EWS Verification', user: 'SDM', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
     { taskName: 'NOC Application to CSEB', user: 'Executive Engineer', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
     { taskName: 'ADM Verification', user: 'ADM', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
-    { taskName: 'Application Submission', user: 'Citizen', receivedDate: 'NA', processedDate: '', actionDetails: 'Completed' }
+    { taskName: 'Application Submission', user: 'Citizen', receivedDate: '', processedDate: '', actionDetails: 'Completed' }
   ];
 
   constructor(private route: ActivatedRoute, private datePipe: DatePipe) {} // Inject DatePipe
@@ -45,6 +45,14 @@ export class VPHComponent implements OnInit {
       // Correctly parse the date in DD/MM/YYYY format
       const [day, month, year] = appReceivedDate.split('/').map(Number);
       const parsedDate = new Date(year, month - 1, day);
+
+      // Set the receivedDate for all tasks except 'Application Submission'
+      this.taskDetails.forEach(task => {
+        
+          const formattedDate = this.datePipe.transform(parsedDate, 'dd/MM/yyyy');
+          task.receivedDate = formattedDate!;
+        
+      });
 
       // Set the processedDate for the task where user is 'Citizen'
       const submissionTask = this.taskDetails.find(task => task.user === 'Citizen');

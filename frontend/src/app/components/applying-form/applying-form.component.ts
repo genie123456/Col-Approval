@@ -170,12 +170,12 @@ export class ApplyingFormComponent implements OnInit {
 
       this.applyingFormService.saveApplyingFormData(combinedFormData).subscribe(
         response => {
-          this.successMessage = 'Form submitted successfully.';
+          this.successMessage = 'Submitted successfully.';
           this.errorMessage = '';
           this.openSuccessModal();
         },
         error => {
-          this.errorMessage = 'Error submitting form. Please check all the required Fields as they are mandatory.';
+          this.errorMessage = 'Error Submitting. Please check all the required Fields as they are mandatory.';
           this.successMessage = '';
           this.openErrorModal();
         }
@@ -186,12 +186,12 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   openSuccessModal() {
-    this.successMessage = 'Form submitted successfully.';
+    this.successMessage = 'Submitted successfully.';
     this.modalService.open(this.successModal, {  });
   }
 
   openErrorModal() {
-    this.errorMessage = 'Error submitting form.  Please check all the required Fields as they are mandatory.';
+    this.errorMessage = 'Error submitting form. Please check all the required Fields as they are mandatory.';
     this.modalService.open(this.errorModal, {  });
   }
 
@@ -218,7 +218,7 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   onCancel() {
-    console.log('Form cancelled');
+    console.log('Cancelled');
   }
 
   openPreviewModal() {

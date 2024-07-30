@@ -1,11 +1,11 @@
-// routes/fileUploads.js
+// Existing code...
 const express = require('express');
 const router = express.Router();
 const fileUploadsController = require('../controllers/fileUploadsController');
 const multer = require('multer');
 const path = require('path');
 
-// Configure multer storage
+// Existing multer configuration...
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/');
@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
   }
 });
 
-// Define multiple fields for file uploads
+// Existing field definitions...
 const upload = multer({ storage: storage }).fields([
   { name: 'layout', maxCount: 1 },
   { name: 'declaration', maxCount: 1 },
@@ -42,7 +42,7 @@ const upload = multer({ storage: storage }).fields([
   { name: 'PanchshalaKhasra', maxCount: 1 }
 ]);
 
-// Route for file upload
+// Update the route for file upload
 router.post('/upload', upload, fileUploadsController.uploadFile);
 
 module.exports = router;

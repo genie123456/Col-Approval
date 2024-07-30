@@ -30,7 +30,12 @@ export class FinalColDevComponent implements OnInit {
 
   onSubmit() {
     if (this.finalColDevForm.valid) {
-      // Handle form submission
+      const decision = this.finalColDevForm.get('decision')?.value;
+      if (decision === 'approve') {
+        alert('Verification and Approval Complete. Sending updated status to the Applicant.');
+      } else if (decision === 'reject') {
+        alert('Rejecting the Approval process. Sending updated status to the Applicant.');
+      }
       console.log(this.finalColDevForm.value);
     }
   }
