@@ -11,7 +11,7 @@ export class AttachmentsService {
 
   constructor(private http: HttpClient) { }
 
-  uploadFiles(formData: FormData): Observable<any> {
-    return this.http.post(this.uploadUrl, formData);
-  }
+  uploadFiles(formData: FormData, username: string, formfields_id: string): Observable<any> {
+    return this.http.post(`/fileUploads/upload/${username}/${formfields_id}`, formData);
+  }  
 }

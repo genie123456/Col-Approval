@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   loadUserProfile(): void {
     this.profileService.getUserProfile().subscribe(
       profile => {
+        console.log('Profile data received:', profile);
         this.user = profile.user;
       },
       error => {
@@ -31,7 +32,7 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     );
-  }
+  }  
 
   logout(): void {
     this.authService.logout().subscribe(() => {

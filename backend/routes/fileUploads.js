@@ -43,6 +43,6 @@ const upload = multer({ storage: storage }).fields([
 ]);
 
 // Route for file upload
-router.post('/upload', upload, fileUploadsController.uploadFile);
+router.post('/upload/:username/:formfields_id', upload, fileUploadsController.uploadFile);
 
 module.exports = router;

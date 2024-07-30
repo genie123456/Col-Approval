@@ -59,37 +59,40 @@ export class AttachmentsComponent implements OnInit {
   }
 
   // Function to submit form data
-  onSubmit(): void {
-    const hasFile = Object.keys(this.attachmentsForm.controls).some(key => {
+onSubmit(): void {
+  const hasFile = Object.keys(this.attachmentsForm.controls).some(key => {
+    const control = this.attachmentsForm.get(key);
+    return control && control.value instanceof File;
+  });
+
+  if (hasFile) {
+    const formData = new FormData();
+    Object.keys(this.attachmentsForm.controls).forEach(key => {
       const control = this.attachmentsForm.get(key);
-      return control && control.value instanceof File;
+      if (control && control.value) {
+        formData.append(key, control.value);
+      }
     });
 
-    if (hasFile) {
-      const formData = new FormData();
-      Object.keys(this.attachmentsForm.controls).forEach(key => {
-        const control = this.attachmentsForm.get(key);
-        if (control && control.value) {
-          formData.append(key, control.value);
-        }
-      });
+    const username = 'your_username_here'; // replace with actual username
+    const formfields_id = 'your_formfields_id_here'; // replace with actual formfields_id
 
-      this.attachmentsService.uploadFiles(formData).subscribe(
-        response => {
-          console.log('Files uploaded successfully', response);
-          alert('Files uploaded successfully');
-          this.attachmentsForm.reset();
-        },
-        error => {
-          console.error('Error uploading files', error);
-          alert('Error uploading files');
-        }
-      );
-    } else {
-      // No files selected, handle validation errors
-      alert('Please select at least one file to upload.');
-    }
+    this.attachmentsService.uploadFiles(formData, username, formfields_id).subscribe(
+      response => {
+        console.log('Files uploaded successfully', response);
+        alert('Files uploaded successfully');
+        this.attachmentsForm.reset();
+      },
+      error => {
+        console.error('Error uploading files', error);
+        alert('Error uploading files');
+      }
+    );
+  } else {
+    // No files selected, handle validation errors
+    alert('Please select at least one file to upload.');
   }
+}
 }
 
  // constructor(private fb: FormBuilder, private attachmentsService: AttachmentsService) {

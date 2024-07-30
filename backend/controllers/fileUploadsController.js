@@ -7,6 +7,9 @@ exports.uploadFile = async (req, res) => {
       return res.status(400).json({ message: 'No files uploaded' });
     }
 
+    const username = req.params.username;
+    const formfields_id = req.params.formfields_id;
+
     // Array to store the promises for database inserts
     const insertPromises = [];
 
@@ -22,8 +25,8 @@ exports.uploadFile = async (req, res) => {
 
         // Insert file details into the database
         const insertPromise = pool.query(
-          'INSERT INTO file_uploads (file_name, file_path, upload_date) VALUES (?, ?, NOW())',
-          [originalname, normalizedFilePath]
+          'INSERT INTO file_uploads (file_name, file_path, formfields_id, username, upload_date) VALUES (?, ?, ?, ?, NOW())',
+          [originalname, normalizedFilePath, formfields_id, username]
         );
 
         // Add the promise to the array

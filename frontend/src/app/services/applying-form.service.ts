@@ -70,6 +70,15 @@ export class ApplyingFormService {
       })
     );
   }
+
+  getFormFieldsDataByUsername(username: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/applying-form/username/${username}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching form fields data by username:', error);
+        return throwError(() => new Error('Error fetching form fields data by username'));
+      })
+    );
+  }
   
   // Method to save the form data as a draft (if applicable)
   saveDraft(data: any): Observable<any> {

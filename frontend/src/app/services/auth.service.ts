@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3000/auth'; // Updated base URL
   private loggedIn = new BehaviorSubject<boolean>(false);
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
@@ -22,16 +22,17 @@ export class AuthService {
 
   login(username: string, password: string, type: string): Observable<any> {
     const loginData = { username, password, type };
-    return this.http.post<any>(`${this.apiUrl}/login`, loginData, { withCredentials: true }).pipe(
+    console.log('Login data:', loginData);
+    return this.http.post<any>(`${this.apiUrl}/login`, loginData, { withCredentials: true,  headers: { 'Content-Type': 'application/json' } }).pipe(
       tap(response => {
         this.loggedIn.next(true);
-        const user = { username: response.user.username };
+        const user = response.user;  // Handle user object directly
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);  // Emit the user data
       })
-    );
+    );    
   }
-
+  
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
       tap(() => {
@@ -51,7 +52,7 @@ export class AuthService {
       response => {
         if (response.user) {
           this.loggedIn.next(true);
-          const user = { username: response.user.username };
+          const user = response.user;
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);  // Emit the user data
         } else {
@@ -69,6 +70,8 @@ export class AuthService {
   }
 
   getProfile(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/profile`, { withCredentials: true });
+    return this.http.get<any>(`${this.apiUrl}/profile`, { withCredentials: true }).pipe(
+      tap((user: any) => this.userSubject.next(user))  // Emit the user data
+    );
   }
 }

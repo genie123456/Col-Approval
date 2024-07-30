@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  @ViewChild('errorModal') errorModal!: ElementRef;
+  @ViewChild('errorModal') errorModal!: TemplateRef<any>;
   @ViewChild('togglePassword') togglePasswordButton!: ElementRef;
 
   loginForm: FormGroup;
@@ -48,37 +48,43 @@ export class LoginComponent {
       eyeSlashIcon.classList.remove('d-none');
     }
   }
-  
 
   loginUser() {
     if (this.loginForm.valid) {
       const { username, password, type } = this.loginForm.value;
-
+      console.log('Login form values:', { username, password, type });
       this.authService.login(username, password, type).subscribe(
         response => {
           console.log('Login successful:', response);
           this.loginSuccess = true;
-
-          // Navigate based on user type
-          switch (response.user.type) {
-            case 'official1':
-              this.router.navigateByUrl('/officer1');
-              break;
-            case 'official2':
-              this.router.navigateByUrl('/officer2');
-              break;
-            case 'official3':
-              this.router.navigateByUrl('/officer3');
-              break;
-            case 'official4':
-              this.router.navigateByUrl('/officer4');
-              break;
-            case 'applicant':
-              this.router.navigateByUrl('/applicant-dashboard');
-              break;
-            default:
-              this.router.navigateByUrl('/dashboard');
-              break;
+  
+          // Check and handle the full user object
+          if (response.user && response.user.type) {
+            console.log('Response user type:', response.user.type);
+  
+            // Navigate based on user type
+            switch (response.user.type) {
+              case 'official1':
+                this.router.navigateByUrl('/officer1');
+                break;
+              case 'official2':
+                this.router.navigateByUrl('/officer2');
+                break;
+              case 'official3':
+                this.router.navigateByUrl('/officer3');
+                break;
+              case 'official4':
+                this.router.navigateByUrl('/officer4');
+                break;
+              case 'applicant':
+                this.router.navigateByUrl('/applicant-dashboard');
+                break;
+              default:
+                this.router.navigateByUrl('/dashboard');
+                break;
+            }
+          } else {
+            console.error('User type is undefined in response');
           }
         },
         error => {
@@ -91,7 +97,9 @@ export class LoginComponent {
       console.log('Form is invalid. Please check your inputs.');
     }
   }
-
+  
+  
+  
   openErrorModal() {
     this.modalService.open(this.errorModal);
   }

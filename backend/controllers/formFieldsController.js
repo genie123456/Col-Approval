@@ -3,28 +3,24 @@ const pool = require('../dbConfig');
 // Controller to save applying form data and applicant data
 const saveApplyingFormData = async (req, res) => {
   const data = req.body;
-
+  const username = req.session.user.username; // Retrieve the username from the session
   const sqlFormFields = `INSERT INTO formfields (
     selectedDistrict, area, body, choosingCorporation, choosingCouncil, choosingJury, 
     khasraIntegrated, integratedKhasraNumber, office
   ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
   const valuesFormFields = [
     data.selectedDistrict, data.area, data.body, data.choosingCorporation,
     data.choosingCouncil, data.choosingJury, data.khasraIntegrated, 
     data.integratedKhasraNumber, data.office
   ];
-
   try {
     const conn = await pool.getConnection();
     const result = await conn.query(sqlFormFields, valuesFormFields);
     const formId = result.insertId || result[0].insertId;
-
     console.log('FormFields query result:', result);
     console.log('FormId:', formId);
-
     const sqlApplicantData = `INSERT INTO applicantdata (
-      formId, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
+      formId, username, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
       surveyNumber, land_area, village, neighbourhoodColony4, district4, developedLandName, 
       village5, neighbourhoodColony5, district5, relinquishment, permitPurpose, 
       mobileNumber, email, tinGstnNumber, EWS, EWS_Less, outside_res_area, inside_res_area, 
@@ -33,9 +29,8 @@ const saveApplyingFormData = async (req, res) => {
       clearancePMGSY, clearanceFOREST, clearanceFireNOC, clearanceGramPanchayat, 
       clearanceNNNPTP, clearanceRevenue, clearanceRES
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
     const valuesApplicantData = [
-      formId, data.applicantData.fullName, data.applicantData.LUB, data.applicantData.Srno, data.applicantData.registrationDate, data.applicantData.Hno, 
+      formId, username, data.applicantData.fullName, data.applicantData.LUB, data.applicantData.Srno, data.applicantData.registrationDate, data.applicantData.Hno, 
       data.applicantData.neighbourhoodColony, data.applicantData.district, data.applicantData.surveyNumber, data.applicantData.land_area, data.applicantData.village, 
       data.applicantData.neighbourhoodColony4, data.applicantData.district4, data.applicantData.developedLandName, data.applicantData.village5, 
       data.applicantData.neighbourhoodColony5, data.applicantData.district5, data.applicantData.relinquishment, data.applicantData.permitPurpose, 
@@ -47,9 +42,7 @@ const saveApplyingFormData = async (req, res) => {
       data.applicantData.clearanceFireNOC || null, data.applicantData.clearanceGramPanchayat || null, data.applicantData.clearanceNNNPTP || null, 
       data.applicantData.clearanceRevenue || null, data.applicantData.clearanceRES || null
     ];
-
     console.log('ApplicantData:', data.applicantData);
-
     await conn.query(sqlApplicantData, valuesApplicantData);
     res.status(200).json({ message: 'Data saved successfully' });
     conn.release();
@@ -157,9 +150,41 @@ const getJoinedFormFieldsDataById = async (req, res) => {
   }
 };
 
+const getFormFieldsDataByUsername = async (req, res) => {
+  const username = req.params.username;
+  console.log(`Received request for form fields data for username: ${username}`);
+
+  const sql = `
+    SELECT 
+      ff.*, ad.*, fu.*
+    FROM users u
+    JOIN applicantdata ad ON u.username = ad.username
+    JOIN formfields ff ON ad.formId = ff.id
+    LEFT JOIN file_uploads fu ON ff.id = fu.formfields_id AND u.username = fu.username
+    WHERE u.username = ?
+  `;
+
+  try {
+    const conn = await pool.getConnection();
+    const [rows] = await conn.query(sql, [username]);
+    console.log('Query executed');
+    
+    if (!rows || rows.length === 0) {
+      res.status(404).json({ message: 'No form fields data found' });
+    } else {
+      res.status(200).json(rows);
+    }
+    conn.release();
+  } catch (err) {
+    console.error('Database error:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   saveApplyingFormData,
   getApplyingFormData,
   getAllFormFieldsData,
   getJoinedFormFieldsDataById,
+  getFormFieldsDataByUsername, // Export the new controller method
 };

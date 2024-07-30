@@ -4,6 +4,7 @@ import { ApplyingFormService } from 'src/app/services/applying-form.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
 import { Modal } from 'bootstrap';
 // import { ModalService } from 'src/app/services/modal.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-applying-form',
@@ -51,10 +52,13 @@ export class ApplyingFormComponent implements OnInit {
     clearanceRES: 'RES (Rural Engineering Services)',
   };  
 
+  username: string | null = null; // Add a variable to store the username
+
   constructor(
     private fb: FormBuilder, 
     private applyingFormService: ApplyingFormService, 
     private modalService: NgbModal,
+    private authService: AuthService 
   ) {
     this.applyingForm = this.fb.group({
       selectedDistrict: ['', Validators.required],
@@ -136,6 +140,11 @@ export class ApplyingFormComponent implements OnInit {
       }
     });
 
+    // Fetch the username from AuthService
+    this.authService.user$.subscribe(user => {
+      this.username = user ? user.username : null;
+    });
+
      // This ensures Bootstrap's JavaScript is loaded
      if (typeof Modal !== 'undefined') {
       console.log('Bootstrap Modal is available');
@@ -165,7 +174,8 @@ export class ApplyingFormComponent implements OnInit {
       const combinedFormData = {
         ...this.applyingForm.value,
         office: this.applyingForm.get('office')?.value,
-        applicantData: this.applicantFormData.value
+        applicantData: this.applicantFormData.value,
+        username: this.username
       };
 
       this.applyingFormService.saveApplyingFormData(combinedFormData).subscribe(
@@ -198,7 +208,8 @@ export class ApplyingFormComponent implements OnInit {
   saveDraft() {
     const combinedFormData = {
       ...this.applyingForm.value,
-      applicantData: this.applicantFormData.value
+      applicantData: this.applicantFormData.value,
+      username: this.username
     };
 
     this.applyingFormService.saveDraft(combinedFormData).subscribe(
@@ -228,9 +239,10 @@ export class ApplyingFormComponent implements OnInit {
     this.formData = {
       formFieldsData: {
         ...this.applyingForm.value,
-        office: this.applyingForm.get('office')?.value // Add this line
+        office: this.applyingForm.get('office')?.value 
       },
-      applicantData: this.applicantFormData.value
+      applicantData: this.applicantFormData.value,
+      username: this.username
     };
   
     // Filter the clearances

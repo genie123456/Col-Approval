@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -34,18 +33,6 @@ export class SignupComponent {
       const password = this.signupForm.value.password;
       const type = this.signupForm.value.type; // Default value
 
-
-      // Call the signup method from the AuthService
-      // this.authService.signup(username, email, phoneNumber, password, type)
-      //   .subscribe(
-      //     response => {
-      //       console.log('Signup successful:', response);
-      //       this.signupSuccess = true; 
-      //     },
-      //     error => {
-      //       console.error('Signup failed:', error);
-      //     }
-      //   );
       this.authService.signup(this.signupForm.value).subscribe((data: any) => {
         // const data1 = data; 
         alert("Signup successful")
