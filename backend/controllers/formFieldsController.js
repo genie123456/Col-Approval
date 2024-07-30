@@ -4,6 +4,13 @@ const pool = require('../dbConfig');
 const saveApplyingFormData = async (req, res) => {
   const data = req.body;
 
+  // Ensure username is extracted from session
+  const username = req.session.user && req.session.user.username;
+
+  if (!username) {
+    return res.status(401).json({ message: 'User not logged in' });
+  }
+
   const sqlFormFields = `INSERT INTO formfields (
     selectedDistrict, area, body, choosingCorporation, choosingCouncil, choosingJury, 
     khasraIntegrated, integratedKhasraNumber, office
@@ -17,14 +24,14 @@ const saveApplyingFormData = async (req, res) => {
 
   try {
     const conn = await pool.getConnection();
-    const result = await conn.query(sqlFormFields, valuesFormFields);
-    const formId = result.insertId || result[0].insertId;
+    const [result] = await conn.query(sqlFormFields, valuesFormFields);
+    const formId = result.insertId;
 
     console.log('FormFields query result:', result);
     console.log('FormId:', formId);
 
     const sqlApplicantData = `INSERT INTO applicantdata (
-      formId, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
+      formId, username, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
       surveyNumber, land_area, village, neighbourhoodColony4, district4, developedLandName, 
       village5, neighbourhoodColony5, district5, relinquishment, permitPurpose, 
       mobileNumber, email, tinGstnNumber, EWS, EWS_Less, outside_res_area, inside_res_area, 
@@ -35,7 +42,7 @@ const saveApplyingFormData = async (req, res) => {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const valuesApplicantData = [
-      formId, data.applicantData.fullName, data.applicantData.LUB, data.applicantData.Srno, data.applicantData.registrationDate, data.applicantData.Hno, 
+      formId, username, data.applicantData.fullName, data.applicantData.LUB, data.applicantData.Srno, data.applicantData.registrationDate, data.applicantData.Hno, 
       data.applicantData.neighbourhoodColony, data.applicantData.district, data.applicantData.surveyNumber, data.applicantData.land_area, data.applicantData.village, 
       data.applicantData.neighbourhoodColony4, data.applicantData.district4, data.applicantData.developedLandName, data.applicantData.village5, 
       data.applicantData.neighbourhoodColony5, data.applicantData.district5, data.applicantData.relinquishment, data.applicantData.permitPurpose, 
@@ -103,7 +110,7 @@ const getAllFormFieldsData = async (req, res) => {
 
   try {
     const conn = await pool.getConnection();
-    const rows = await conn.query(sql);
+    const [rows] = await conn.query(sql);
     console.log('Query executed');
     // console.log('SQL Query:', sql);
     console.log('Number of rows fetched:', rows.length);

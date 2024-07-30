@@ -15,10 +15,10 @@ exports.uploadFile = async (req, res) => {
       files.forEach(file => {
         const { originalname } = file;
         
-        const username = req.body.username || 'pankaj';
-        const formfields_id = req.body.formfields_id || 1;
+        const username = req.session.username; // Ensure session handling for logged-in user
+        const formfields_id = req.body.formfields_id;
 
-        const insertPromise = pool.query(
+        const insertPromise = pool.promise().query(
           'INSERT INTO file_uploads (file_name, formfields_id, username, upload_date) VALUES (?, ?, ?, NOW())',
           [originalname, formfields_id, username]
         );
@@ -35,4 +35,3 @@ exports.uploadFile = async (req, res) => {
     res.status(500).json({ message: 'Error uploading files', error: err });
   }
 };
-

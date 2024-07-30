@@ -1,11 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const pool = require('./dbConfig'); // Import the database connection pool
-const crypto = require('crypto'); // Import the crypto module
+const pool = require('./dbConfig');  // Updated import to match the correct pool export
+const MySQLStore = require('express-mysql-session')(session); 
+const crypto = require('crypto');
 const path = require('path');
-// const mime = require('mime'); 
-const multer = require('multer');
 const fs = require('fs');
 
 const formFieldsRoutes = require('./routes/formFields');
@@ -38,17 +37,46 @@ app.use(cors({
 
 // Configure JSON parsing middleware
 app.use(express.json());
-// app.use(fileUpload());
+
+// Session store configuration
+const sessionStore = new MySQLStore({
+  createDatabaseTable: true, // Ensure the session table is created if it does not exist
+  schema: {
+    tableName: 'sessions',
+    columnNames: {
+      session_id: 'session_id',
+      expires: 'expires',
+      data: 'data'
+    }
+  }
+}, pool, {
+  clearExpired: true,
+  checkExpirationInterval: 900000, // How frequently expired sessions will be cleared; milliseconds.
+  expiration: 86400000, // The maximum age of a valid session; milliseconds.
+  createDatabaseTable: true, // Whether or not to create the sessions database table, if one does not already exist.
+  charset: 'utf8mb4_bin', // Charset used for the session table.
+  schema: {
+    tableName: 'sessions',
+    columnNames: {
+      session_id: 'session_id',
+      expires: 'expires',
+      data: 'data'
+    }
+  }
+});
 
 // Session middleware
 app.use(session({
-  secret: secretKey, // Use the generated secret key
+  key: 'session_id',
+  secret: secretKey,
+  store: sessionStore,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     secure: false, // Set to true if using HTTPS
     httpOnly: true,
-    sameSite: 'lax', // Add SameSite attribute
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
   },
 }));
 
@@ -78,21 +106,16 @@ app.get('/get', async (req, res) => {
 // Signup route
 app.post('/signup', async (req, res) => {
   const { username, email, phoneNumber, password, type } = req.body;
-
   let connection;
   try {
     connection = await pool.getConnection(); // Get a connection from the pool
-
     // Check if user already exists
-    const userExists = await connection.query('SELECT * FROM users WHERE username = ?', [username]);
-
+    const [userExists] = await connection.query('SELECT * FROM users WHERE username = ?', [username]);
     if (userExists.length > 0) {
       return res.status(400).json({ error: 'User already exists' });
     }
-
     // Insert new user into the database
     await connection.query('INSERT INTO users (username, email, phone_number, password, type) VALUES (?, ?, ?, ?, ?)', [username, email, phoneNumber, password, type]);
-
     res.status(201).json({ message: 'User signed up successfully' });
   } catch (error) {
     console.error('Error signing up:', error);
@@ -105,26 +128,20 @@ app.post('/signup', async (req, res) => {
 // Login route
 app.post('/login', async (req, res) => {
   const { username, password, type } = req.body;
-
   let connection;
   try {
     connection = await pool.getConnection(); // Get a connection from the pool
-
     // Check if user exists with the provided type
-    const user = await connection.query('SELECT * FROM users WHERE username = ? AND type = ?', [username, type]);
-
+    const [user] = await connection.query('SELECT * FROM users WHERE username = ? AND type = ?', [username, type]);
     if (user.length === 0) {
       return res.status(401).json({ error: 'Invalid username, password, or type' });
     }
-
     // Check if password matches
     if (user[0].password !== password) {
       return res.status(401).json({ error: 'Invalid username, password, or type' });
     }
-
     // Store user info in session
     req.session.user = user[0];
-
     res.status(200).json({ message: 'Login successful', user: { ...user[0], type: user[0].type } });
   } catch (error) {
     console.error('Error logging in:', error);
@@ -139,8 +156,8 @@ app.get('/profile', (req, res) => {
   if (req.session.user) {
     res.status(200).json({ user: req.session.user });
   } else {
-      res.status(401).json({ error: 'Not authenticated. Session destroyed.' });
-    }
+    res.status(401).json({ error: 'Not authenticated. Session destroyed.' });
+  }
 });
 
 // Logout route
@@ -156,7 +173,7 @@ app.post('/logout', (req, res) => {
 app.get('*', (req, res) => {
   if (!req.path.startsWith('/officer1') && !req.path.startsWith('/api')) {
     res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'));
-    }
+  }
 });
 
 // Start the server

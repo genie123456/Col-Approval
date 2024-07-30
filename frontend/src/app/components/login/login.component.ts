@@ -49,7 +49,6 @@ export class LoginComponent {
     }
   }
   
-
   loginUser() {
     if (this.loginForm.valid) {
       const { username, password, type } = this.loginForm.value;
