@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AttachmentsService } from 'src/app/services/attachments.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
-@Component({
-  selector: 'app-attachments',
-  templateUrl: './attachments.component.html',
-  styleUrls: ['./attachments.component.css']
-})
-export class AttachmentsComponent implements OnInit {
-  attachmentsForm: FormGroup;
-  fields = [
+export const ATTACHMENT_FIELDS = [
     { label: 'Layout as per CG Bhumi Vikas Niyam 1984, Development Plan\'s provisions and Zoning Regulations (Softcopy) with Khasra Superimpose', selectId: 'layout', selectFormControlName: 'layoutSelect', selectOption: 'layoutOption', inputId: 'layoutFile', formControlName: 'layout' },
     { label: 'Registration Form and declaration by Engineer/Architect for designing Layout', selectId: 'declaration', selectFormControlName: 'declarationSelect', selectOption: 'declarationOption', inputId: 'declarationFile', formControlName: 'declaration' },
     { label: 'Survey Map', selectId: 'surveyMap', selectFormControlName: 'surveyMapSelect', selectOption: 'surveyMapOption', inputId: 'surveyMapFile', formControlName: 'surveyMap' },
@@ -30,19 +22,19 @@ export class AttachmentsComponent implements OnInit {
     { label: 'Khasra Samviliyan-Aggregation all Khasras for colony into a single Khasra (khasra integration order)', selectId: 'KhasraSamviliyan', selectFormControlName: 'KhasraSamviliyanSelect', selectOption: 'KhasraSamviliyanOption', inputId: 'KhasraSamviliyanFile', formControlName: 'KhasraSamviliyan' },
     { label: 'Seemankan of Integrated Khasra - Signed by Tehsildar alongwith Total Station Survey', selectId: 'SeemankanIntegratedKhasra', selectFormControlName: 'SeemankanIntegratedKhasraSelect', selectOption: 'SeemankanIntegratedKhasraOption', inputId: 'SeemankanIntegratedKhasraFile', formControlName: 'SeemankanIntegratedKhasra' },
     { label: 'B1 P2 Khasra Map', selectId: 'B1P2KhasraMap', selectFormControlName: 'B1P2KhasraMapSelect', selectOption: 'B1P2KhasraMapOption', inputId: 'B1P2KhasraMapFile', formControlName: 'B1P2KhasraMap' },
-
     { label: 'Registry Documents Details of all khasras used to make integrated khasra if will inheritance then mutation order', selectId: 'RegistryDocuments', selectFormControlName: 'RegistryDocumentsSelect', selectOption: 'RegistryDocumentsOption', inputId: 'RegistryDocumentsFile', formControlName: 'RegistryDocuments' },
-
     { label: 'Panchshala Khasra of last 12 years for all khasras applied for diversion', selectId: 'PanchshalaKhasra', selectFormControlName: 'PanchshalaKhasraSelect', selectOption: 'PanchshalaKhasraOption', inputId: 'PanchshalaKhasraFile', formControlName: 'PanchshalaKhasra' },
-  ];
+];
+@Component({
+  selector: 'app-attachments',
+  templateUrl: './attachments.component.html',
+  styleUrls: ['./attachments.component.css']
+})
+export class AttachmentsComponent implements OnInit {
+  @Input() attachmentsForm!: FormGroup; 
+  fields = ATTACHMENT_FIELDS;
 
-  constructor(private fb: FormBuilder, private attachmentsService: AttachmentsService) {
-    this.attachmentsForm = this.fb.group({});
-    this.fields.forEach(field => {
-      this.attachmentsForm.addControl(field.formControlName, this.fb.control(null));
-      this.attachmentsForm.addControl(field.selectFormControlName, this.fb.control(null, Validators.required));
-    });
-  }
+  constructor() {}
 
   ngOnInit(): void {
     // Additional initialization logic if needed
@@ -53,68 +45,12 @@ export class AttachmentsComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      console.log('Selected file:', file); // Debug log
-      this.attachmentsForm.get(controlName)?.setValue(file);
+      this.attachmentsForm.get(controlName)?.setValue(file); // <-- Update form control with the selected file
     }
   }
 
   // Function to submit form data
   onSubmit(): void {
-    const hasFile = Object.keys(this.attachmentsForm.controls).some(key => {
-      const control = this.attachmentsForm.get(key);
-      return control && control.value instanceof File;
-    });
-
-    if (hasFile) {
-      const formData = new FormData();
-      Object.keys(this.attachmentsForm.controls).forEach(key => {
-        const control = this.attachmentsForm.get(key);
-        if (control && control.value) {
-          formData.append(key, control.value);
-        }
-      });
-
-      this.attachmentsService.uploadFiles(formData).subscribe(
-        response => {
-          console.log('Files uploaded successfully', response);
-          alert('Files uploaded successfully');
-          this.attachmentsForm.reset();
-        },
-        error => {
-          console.error('Error uploading files', error);
-          alert('Error uploading files');
-        }
-      );
-    } else {
-      // No files selected, handle validation errors
-      alert('Please select at least one file to upload.');
-    }
+    console.log('File upload functionality is now managed by the ApplyingFormComponent.');
   }
 }
-
- // constructor(private fb: FormBuilder, private attachmentsService: AttachmentsService) {
-  //   this.attachmentsForm = this.fb.group({
-  //     layout: [null, Validators.required],
-  //     declaration: [null, Validators.required],
-  //     surveyMap: [null, Validators.required],
-  //     satelliteMap: [null, Validators.required],
-  //     landUse: [null, Validators.required],
-  //     allotLetter: [null, Validators.required],
-  //     parkingPlan: [null, Validators.required],
-  //     soilTestReport: [null, Validators.required],
-  //     locationMap: [null, Validators.required],
-  //     structuralStability: [null, Validators.required],
-  //     EWSlandLocation: [null, Validators.required],
-  //     servicePlan: [null, Validators.required],
-  //     partnershipDeed: [null, Validators.required],
-  //     affidavitFormat: [null, Validators.required],
-  //     colonizerRegistration: [null, Validators.required],
-  //     colonizerNetWorth: [null, Validators.required],
-  //     otherDocuments: [null],
-  //     KhasraSamviliyan: [null, Validators.required],
-  //     SeemankanIntegratedKhasra: [null, Validators.required],
-  //     B1P2KhasraMap: [null, Validators.required],
-  //     RegistryDocuments: [null, Validators.required],
-  //     PanchshalaKhasra: [null, Validators.required],
-  //   }); 
-  // }

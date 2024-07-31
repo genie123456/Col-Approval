@@ -14,7 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ApplyingFormComponent } from './components/applying-form/applying-form.component';
 
 import { DashApplicantComponent } from './components/dash-applicant/dash-applicant.component';
-import { AttachmentsComponent } from './components/attachments/attachments.component';
+import { AttachmentsComponent } from './components/applying-form/attachments/attachments.component';
 import { EnclosureListComponent } from './components/enclosure-list/enclosure-list.component';
 import { EnclosurePrintComponent } from './components/enclosure-print/enclosure-print.component';
 import { AdmVerificationComponent } from './components/adm-verification/adm-verification.component';

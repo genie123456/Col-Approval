@@ -4,13 +4,6 @@ const pool = require('../dbConfig');
 const saveApplyingFormData = async (req, res) => {
   const data = req.body;
 
-  // Ensure username is extracted from session
-  const username = req.session.user && req.session.user.username;
-
-  if (!username) {
-    return res.status(401).json({ message: 'User not logged in' });
-  }
-
   const sqlFormFields = `INSERT INTO formfields (
     selectedDistrict, area, body, choosingCorporation, choosingCouncil, choosingJury, 
     khasraIntegrated, integratedKhasraNumber, office
@@ -31,10 +24,10 @@ const saveApplyingFormData = async (req, res) => {
     console.log('FormId:', formId);
 
     const sqlApplicantData = `INSERT INTO applicantdata (
-      formId, username, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
+      formId, fullName, LUB, Srno, registrationDate, Hno, neighbourhoodColony, district, 
       surveyNumber, land_area, village, neighbourhoodColony4, district4, developedLandName, 
       village5, neighbourhoodColony5, district5, relinquishment, permitPurpose, 
-      mobileNumber, email, tinGstnNumber, EWS, EWS_Less, outside_res_area, inside_res_area, 
+      mobileNumber, applicant_email, tinGstnNumber, EWS, EWS_Less, outside_res_area, inside_res_area, 
       CGR_Residential_Area, CGR_Land_Area, EWS_Residential_Area, EWS_Land_Area, CGRAmount, 
       clearancePWD, clearanceWRD, clearanceCSEB, clearanceCECB, clearanceNHAI, clearancePHED, 
       clearancePMGSY, clearanceFOREST, clearanceFireNOC, clearanceGramPanchayat, 
@@ -42,11 +35,11 @@ const saveApplyingFormData = async (req, res) => {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const valuesApplicantData = [
-      formId, username, data.applicantData.fullName, data.applicantData.LUB, data.applicantData.Srno, data.applicantData.registrationDate, data.applicantData.Hno, 
+      formId, data.applicantData.fullName, data.applicantData.LUB, data.applicantData.Srno, data.applicantData.registrationDate, data.applicantData.Hno, 
       data.applicantData.neighbourhoodColony, data.applicantData.district, data.applicantData.surveyNumber, data.applicantData.land_area, data.applicantData.village, 
       data.applicantData.neighbourhoodColony4, data.applicantData.district4, data.applicantData.developedLandName, data.applicantData.village5, 
       data.applicantData.neighbourhoodColony5, data.applicantData.district5, data.applicantData.relinquishment, data.applicantData.permitPurpose, 
-      data.applicantData.mobileNumber, data.applicantData.email, data.applicantData.tinGstnNumber, data.applicantData.EWS, data.applicantData.EWS_Less, data.applicantData.outside_res_area, 
+      data.applicantData.mobileNumber, data.applicantData.applicant_email, data.applicantData.tinGstnNumber, data.applicantData.EWS, data.applicantData.EWS_Less, data.applicantData.outside_res_area, 
       data.applicantData.inside_res_area, data.applicantData.CGR_Residential_Area, data.applicantData.CGR_Land_Area, data.applicantData.EWS_Residential_Area, 
       data.applicantData.EWS_Land_Area, data.applicantData.CGRAmount, data.applicantData.clearancePWD || null, data.applicantData.clearanceWRD || null, 
       data.applicantData.clearanceCSEB || null, data.applicantData.clearanceCECB || null, data.applicantData.clearanceNHAI || null, 
@@ -65,6 +58,7 @@ const saveApplyingFormData = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // Controller to get applying form and applicant data by ID
 const getApplyingFormData = async (req, res) => {

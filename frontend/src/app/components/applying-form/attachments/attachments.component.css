@@ -2,7 +2,7 @@
     background-color: rgb(14, 35, 53);
     padding: 5px;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     margin: 7px 10px 5px 10px; /* Top: 7px, Right: 10px, Bottom: 7px, Left: 10px */
     border-radius: 1px;
     font-weight: bold;
@@ -50,7 +50,7 @@
   }
 
   .outer-container {
-    background-color: lightgray;
+    /* background-color: rgb(226, 226, 226); */
     display: auto;
     padding: 5px;
     margin: 7px 10px 5px 10px; /* Top: 7px, Right: 10px, Bottom: 5px, Left: 10px */
@@ -65,10 +65,11 @@
     margin-bottom: 20px;
     border: 0.7px solid gray;
     height: 40px;
+    justify-content: center;
   }
 
   .formA-container {
-    background-color: lightgray;
+    background-color: rgb(226, 226, 226);
     padding: 10px;
     border-radius: 7px; /* Adds rounded corners */
     margin: 10px 0; /* Adds some space between form containers */
@@ -153,4 +154,9 @@
 .btn-primary[disabled]:hover {
   background-color: #d9edf7; /* Maintain lighter shade when hovered */
   border-color: #bce8f1; /* Maintain border color when hovered */
+}
+
+.input-group{
+  border: 0.2px solid gray;
+  border-radius: 7px;
 }

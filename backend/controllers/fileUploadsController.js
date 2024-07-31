@@ -3,6 +3,8 @@ const path = require('path');
 
 exports.uploadFile = async (req, res) => {
   try {
+    console.log('Session during file upload:', req.session); // Debugging line
+
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).json({ message: 'No files uploaded' });
     }
@@ -14,13 +16,10 @@ exports.uploadFile = async (req, res) => {
       
       files.forEach(file => {
         const { originalname } = file;
-        
-        const username = req.session.username; // Ensure session handling for logged-in user
-        const formfields_id = req.body.formfields_id;
 
-        const insertPromise = pool.promise().query(
-          'INSERT INTO file_uploads (file_name, formfields_id, username, upload_date) VALUES (?, ?, ?, NOW())',
-          [originalname, formfields_id, username]
+        const insertPromise = pool.query(
+          'INSERT INTO file_uploads (file_name, upload_date) VALUES (?, NOW())',
+          [originalname]
         );
 
         insertPromises.push(insertPromise);

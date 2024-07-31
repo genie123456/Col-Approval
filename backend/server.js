@@ -9,6 +9,7 @@ const fs = require('fs');
 
 const formFieldsRoutes = require('./routes/formFields');
 const fileUploadsRoute = require('./routes/fileUploads');
+const masterRoutes = require('./routes/masterRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -98,6 +99,13 @@ app.use(express.static(path.join(__dirname, '../frontend/dist/frontend')));
 // Use the formFields route for form submissions
 app.use('/formFields', formFieldsRoutes);
 app.use('/fileUploads', fileUploadsRoute);
+app.use('/master', masterRoutes)
+
+app.use((req, res, next) => {
+  console.log('Session ID:', req.sessionID);
+  console.log('Session Data:', req.session);
+  next();
+});
 
 app.get('/get', async (req, res) => {
   res.send('working');
@@ -130,29 +138,29 @@ app.post('/login', async (req, res) => {
   const { username, password, type } = req.body;
   let connection;
   try {
-    connection = await pool.getConnection(); // Get a connection from the pool
-    // Check if user exists with the provided type
+    connection = await pool.getConnection();
     const [user] = await connection.query('SELECT * FROM users WHERE username = ? AND type = ?', [username, type]);
     if (user.length === 0) {
-      return res.status(401).json({ error: 'Invalid username, password, or type' });
+      return res.status(401).json({ error: 'Username does not Exists' });
     }
-    // Check if password matches
     if (user[0].password !== password) {
       return res.status(401).json({ error: 'Invalid username, password, or type' });
     }
-    // Store user info in session
     req.session.user = user[0];
+    console.log('Session set:', req.session); // Debugging line
     res.status(200).json({ message: 'Login successful', user: { ...user[0], type: user[0].type } });
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ error: 'Internal server error' });
   } finally {
-    if (connection) connection.release(); // Release the connection back to the pool
+    if (connection) connection.release();
   }
 });
 
+
 // Profile route
 app.get('/profile', (req, res) => {
+  console.log('Session:', req.session); // Debugging line
   if (req.session.user) {
     res.status(200).json({ user: req.session.user });
   } else {

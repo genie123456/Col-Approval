@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplyingFormService } from 'src/app/services/applying-form.service';
+import { AttachmentsService } from 'src/app/services/attachments.service';
+import { ATTACHMENT_FIELDS } from './attachments/attachments.component'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
 import { Modal } from 'bootstrap';
-// import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-applying-form',
@@ -25,6 +26,7 @@ export class ApplyingFormComponent implements OnInit {
 
   applyingForm: FormGroup;
   applicantFormData: FormGroup;
+  attachmentsForm!: FormGroup;
 
   formData: any;
 
@@ -33,6 +35,9 @@ export class ApplyingFormComponent implements OnInit {
 
   successMessage: string = '';
   errorMessage: string = '';
+
+  showAttachments: boolean = false;
+  isAttachmentsOpened: boolean = false;
 
   required: string = 'This Field is Required';
   clearanceLabels: { [key: string]: string } = {
@@ -54,6 +59,7 @@ export class ApplyingFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private applyingFormService: ApplyingFormService, 
+    private attachmentsService: AttachmentsService,
     private modalService: NgbModal,
   ) {
     this.applyingForm = this.fb.group({
@@ -99,21 +105,25 @@ export class ApplyingFormComponent implements OnInit {
       EWS_Residential_Area: [''],
       EWS_Land_Area: [''],
       CGRAmount: [''],
-      // clearances: this.fb.group({
-        clearancePWD: [false],
-        clearanceWRD: [false],
-        clearanceCSEB: [false],
-        clearanceCECB: [false],
-        clearanceNHAI: [false],
-        clearancePHED: [false],
-        clearancePMGSY: [false],
-        clearanceFOREST: [false],
-        clearanceFireNOC: [false],
-        clearanceGramPanchayat: [false],
-        clearanceNNNPTP: [false],
-        clearanceRevenue: [false],
-        clearanceRES: [false]
-      // })
+      clearancePWD: [false],
+      clearanceWRD: [false],
+      clearanceCSEB: [false],
+      clearanceCECB: [false],
+      clearanceNHAI: [false],
+      clearancePHED: [false],
+      clearancePMGSY: [false],
+      clearanceFOREST: [false],
+      clearanceFireNOC: [false],
+      clearanceGramPanchayat: [false],
+      clearanceNNNPTP: [false],
+      clearanceRevenue: [false],
+      clearanceRES: [false]
+    });
+
+    this.attachmentsForm = this.fb.group({});
+    ATTACHMENT_FIELDS.forEach(field => {
+      this.attachmentsForm.addControl(field.formControlName, this.fb.control(null));
+      this.attachmentsForm.addControl(field.selectFormControlName, this.fb.control(null, Validators.required));
     });
 
     // Subscribe to changes in the 'khasraIntegrated' form control to show/hide additional form fields
@@ -144,6 +154,11 @@ export class ApplyingFormComponent implements OnInit {
     }
   }
 
+  onAttachmentsButtonClick() {
+    this.showAttachments = !this.showAttachments; // Toggle visibility
+    this.isAttachmentsOpened = true;
+  }  
+
   onKhasraIntegratedChange(value: string) {
     this.showAdditionalForm = (value === 'yes');
     this.isKhasraIntegrated = (value === 'yes');
@@ -161,6 +176,10 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (!this.isAttachmentsOpened) {
+      alert('Please open the attachments section before submitting.');
+      return;
+    }
     if (this.isKhasraIntegrated) {
       const combinedFormData = {
         ...this.applyingForm.value,
@@ -170,9 +189,10 @@ export class ApplyingFormComponent implements OnInit {
 
       this.applyingFormService.saveApplyingFormData(combinedFormData).subscribe(
         response => {
-          this.successMessage = 'Submitted successfully.';
-          this.errorMessage = '';
-          this.openSuccessModal();
+          this.submitAttachments();
+          // this.successMessage = 'Submitted successfully.';
+          // this.errorMessage = '';
+          // this.openSuccessModal();
         },
         error => {
           this.errorMessage = 'Error Submitting. Please check all the required Fields as they are mandatory.';
@@ -182,6 +202,39 @@ export class ApplyingFormComponent implements OnInit {
       );
     } else {
       alert('Please get the Khasra integrated from the revenue department before applying for colony approval.');
+    }
+  }
+
+  submitAttachments() {
+    const hasFile = Object.keys(this.attachmentsForm.controls).some(key => {
+      const control = this.attachmentsForm.get(key);
+      return control && control.value instanceof File;
+    });
+
+    if (hasFile) {
+      const formData = new FormData();
+      Object.keys(this.attachmentsForm.controls).forEach(key => {
+        const control = this.attachmentsForm.get(key);
+        if (control && control.value) {
+          formData.append(key, control.value);
+        }
+      });
+
+      this.attachmentsService.uploadFiles(formData).subscribe(
+        response => {
+          this.successMessage = 'All data submitted successfully.';
+          this.errorMessage = '';
+          this.openSuccessModal();
+        },
+        error => {
+          this.errorMessage = 'Error uploading files.';
+          this.successMessage = '';
+          this.openErrorModal();
+        }
+      );
+    } else {
+      this.successMessage = 'Submitted successfully (no files to upload).';
+      this.openSuccessModal();
     }
   }
 
@@ -248,24 +301,24 @@ export class ApplyingFormComponent implements OnInit {
 
   processClearanceTexts(): void {
     if (this.formData && this.formData.applicantData) {
-      const clearanceLabels: { [key: string]: string } = {
-        clearancePWD: 'PWD (Public Works Department)',
-        clearanceWRD: 'WRD (Water Resources Department)',
-        clearanceCSEB: 'CSEB (CG Electricity Board)',
-        clearanceCECB: 'CECB (Environment)',
-        clearanceNHAI: 'NHAI (National Highway)',
-        clearancePHED: 'PHED (Public Health Engineering)',
-        clearancePMGSY: 'PMGSY (PM Gramin Sadak Yojna)',
-        clearanceFOREST: 'FOREST',
-        clearanceFireNOC: 'Fire NOC (Home Department)',
-        clearanceGramPanchayat: 'Gram Panchayat',
-        clearanceNNNPTP: 'NN / NP / TP',
-        clearanceRevenue: 'Revenue Department',
-        clearanceRES: 'RES (Rural Engineering Services)',
-      };
+      // const clearanceLabels: { [key: string]: string } = {
+      //   clearancePWD: 'PWD (Public Works Department)',
+      //   clearanceWRD: 'WRD (Water Resources Department)',
+      //   clearanceCSEB: 'CSEB (CG Electricity Board)',
+      //   clearanceCECB: 'CECB (Environment)',
+      //   clearanceNHAI: 'NHAI (National Highway)',
+      //   clearancePHED: 'PHED (Public Health Engineering)',
+      //   clearancePMGSY: 'PMGSY (PM Gramin Sadak Yojna)',
+      //   clearanceFOREST: 'FOREST',
+      //   clearanceFireNOC: 'Fire NOC (Home Department)',
+      //   clearanceGramPanchayat: 'Gram Panchayat',
+      //   clearanceNNNPTP: 'NN / NP / TP',
+      //   clearanceRevenue: 'Revenue Department',
+      //   clearanceRES: 'RES (Rural Engineering Services)',
+      // };
   
       // Filter only checked clearances
-      this.formData.filteredClearances = Object.keys(clearanceLabels).filter(key => this.formData.applicantData[key]);
+      this.formData.filteredClearances = Object.keys(this.clearanceLabels).filter(key => this.formData.applicantData[key]);
     }
   }
 }

@@ -7,7 +7,6 @@
     <form [formGroup]="applyingForm">
       <span class="bannerISW">Integrated Single Window System Approval</span>
       <hr class="dotted-line">
-
       <div class="form-group">
         <div class="flex-container">
           <label for="district1" class="left required">In which district is colony development permission sought?</label>
@@ -185,7 +184,6 @@
           </div>
         </div>
       </ng-container>
-      
 
       <div class="form-group">
         <p class="left required"><b>Note - If the khasra is not integrated, please get it integrated from the revenue department before applying for colony approval.</b></p>
@@ -225,20 +223,45 @@
     <app-applicant-data [applicantFormData]="applicantFormData" (formSubmit)="onApplicantFormSubmit($event)"></app-applicant-data>
   </div>
   
+ <!-- Conditionally show the AttachmentsComponent -->
+<div *ngIf="showAttachments" class="form-container">
+  <app-attachments [attachmentsForm]="attachmentsForm"></app-attachments>
+</div>
 
-  <div class="form-container">
-    <form [formGroup]="applyingForm">
-      <span class="bannerISW">Additional Details</span>
-      <div class="form-group">
+<div class="form-container">
+  <form [formGroup]="applyingForm">
+    <span class="bannerISW">Additional Details</span>
+    <div class="form-group">
+      <div class="container">
+        <label class="required">Apply to the Office</label>
         <div class="container">
-          <label class="required">Apply to the Office</label>
-          <div class="container">
-            <input type="text" id="office" formControlName="office" class="wide-input" [value]="applyingForm.get('office')?.value || ''">
-          </div>
+          <input type="text" id="office" formControlName="office" class="wide-input" [value]="applyingForm.get('office')?.value || ''">
         </div>
       </div>
-    </form>
-  </div>  
+    </div>
+  </form>
+</div>  
+
+<div class="info-container form-container">
+  <p>1. Before submitting your form, Please attach the required annexures.</p>
+  <p>2. Please preview your application form before submitting by clicking the "Preview" button.</p>
+  <p>3. After previewing your application, if all the required fields are correctly filled, click the "Submit" button.</p>
+</div>
+
+<div class="button-container">
+  <div class="button-bottom">
+    <button type="button" class="btn btn-success mr-2" [disabled]="!applyingForm.valid || !isAttachmentsOpened"
+    (click)="onSubmit()">Submit</button>
+    <a class="btn btn-info mr-2" [class.disabled]="!applyingForm.valid" (click)="onAttachmentsButtonClick()">Attachments</a>
+      <button type="button" class="btn btn-info mr-2" [disabled]="!applyingForm.valid" (click)="openPreviewModal()">Preview</button>
+    <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
+    <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
+  </div>
+</div>
+</div>
+
+<!-- <button type="button" class="btn btn-success" (click)="openSuccessModal()">Open Success Modal</button>
+<button type="button" class="btn btn-danger" (click)="openErrorModal()">Open Error Modal</button> -->
 
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
@@ -283,28 +306,6 @@
     </div>
   </ng-template>
 </div>
-
-<div class="info-container form-container">
-  <p>1. Please preview your application form before submitting by clicking the "Preview" button.</p>
-  <p>2. After previewing your application, if all the required fields are correctly filled, click the "Submit" button.</p>
-  <p>3. After submitting your form, click the "Attachments" button to proceed with the next steps.</p>
-</div>
-
-<div class="button-container">
-  <div class="button-bottom">
-    <button type="button" class="btn btn-success mr-2" [disabled]="!applyingForm.valid "
-      (click)="onSubmit()">Submit</button> 
-      <a class="btn btn-info mr-2" [class.disabled]="!applyingForm.valid" href="/attachments">Attachments</a>
-      <button type="button" class="btn btn-info mr-2" [disabled]="!applyingForm.valid" (click)="openPreviewModal()">Preview</button>
-    <!-- <a class="btn btn-info mr-2" [class.disabled]="!applyingForm.valid" href="/form-data">Preview</a> -->
-    <button type="button" class="btn btn-dark" (click)="onReset()">Reset</button>
-    <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
-  </div>
-</div>
-</div>
-
-<!-- <button type="button" class="btn btn-success" (click)="openSuccessModal()">Open Success Modal</button>
-<button type="button" class="btn btn-danger" (click)="openErrorModal()">Open Error Modal</button> -->
 
 <!-- Preview Modal -->
 <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
