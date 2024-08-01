@@ -9,7 +9,7 @@ const fs = require('fs');
 
 const formFieldsRoutes = require('./routes/formFields');
 const fileUploadsRoute = require('./routes/fileUploads');
-const masterRoutes = require('./routes/masterRoutes');
+const masterRoutes = require('./routes/master');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -73,6 +73,7 @@ app.use(session({
   store: sessionStore,
   resave: false,
   saveUninitialized: false,
+  rolling: true, // <-- Extend session expiration time on user activity
   cookie: {
     secure: false, // Set to true if using HTTPS
     httpOnly: true,
@@ -164,6 +165,7 @@ app.get('/profile', (req, res) => {
   if (req.session.user) {
     res.status(200).json({ user: req.session.user });
   } else {
+    req.session.destroy(); // Ensure the session is destroyed if it exists but is unauthorized
     res.status(401).json({ error: 'Not authenticated. Session destroyed.' });
   }
 });

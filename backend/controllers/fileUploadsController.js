@@ -8,7 +8,10 @@ exports.uploadFile = async (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).json({ message: 'No files uploaded' });
     }
-
+    const username = req.body.username;
+    if (!username) {
+      return res.status(400).json({ message: 'Username is required' });
+    }
     const insertPromises = [];
 
     Object.keys(req.files).forEach(fieldName => {
@@ -16,16 +19,16 @@ exports.uploadFile = async (req, res) => {
       
       files.forEach(file => {
         const { originalname } = file;
-
+    
         const insertPromise = pool.query(
-          'INSERT INTO file_uploads (file_name, upload_date) VALUES (?, NOW())',
-          [originalname]
+          'INSERT INTO file_uploads (file_name, username, upload_date) VALUES (?, ?, NOW())',
+          [originalname, username]  // Use the username
         );
-
+    
         insertPromises.push(insertPromise);
       });
     });
-
+    
     await Promise.all(insertPromises);
 
     res.status(200).json({ message: 'Files uploaded successfully' });

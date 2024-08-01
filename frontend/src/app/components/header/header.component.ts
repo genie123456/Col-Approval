@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
     });
   }
   
-
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }

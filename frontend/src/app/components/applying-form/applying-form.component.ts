@@ -26,6 +26,8 @@ export class ApplyingFormComponent implements OnInit {
     'Sukma', 'Surajpur', 'Surguja', 'Uttar Bastar Kanker'
   ].sort();
 
+  username: string = '';
+
   applyingForm: FormGroup;
   applicantFormData: FormGroup;
   attachmentsForm!: FormGroup;
@@ -141,6 +143,7 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.username = this.getUsername(); 
     this.applyingForm.get('area')!.valueChanges.subscribe(value => {
       if (value === 'urban') {
         this.applyingForm.get('body')!.enable();
@@ -155,6 +158,11 @@ export class ApplyingFormComponent implements OnInit {
     } else {
       console.error('Bootstrap Modal is not available');
     }
+  }
+
+  getUsername(): string {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user.username || '';
   }
 
   onAttachmentsButtonClick() {
@@ -183,8 +191,10 @@ export class ApplyingFormComponent implements OnInit {
       alert('Please open the attachments section before submitting.');
       return;
     }
+
     if (this.isKhasraIntegrated) {
       const combinedFormData = {
+        username: this.username,  // Include username
         ...this.applyingForm.value,
         office: this.applyingForm.get('office')?.value,
         applicantData: this.applicantFormData.value
@@ -193,9 +203,7 @@ export class ApplyingFormComponent implements OnInit {
       this.applyingFormService.saveApplyingFormData(combinedFormData).subscribe(
         response => {
           this.submitAttachments();
-          // this.successMessage = 'Submitted successfully.';
-          // this.errorMessage = '';
-          // this.openSuccessModal();
+          // Existing code...
         },
         error => {
           this.errorMessage = 'Error Submitting. Please check all the required Fields as they are mandatory.';
@@ -213,16 +221,18 @@ export class ApplyingFormComponent implements OnInit {
       const control = this.attachmentsForm.get(key);
       return control && control.value instanceof File;
     });
-
+  
     if (hasFile) {
       const formData = new FormData();
+      formData.append('username', this.username);  // Include username in FormData
+  
       Object.keys(this.attachmentsForm.controls).forEach(key => {
         const control = this.attachmentsForm.get(key);
         if (control && control.value) {
           formData.append(key, control.value);
         }
       });
-
+  
       this.attachmentsService.uploadFiles(formData).subscribe(
         response => {
           this.successMessage = 'All data submitted successfully.';
@@ -239,7 +249,7 @@ export class ApplyingFormComponent implements OnInit {
       this.successMessage = 'Submitted successfully (no files to upload).';
       this.openSuccessModal();
     }
-  }
+  }  
 
   openSuccessModal() {
     this.successMessage = 'Submitted successfully.';
@@ -311,22 +321,6 @@ export class ApplyingFormComponent implements OnInit {
 
   processClearanceTexts(): void {
     if (this.formData && this.formData.applicantData) {
-      // const clearanceLabels: { [key: string]: string } = {
-      //   clearancePWD: 'PWD (Public Works Department)',
-      //   clearanceWRD: 'WRD (Water Resources Department)',
-      //   clearanceCSEB: 'CSEB (CG Electricity Board)',
-      //   clearanceCECB: 'CECB (Environment)',
-      //   clearanceNHAI: 'NHAI (National Highway)',
-      //   clearancePHED: 'PHED (Public Health Engineering)',
-      //   clearancePMGSY: 'PMGSY (PM Gramin Sadak Yojna)',
-      //   clearanceFOREST: 'FOREST',
-      //   clearanceFireNOC: 'Fire NOC (Home Department)',
-      //   clearanceGramPanchayat: 'Gram Panchayat',
-      //   clearanceNNNPTP: 'NN / NP / TP',
-      //   clearanceRevenue: 'Revenue Department',
-      //   clearanceRES: 'RES (Rural Engineering Services)',
-      // };
-  
       // Filter only checked clearances
       this.formData.filteredClearances = Object.keys(this.clearanceLabels).filter(key => this.formData.applicantData[key]);
     }

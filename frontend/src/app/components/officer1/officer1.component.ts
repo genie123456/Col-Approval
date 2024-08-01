@@ -32,13 +32,13 @@ export class Officer1Component implements OnInit {
         console.log('Number of items in response:', response.length);
 
         this.data = response.map((item: any) => ({
-          sno: item.id,
-          appNo: item.id,
+          sno: item.formfields_id,
+          appNo: item.formfields_id,
           status: item.status || 'Initiated',
           action: item.action || 'Verify',
           ReviewApp: item.ReviewApp || 'Pull',
           date: item.created_at ? new Date(item.created_at).toLocaleDateString('en-GB') : ''
-        }));
+        }));           
 
         // console.log('Mapped data:', this.data);
         console.log('Number of items after mapping:', this.data.length);
@@ -79,25 +79,25 @@ export class Officer1Component implements OnInit {
         console.log('Fetched application data:', data);
 
         if (data && data.formFieldsData) {
-          item.appNo = data.formFieldsData.id;
+          item.appNo = data.formFieldsData.formfields_id;  // Updated from 'id' to 'formfields_id'
           const createdAt = new Date(data.formFieldsData.created_at);
           item.date = createdAt.toLocaleDateString('en-GB');
           console.log('Form fields data:', data.formFieldsData);
-
+        
           if (data.applicantData) {
             console.log('Applicant data:', data.applicantData);
           } else {
             console.warn('Applicant data not found for form ID:', item.appNo);
           }
-
+        
           this.selectedAppNo = item.appNo;
           this.selectedDate = item.date;
-
-          // Navigate to FormDataComponent with the selected sno
+        
           this.navigateToFormDataComponent(item.sno);
         } else {
           console.error('Form fields data not found:', data);
         }
+        
       },
       (error) => {
         console.error('Error fetching application data:', error);
@@ -115,10 +115,15 @@ export class Officer1Component implements OnInit {
   }
 
   getRouterLink(item: PullData): string[] {
+    if (!item.appNo) {
+      console.error('getRouterLink: Missing appNo for item', item);
+      return ['/error']; // Redirect to an error page or handle accordingly
+    }
+  
     if (this.selectedTask === 'Final Colony Development Permission') {
       return ['/officer1/final', this.selectedService, this.selectedTask, item.appNo.toString(), item.date];
     } else {
       return ['/officer1/verification', this.selectedService, this.selectedTask, item.appNo.toString(), item.date];
     }
-  }
+  }  
 }

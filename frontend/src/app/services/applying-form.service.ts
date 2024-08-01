@@ -58,10 +58,10 @@ export class ApplyingFormService {
   getJoinedFormFieldsDataById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/applying-form/joined/${id}`).pipe(
       map((response: any) => {
-        // console.log('Full API response:', response);
+        // Assuming the API now returns a single object
         return {
-          formFieldsData: response || {}, // Ensure correct default value
-          applicantData: response || {}    // Ensure correct default value
+          formFieldsData: response.formFieldsData || {}, // Ensure correct default value
+          applicantData: response.applicantData || {}    // Ensure correct default value
         };
       }),
       catchError((error: HttpErrorResponse) => {
@@ -69,7 +69,7 @@ export class ApplyingFormService {
         return throwError(() => new Error('Error fetching joined form data'));
       })
     );
-  }
+  }  
   
   // Method to save the form data as a draft (if applicable)
   saveDraft(data: any): Observable<any> {

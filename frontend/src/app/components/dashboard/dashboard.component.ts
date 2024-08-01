@@ -26,10 +26,14 @@ export class DashboardComponent implements OnInit {
       },
       error => {
         console.error('Error fetching profile:', error);
-        this.router.navigate(['/login']);
+        if (error.status === 401) {  // If session expired or unauthorized
+          alert('Session expired. Please log in again.');
+          this.router.navigate(['/login']);
+        }
       }
     );
   }
+  
 
   logout(): void {
     this.authService.logout().subscribe(() => {

@@ -44,8 +44,9 @@ export class FormDataComponent implements OnInit {
     this.applyingFormService.getJoinedFormFieldsDataById(id).subscribe(
       data => {
         console.log('Fetched data:', data);
-        this.formFieldsData = data.formFieldsData || {}; // Ensure correct default value
-        this.applicantData = data.applicantData || {};  // Ensure correct default value
+        this.formFieldsData = data.formFieldsData || {};
+        this.applicantData = data.applicantData || {};
+  
         // console.log('Updated formFieldsData:', this.formFieldsData);
         // console.log('Updated applicantData:', this.applicantData);
         this.processClearanceTexts();
@@ -54,7 +55,8 @@ export class FormDataComponent implements OnInit {
         console.error('Error fetching form data:', error);
       }
     );
-  }
+  }  
+    
 
   processClearanceTexts(): void {
     // console.log('Before processing:', this.applicantData);
