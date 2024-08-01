@@ -2,23 +2,11 @@ const db = require('../dbConfig');
 
 exports.getAllData = (req, res) => {
     const query = `
-        SELECT 
-            u.username, 
-            u.email, 
-            u.phone_number,
-            f.selectedDistrict, 
-            f.area, 
-            f.body, 
-            f.choosingCorporation,
-            a.fullName, 
-            a.registrationDate,
-            file.file_name
-        FROM 
-            master_table mt
-            JOIN users u ON mt.user_id = u.id
-            JOIN formfields f ON mt.form_id = f.id
-            JOIN applicantdata a ON mt.applicant_data_id = a.applicantdata
-            JOIN file_uploads file ON mt.file_id = file.id;
+        select DISTINCT * FROM master_table mt 
+        JOIN users u ON u.username = mt.master_user 
+        JOIN formfields ff on mt.master_form = ff.formfields_id 
+        JOIN applicantdata ad ON ad.formId = ff.formfields_id 
+        JOIN file_uploads fu ON fu.file_id = mt.master_file
     `;
 
     db.query(query, (err, results) => {

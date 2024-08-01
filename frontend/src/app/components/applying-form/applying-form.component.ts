@@ -5,6 +5,8 @@ import { AttachmentsService } from 'src/app/services/attachments.service';
 import { ATTACHMENT_FIELDS } from './attachments/attachments.component'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
 import { Modal } from 'bootstrap';
+import { Router } from '@angular/router';
+import { PreviewModalComponent } from '../preview-modal/preview-modal.component';
 
 @Component({
   selector: 'app-applying-form',
@@ -61,6 +63,7 @@ export class ApplyingFormComponent implements OnInit {
     private applyingFormService: ApplyingFormService, 
     private attachmentsService: AttachmentsService,
     private modalService: NgbModal,
+    private router: Router 
   ) {
     this.applyingForm = this.fb.group({
       selectedDistrict: ['', Validators.required],
@@ -271,7 +274,14 @@ export class ApplyingFormComponent implements OnInit {
   }
 
   onCancel() {
-    console.log('Cancelled');
+    const modalRef = this.modalService.open(PreviewModalComponent);
+    modalRef.result.then((result) => {
+      if (result) {
+        this.router.navigate(['/applicant-dashboard']);
+      }
+    }, (reason) => {
+      // Handle dismiss, if necessary
+    });
   }
 
   openPreviewModal() {

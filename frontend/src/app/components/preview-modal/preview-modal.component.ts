@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,7 +7,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./preview-modal.component.css']
 })
 export class PreviewModalComponent {
-  @Input() data: any;
+  constructor(public activeModal: NgbActiveModal) {}
 
-  constructor(public activeModal: NgbActiveModal) {} // Inject NgbActiveModal
+  confirm() {
+    this.activeModal.close(true);
+  }
+
+  decline() {
+    this.activeModal.close(false);
+  }
 }

@@ -8,7 +8,7 @@ import localeEnGb from '@angular/common/locales/en-GB';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { ApplyingFormComponent } from './components/applying-form/applying-form.component';
@@ -89,7 +89,6 @@ registerLocaleData(localeEnGb);
     VerifyEEComponent,
     VerifySDMComponent,
     Officer3InComponent,
-    // VPHComponent,
     Officer4Component,
     Officer4InComponent,
     VerifyTNCPComponent,
@@ -110,6 +109,7 @@ registerLocaleData(localeEnGb);
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
+    NgbModalModule,
     FormsModule,
     NoopAnimationsModule,
     CommonModule
@@ -119,6 +119,6 @@ registerLocaleData(localeEnGb);
     DatePipe,
     { provide: LOCALE_ID, useValue: 'en-GB' }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
