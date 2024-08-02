@@ -1,102 +1,89 @@
 <div class="container">
-    <form class="form-c">
-        <h5>Issue Provisional Layout Rural</h5>
-    <div class="noc-application">
-        <div class="noc-application__heading">
-          <span class="bannerISW">ACTION DETAILS</span>
-        </div>
-        <hr class="dotted-line">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th scope="col">Service Name</th>
+        <td>{{ data.serviceName }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Current Task</th>
+        <td>{{ data.currentTask }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Application Reference Number</th>
+        <td>{{ 'CGAWAAS/2024/0000' + data.appRefNo }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Application Received Date</th>
+        <td>{{ data.appReceivedDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-        <div class="noc-application__content">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <div class="noc-application__details__label required">ACTIONS TO BE TAKEN</div>
-              </div>
+<div>
+  <app-vph></app-vph>
+</div>
+
+<div class="container">
+  <form class="form-c" [formGroup]="provisionalLayoutForm" (ngSubmit)="onSubmit()">
+    <h5>Issue Provisional Layout</h5>
+    <div class="noc-application">
+      <div class="noc-application__heading">
+        <span class="bannerISW">ACTION DETAILS</span>
+      </div>
+      <hr class="dotted-line">
+      <div class="noc-application__content">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <div class="noc-application__details__label required">ACTIONS TO BE TAKEN</div>
             </div>
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <input type="radio" id="forward" name="action" value="forward" >
+          </div>
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <div class="radio-buttons">
+                <input type="radio" id="forward" formControlName="action" value="forward">
                 <label for="forward">Forward</label>
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <div class="noc-application__details__label required">SELECT OFFICIALS FOR DIVERSION OF LAND</div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <input type="checkbox" id="SDM-1" name="official" value="SDM-1">
-                <label for="SDM-1">(Deputy Collector / SDM)</label><br>
-                <input type="checkbox" id="SDM-2" name="official" value="SDM-2">
-                <label for="SDM-2">(Deputy Collector / SDM)</label><br>
-                <input type="checkbox" id="SDM-3" name="official" value="SDM-3">
-                <label for="SDM-3">(Deputy Collector / SDM)</label><br>
-              </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <div class="noc-application__details__label required">SELECT OFFICIALS FOR PROVISIONAL DEVELOPMENT PERMISSION</div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <div class="noc-application__details__label required">SELECT OFFICIALS FOR PROVISIONAL DEVELOPMENT PERMISSION</div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <input type="checkbox" id="SDM-4" name="official" value="SDM-4">
-                <label for="SDM-4">(Deputy Collector / SDM)</label><br>
-                <input type="checkbox" id="SDM-5" name="official" value="SDM-5">
-                <label for="SDM-5">(Deputy Collector / SDM)</label><br>
-                <input type="checkbox" id="SDM-6" name="official" value="SDM-6">
-                <label for="SDM-6">(Deputy Collector / SDM)</label><br>
-              </div>
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <input type="checkbox" id="SDM-4" formControlName="official">
+              <label for="SDM-4">(Deputy Collector / SDM)</label><br>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <div class="noc-application__details__label required">SELECT OFFICIALS FOR REGISTRATION AND MUTATION EWS</div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <input type="checkbox" id="SDM-7" name="official" value="SDM-7">
-                <label for="SDM-7">(Deputy Collector / SDM)</label><br>
-                <input type="checkbox" id="SDM-8" name="official" value="SDM-8">
-                <label for="SDM-8">(Deputy Collector / SDM)</label><br>
-                <input type="checkbox" id="SDM-9" name="official" value="SDM-9">
-                <label for="SDM-9">(Deputy Collector / SDM)</label><br>
-              </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <div class="noc-application__details__label">Remarks</div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <div class="noc-application__details__label">Remarks</div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <input type="text" id="remarks" name="remarks" class="custom-input">
-              </div>
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <input type="text" id="remarks" formControlName="remarks" class="custom-input">
             </div>
           </div>
         </div>
       </div>
-    </form>
+    </div>
     <div class="button-container">
-        <div class="button-bottom">
-          <button type="submit" class="btn btn-success mr-2">Submit</button>
-          <button type="button" class="btn btn-primary">Reset</button>
-          <button type="button" class="btn btn-danger mr-2">Cancel</button>
-          <button type="button" class="btn btn-warning mr-2">Back to Inbox</button>
-        </div>
-      </div>  
+      <div class="button-bottom">
+        <button type="submit" class="btn btn-success mr-2">Submit</button>
+        <button type="button" class="btn btn-primary">Reset</button>
+        <button type="button" class="btn btn-danger mr-2">Cancel</button>
+      </div>
+    </div>
+  </form>
 </div>

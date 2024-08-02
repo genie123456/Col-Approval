@@ -62,8 +62,9 @@ const routes: Routes = [
   { path: 'officer2/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: VerifyEEComponent },
   { path: 'officer3/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: VerifySDMComponent },
   { path: 'officer4/verification/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: VerifyTNCPComponent },
+  { path: 'officer4/provisional/:serviceName/:currentTask/:appRefNo/:appReceivedDate', component: ProvisionalLayoutComponent },
 
-  { path: 'provisional', component: ProvisionalLayoutComponent },
+  // { path: 'provisional', component: ProvisionalLayoutComponent },
   { path: 'diversion', component: DiversionCertificateComponent },
   { path: 'development', component: DevelopmentPermissionComponent },
   // { path: 'final', component: FinalColDevComponent },

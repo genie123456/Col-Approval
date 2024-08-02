@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VerificationData } from 'src/app/models/verification-data.model';
+import { VerificationService } from 'src/app/services/verification.service';
 
 @Component({
   selector: 'app-final-col-dev',
@@ -12,7 +13,11 @@ export class FinalColDevComponent implements OnInit {
   finalColDevForm!: FormGroup;
   data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '' };
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {}
+  constructor(
+    private fb: FormBuilder, 
+    private route: ActivatedRoute,
+    private verificationService: VerificationService
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -21,30 +26,44 @@ export class FinalColDevComponent implements OnInit {
       this.data.appRefNo = params.get('appRefNo')!;
       this.data.appReceivedDate = params.get('appReceivedDate')!;
     });
-    
-    this.finalColDevForm = this.fb.group({
-      decision: ['', Validators.required],
-      remarks: ['']
+
+    this.finalColDevForm= this.fb.group({
+      action: ['', Validators.required], 
+      official: [false, Validators.requiredTrue],
+      remarks: ['', Validators.required]
     });
   }
 
   onSubmit() {
+    console.log('Submit button clicked');
+    console.log('Form Submitted');
+    console.log('Form value:', this.finalColDevForm.value);
+    console.log('Form valid:', this.finalColDevForm.valid);
+    
     if (this.finalColDevForm.valid) {
-      const decision = this.finalColDevForm.get('decision')?.value;
-      if (decision === 'approve') {
-        alert('Verification and Approval Complete. Sending updated status to the Applicant.');
-      } else if (decision === 'reject') {
-        alert('Rejecting the Approval process. Sending updated status to the Applicant.');
+      const action = this.finalColDevForm.value.action;
+      const official = this.finalColDevForm.value.official;
+      const remarks = this.finalColDevForm.value.remarks;
+    
+      this.verificationService.setVerificationData({
+        ...this.data,
+        action,
+        remarks
+      });
+    
+      if (action === 'approve' && official && remarks) {
+        this.showAlert('Approved.');
+      } else if (action === 'reject' && official && remarks) {
+        this.showAlert('Rejected.');
+      } else {
+        console.error('Form is invalid or incomplete.');
       }
-      console.log(this.finalColDevForm.value);
+    } else {
+      console.error('Form is invalid.');
     }
   }
 
-  onReset() {
-    this.finalColDevForm.reset();
-  }
-
-  onCancel() {
-    // Handle cancel
+  showAlert(message: string) {
+    alert(message);
   }
 }

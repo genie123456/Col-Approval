@@ -57,6 +57,7 @@ import { PreviewModalComponent } from './components/preview-modal/preview-modal.
 import { CommonModule } from '@angular/common';
 import { ModalService } from './services/modal.service';
 import { VPHComponent } from './components/vph/vph.component';
+import { ModalContentComponent } from './components/modal-content/modal-content.component';
 
 registerLocaleData(localeEnGb);
 
@@ -101,6 +102,7 @@ registerLocaleData(localeEnGb);
     PreviewModalComponent,
     FormDataComponent,
     VPHComponent,
+    ModalContentComponent,
   ],
   imports: [
     HttpClientModule,

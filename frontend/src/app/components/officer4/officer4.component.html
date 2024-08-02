@@ -22,9 +22,9 @@
                     <div class="col-md-6">
                         <div class="search-box__filter">
                             <label for="task" class="required left">Select Task</label>
-                            <select name="task" id="task" class="form-control" [(ngModel)]="selectedTask">
+                            <select name="task" id="task" class="form-control" [(ngModel)]="selectedTask" (change)="onTaskChange($event)">
                                 <option>Verification by TNCP</option>
-                                <option>Any Other</option>
+                                <option>Issue Provisional Layout</option>
                             </select>
                         </div>
                         <div class="search-box__filter">
@@ -57,7 +57,7 @@
                             <td>
                               <a [routerLink]="['/form-data', item.sno]" class="text-primary" style="text-decoration: underline;">Preview</a>
                             </td>
-                            <td><a [routerLink]="['/officer4/verification', selectedService, selectedTask, item.appNo, item.date]">{{ item.action }}</a></td>
+                            <td><a [routerLink]="getRouterLink(item)">{{ item.action }}</a></td>
                         </tr>
                     </tbody>
                 </table>

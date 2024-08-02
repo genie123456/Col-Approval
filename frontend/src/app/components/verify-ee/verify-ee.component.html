@@ -1,90 +1,92 @@
 <div class="container">
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <th scope="col">Service Name</th>
-          <td>{{ data.serviceName }}</td>
-        </tr>
-        <tr>
-          <th scope="col">Current Task</th>
-          <td>{{ data.currentTask }}</td>
-        </tr>
-        <tr>
-          <th scope="col">Application Reference Number</th>
-          <td>{{ 'CGAWAAS/2024/0000' + data.appRefNo }}</td>
-        </tr>
-        <tr>
-          <th scope="col">Application Received Date</th>
-          <td>{{ data.appReceivedDate }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th scope="col">Service Name</th>
+        <td>{{ data.serviceName }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Current Task</th>
+        <td>{{ data.currentTask }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Application Reference Number</th>
+        <td>{{ 'CGAWAAS/2024/0000' + data.appRefNo }}</td>
+      </tr>
+      <tr>
+        <th scope="col">Application Received Date</th>
+        <td>{{ data.appReceivedDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div>
   <app-vph></app-vph>
 </div>
 
 <div class="container">
-    <form class="form-c">
-        <h5>NOC Application to CSEB</h5>
+  <form class="form-c" [formGroup]="verifyEEForm" (ngSubmit)="onSubmit()">
+    <h5 class="fontADM">Verification for Executive Engineer</h5>
     <div class="noc-application">
-        <div class="noc-application__heading">
-          <span class="bannerISW">ACTION DETAILS</span>
-        </div>
-        <hr class="dotted-line">
-
-        <div class="noc-application__content">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <div class="noc-application__details__label required">ACTIONS TO BE TAKEN</div>
-              </div>
+      <div class="noc-application__heading">
+        <span class="bannerISW">ACTION DETAILS</span>
+      </div>
+      <hr class="dotted-line">
+      <div class="noc-application__content">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <div class="noc-application__details__label required">ACTIONS TO BE TAKEN</div>
             </div>
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <input type="radio" id="forward" name="action" value="forward" >
+          </div>
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <div class="radio-buttons">
+                <!-- <input type="radio" id="reject" formControlName="action" value="reject">
+                <label for="reject">Reject</label> -->
+                <input type="radio" id="forward" formControlName="action" value="forward">
                 <label for="forward">Forward</label>
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <div class="noc-application__details__label required">SELECT OFFICIALS FOR FIELD VISIT AND NOC SUBMISSION</div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <input type="checkbox" id="executive-engineer" name="official" value="executive-engineer">
-                <label for="executive-engineer"> Executive Engineer</label>
-              </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <div class="noc-application__details__label required">SELECT OFFICIALS FOR FIELD VISIT AND NOC SUBMISSION</div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <div class="noc-application__details__label">Remarks</div>
-              </div>
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <input type="checkbox" id="executive-engineer" formControlName="official">
+              <label for="executive-engineer"> Executive Engineer</label>
             </div>
-            <div class="col-lg-6">
-              <div class="noc-application__details">
-                <input type="text" id="remarks" name="remarks" class="custom-input">
-              </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <div class="noc-application__details__label">Remarks</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="noc-application__details">
+              <input type="text" id="remarks" formControlName="remarks" class="custom-input">
             </div>
           </div>
         </div>
       </div>
-    </form>
+    </div>
     <div class="button-container">
-        <div class="button-bottom">
-          <button type="button" class="btn btn-warning mr-2">Save Draft</button>
-          <button type="submit" class="btn btn-success mr-2">Submit</button>
-          <a class="btn btn-primary" href="/officer3" role="button">Forward</a>
-          <button type="button" class="btn btn-primary">Reset</button>
-          <button type="button" class="btn btn-danger mr-2">Cancel</button>
-        </div>
+      <div class="button-bottom">
+        <button type="submit" class="btn btn-success mr-2">Submit</button>
+        <a class="btn btn-primary" href="/officer3" role="button">Forward</a>
+        <button type="button" class="btn btn-primary">Reset</button>
+        <button type="button" class="btn btn-danger mr-2">Cancel</button>
       </div>
+    </div>
+  </form>
 </div>

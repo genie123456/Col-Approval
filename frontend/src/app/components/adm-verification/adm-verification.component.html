@@ -24,14 +24,13 @@
   <app-vph></app-vph>
 </div>
 <div class="container">
-  <form class="form-c">
-      <h5 class="fontADM">ADM Verification</h5>
-  <div class="noc-application">
+  <form class="form-c" [formGroup]="admVerificationForm" (ngSubmit)="onSubmit()">
+    <h5 class="fontADM">ADM Verification</h5>
+    <div class="noc-application">
       <div class="noc-application__heading">
         <span class="bannerISW">ACTION DETAILS</span>
       </div>
       <hr class="dotted-line">
-
       <div class="noc-application__content">
         <div class="row">
           <div class="col-lg-6">
@@ -42,14 +41,14 @@
           <div class="col-lg-6">
             <div class="noc-application__details">
               <div class="radio-buttons">
-              <input type="radio" id="reject" name="action" value="reject" >
-              <label for="reject">Reject</label>
-              <input type="radio" id="forward" name="action" value="forward" >
-              <label for="forward">Forward</label>
+                <input type="radio" id="reject" formControlName="action" value="reject">
+                <label for="reject">Reject</label>
+                <input type="radio" id="forward" formControlName="action" value="forward">
+                <label for="forward">Forward</label>
+              </div>
             </div>
           </div>
         </div>
-      </div>
         <br>
         <div class="row">
           <div class="col-lg-6">
@@ -59,8 +58,9 @@
           </div>
           <div class="col-lg-6">
             <div class="noc-application__details">
-              <input type="checkbox" id="Exec-Eng" name="official" value="Exec-Eng">
-              <label for="Exec-Eng">Executive Engineer (Executive Engineer)</label>
+              <input type="checkbox" id="Exec-Eng" formControlName="official">
+              <label for="Exec-Eng">Executive Engineer</label>
+
             </div>
           </div>
         </div>
@@ -73,20 +73,19 @@
           </div>
           <div class="col-lg-6">
             <div class="noc-application__details">
-              <input type="text" id="remarks" name="remarks" class="custom-input">
+              <input type="text" id="remarks" formControlName="remarks" class="custom-input">
             </div>
           </div>
         </div>
+      </div>
     </div>
-  </div>
-  </form>
-  <div class="button-container">
+    <div class="button-container">
       <div class="button-bottom">
-        <button type="button" class="btn btn-warning mr-2">Save Draft</button>
         <button type="submit" class="btn btn-success mr-2">Submit</button>
-        <a class="btn btn-primary" href="/officer2" role="button">Forward</a>
+        <!-- <a class="btn btn-primary" href="/officer2" role="button">Forward</a> -->
         <button type="button" class="btn btn-primary">Reset</button>
         <button type="button" class="btn btn-danger mr-2">Cancel</button>
       </div>
-    </div>  
+    </div>
+  </form>
 </div>

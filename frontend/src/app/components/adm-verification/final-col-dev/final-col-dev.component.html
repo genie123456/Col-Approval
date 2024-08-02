@@ -24,7 +24,7 @@
   <app-vph></app-vph>
 </div>
 <div class="container">
-  <form [formGroup]="finalColDevForm" (ngSubmit)="onSubmit()" class="form-c">
+  <form class="form-c" [formGroup]="finalColDevForm" (ngSubmit)="onSubmit()" >
       <h5>Final Colony Development Permission</h5>
       <div class="noc-application">
           <div class="noc-application__heading">
@@ -41,11 +41,11 @@
                   <div class="col-lg-6">
                       <div class="noc-application__details">
                           <div class="radio-buttons">
-                              <input type="radio" id="reject" formControlName="decision" name="decision" value="reject">
+                              <input type="radio" id="reject" formControlName="action" value="reject">
                               <label for="reject">Reject</label>
                           </div>
                           <div class="radio-buttons">
-                              <input type="radio" id="approve" formControlName="decision" name="decision" value="approve">
+                              <input type="radio" id="approve" formControlName="action" value="approve">
                               <label for="approve">Approval</label>
                           </div>
                       </div>
@@ -59,7 +59,7 @@
                   </div>
                   <div class="col-lg-6">
                       <div class="noc-application__details">
-                          <input type="text" id="remarks" formControlName="remarks" name="remarks" class="custom-input">
+                          <input type="text" id="remarks" formControlName="remarks" class="custom-input">
                       </div>
                   </div>
               </div>
@@ -67,9 +67,10 @@
       </div>
       <div class="button-container">
           <div class="button-bottom">
-              <button type="submit" class="btn btn-success mr-2">Submit</button>
-              <button type="button" class="btn btn-primary" (click)="onReset()">Reset</button>
-              <button type="button" class="btn btn-danger mr-2" (click)="onCancel()">Cancel</button>
+            <button type="submit" class="btn btn-success mr-2">Submit</button>
+            <!-- <a class="btn btn-primary" href="/officer2" role="button">Forward</a> -->
+            <button type="button" class="btn btn-primary">Reset</button>
+            <button type="button" class="btn btn-danger mr-2">Cancel</button>
           </div>
       </div>
   </form>

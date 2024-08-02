@@ -31,8 +31,8 @@ export class Officer2Component implements OnInit {
         console.log('Number of items in response:', response.length);
 
         this.data = response.map((item: any) => ({
-          sno: item.id,
-          appNo: item.id,
+          sno: item.formfields_id, // Updated from 'id' to 'formfields_id'
+          appNo: item.formfields_id, // Updated from 'id' to 'formfields_id'
           status: item.status || 'Initiated',
           action: item.action || 'Verify',
           ReviewApp: item.ReviewApp || 'Pull',
@@ -74,9 +74,8 @@ export class Officer2Component implements OnInit {
     this.applyingFormService.getApplyingFormData(item.appNo).subscribe(
       (data: { formFieldsData: any; applicantData: any }) => {
         console.log('Fetched application data:', data);
-
         if (data && data.formFieldsData) {
-          item.appNo = data.formFieldsData.id;
+          item.appNo = data.formFieldsData.formfields_id; // Updated from 'id' to 'formfields_id'
           const createdAt = new Date(data.formFieldsData.created_at);
           item.date = createdAt.toLocaleDateString('en-GB');
           console.log('Form fields data:', data.formFieldsData);

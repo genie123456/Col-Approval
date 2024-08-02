@@ -22,7 +22,7 @@ export class Officer4Component implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fetchData(); // Fetch data on initialization
+    this.fetchData();
   }
 
   fetchData() {
@@ -31,8 +31,8 @@ export class Officer4Component implements OnInit {
         console.log('Number of items in response:', response.length);
 
         this.data = response.map((item: any) => ({
-          sno: item.id,
-          appNo: item.id,
+          sno: item.formfields_id, // Updated from 'id' to 'formfields_id'
+          appNo: item.formfields_id, // Updated from 'id' to 'formfields_id'
           status: item.status || 'Initiated',
           action: item.action || 'Verify',
           ReviewApp: item.ReviewApp || 'Pull',
@@ -71,12 +71,12 @@ export class Officer4Component implements OnInit {
   }
 
   setSelectedApp(item: TNCPData) {
-    this.applyingFormService.getApplyingFormData(item.sno).subscribe(
+    this.applyingFormService.getApplyingFormData(item.appNo).subscribe(
       (data: { formFieldsData: any; applicantData: any }) => {
         console.log('Fetched application data:', data);
 
         if (data && data.formFieldsData) {
-          item.appNo = data.applicantData.application_id; // Adjust as needed
+          item.appNo = data.formFieldsData.formfields_id; // Updated from 'id' to 'formfields_id'
           const createdAt = new Date(data.formFieldsData.created_at);
           item.date = createdAt.toLocaleDateString('en-GB');
           console.log('Form fields data:', data.formFieldsData);
@@ -84,7 +84,7 @@ export class Officer4Component implements OnInit {
           if (data.applicantData) {
             console.log('Applicant data:', data.applicantData);
           } else {
-            console.warn('Applicant data not found for form ID:', item.sno);
+            console.warn('Applicant data not found for form ID:', item.appNo);
           }
 
           this.selectedAppNo = item.appNo;
@@ -105,4 +105,21 @@ export class Officer4Component implements OnInit {
   navigateToFormDataComponent(sno: number) {
     this.router.navigate(['/form-data', sno]);
   }
+
+  onTaskChange(event: Event) {
+    this.selectedTask = (event.target as HTMLSelectElement).value;
+  }
+
+  getRouterLink(item: TNCPData): string[] {
+    if (!item.appNo) {
+      console.error('getRouterLink: Missing appNo for item', item);
+      return ['/error']; // Redirect to an error page or handle accordingly
+    }
+  
+    if (this.selectedTask === 'Issue Provisional Layout') {
+      return ['/officer4/provisional', this.selectedService, this.selectedTask, item.appNo.toString(), item.date];
+    } else {
+      return ['/officer4/verification', this.selectedService, this.selectedTask, item.appNo.toString(), item.date];
+    }
+  }  
 }
