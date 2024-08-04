@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VphComponent } from './vph.component';
+import { VPHComponent } from './vph.component';
 
-describe('VphComponent', () => {
-  let component: VphComponent;
-  let fixture: ComponentFixture<VphComponent>;
+describe('VPHComponent', () => {
+  let component: VPHComponent;
+  let fixture: ComponentFixture<VPHComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [VphComponent]
+      declarations: [VPHComponent]
     });
-    fixture = TestBed.createComponent(VphComponent);
+    fixture = TestBed.createComponent(VPHComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

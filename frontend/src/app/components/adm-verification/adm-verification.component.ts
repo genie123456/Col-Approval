@@ -11,8 +11,7 @@ import { VerificationService } from 'src/app/services/verification.service';
 })
 export class AdmVerificationComponent implements OnInit {
   admVerificationForm!: FormGroup;
-  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '' };
-
+  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '', action: '', official: '', remarks: '' };
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -41,21 +40,21 @@ export class AdmVerificationComponent implements OnInit {
     console.log('Form valid:', this.admVerificationForm.valid);
     
     if (this.admVerificationForm.valid) {
-      const action = this.admVerificationForm.value.action;
-      const official = this.admVerificationForm.value.official;
+      const action = this.admVerificationForm.value.action === 'forward' ? 'Forwarded' : 'Rejected';
+      const official = this.admVerificationForm.value.official ? 'Executive Engineer' : '';
       const remarks = this.admVerificationForm.value.remarks;
-    
-      this.verificationService.setVerificationData({
+
+      const verificationData = {
         ...this.data,
         action,
         official,
         remarks
-      });
-    
-      if (action === 'forward' && official && remarks) {
-        this.showAlert('Successfully Forwarded');
-      } else if (action === 'reject' && official && remarks) {
-        this.showAlert('Rejected');
+      };
+
+      this.verificationService.setVerificationData(verificationData);
+
+      if (action === 'Forwarded' || action === 'Rejected') {
+        this.showAlert(action === 'Forwarded' ? 'Successfully Forwarded' : 'Rejected');
       } else {
         console.error('Form is invalid or incomplete.');
       }
@@ -67,4 +66,5 @@ export class AdmVerificationComponent implements OnInit {
   showAlert(message: string) {
     alert(message);
   }
+
 }

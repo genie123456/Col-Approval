@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VerificationData } from 'src/app/models/verification-data.model';
 import { VerificationService } from 'src/app/services/verification.service';
+import { VPHComponent } from '../vph/vph.component';
 
 @Component({
   selector: 'app-verify-ee',
@@ -11,13 +12,14 @@ import { VerificationService } from 'src/app/services/verification.service';
 })
 export class VerifyEEComponent implements OnInit {
   verifyEEForm!: FormGroup;
-  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '' };
+  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '', action: '', official: '', remarks: '' };
+
+  @ViewChild(VPHComponent) vphComponent!: VPHComponent;  // Use ViewChild to get a reference to VPHComponent
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router,
-    private verificationService: VerificationService
+    private verificationService: VerificationService,
   ) {}
 
   ngOnInit() {
@@ -29,9 +31,15 @@ export class VerifyEEComponent implements OnInit {
     });
 
     this.verifyEEForm = this.fb.group({
-      action: ['forward', Validators.required], // Default to "Forward" action
+      action: ['forward', Validators.required],
       official: [false, Validators.requiredTrue],
       remarks: ['', Validators.required]
+    });
+
+    this.verificationService.getVerificationData().subscribe(data => {
+      if (data) {
+        this.receiveData(data);
+      }
     });
   }
 
@@ -40,14 +48,13 @@ export class VerifyEEComponent implements OnInit {
       const action = this.verifyEEForm.value.action;
       const official = this.verifyEEForm.value.official;
       const remarks = this.verifyEEForm.value.remarks;
-      
+
       this.verificationService.setVerificationData({
         ...this.data,
         action,
         official,
         remarks
       });
-
       if (official && remarks) {
         this.showAlert('Successfully Forwarded');
       } else {
@@ -56,6 +63,12 @@ export class VerifyEEComponent implements OnInit {
     } else {
       console.error('Form is invalid.');
     }
+  }
+
+  receiveData(data: VerificationData) {
+    this.vphComponent.actionDetails = data.action;
+    this.vphComponent.official = data.official;
+    this.vphComponent.remarks = data.remarks;
   }
 
   showAlert(message: string) {

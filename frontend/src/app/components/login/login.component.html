@@ -48,8 +48,12 @@
   </div>
 </div>
 
+<div *ngIf="loginError" class="alert alert-danger">
+  Login failed. Please check your username, password, and role.
+</div>
+
 <!-- Bootstrap modal for error message -->
-<!-- <div class="modal fade" #errorModal tabindex="-1" role="dialog">
+<div class="modal fade" #errorModal tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -66,4 +70,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

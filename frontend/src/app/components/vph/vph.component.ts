@@ -17,6 +17,10 @@ export class VPHComponent implements OnInit {
     dueDate: ''
   };
 
+  actionDetails: string = '';
+official: string = '';
+remarks: string = '';
+
   taskDetails: TaskDetails[] = [
     { taskName: 'Verification by TNCP', user: 'Deputy Director', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
     { taskName: 'EWS Verification', user: 'SDM', receivedDate: '', processedDate: '', actionDetails: 'Waiting to be pulled' },
@@ -25,7 +29,7 @@ export class VPHComponent implements OnInit {
     { taskName: 'Application Submission', user: 'Citizen', receivedDate: '', processedDate: '', actionDetails: 'Completed' }
   ];
 
-  constructor(private route: ActivatedRoute, private datePipe: DatePipe) {} // Inject DatePipe
+  constructor(private route: ActivatedRoute, private datePipe: DatePipe) {} 
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -73,14 +77,14 @@ export class VPHComponent implements OnInit {
       switch (currentTask) {
         case 'ADM Verification':
           if (task.user === 'ADM') {
-            task.actionDetails = 'Under Process';
+            task.actionDetails = this.actionDetails;
           } else {
             task.actionDetails = 'Waiting to be pulled';
           }
           break;
         case 'NOC Application to CSEB':
           if (task.user === 'Executive Engineer') {
-            task.actionDetails = 'Under Process';
+            task.actionDetails = this.actionDetails;
           } else if (task.user === 'ADM') {
             task.actionDetails = 'Forwarded';
           } else {
@@ -111,4 +115,15 @@ export class VPHComponent implements OnInit {
       }
     });
   }
+  showDetails(task: TaskDetails) {
+    alert(`Action: ${task.actionDetails}\nOfficial: ${this.official}\nRemarks: ${this.remarks}`);
+    // Or if you want to use a modal instead of an alert, you'd need to implement modal logic here.
+}
+
+// Add this method to handle the display of details in an alert
+showForwardedDetails(task: TaskDetails) {
+  if (task.actionDetails === 'Forwarded') {
+    alert(`Action: ${task.actionDetails}\nOfficial: ${task.user}\nRemarks: ${this.remarks}`);
+  }
+}
 }

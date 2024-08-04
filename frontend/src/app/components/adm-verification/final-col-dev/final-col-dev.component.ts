@@ -11,7 +11,7 @@ import { VerificationService } from 'src/app/services/verification.service';
 })
 export class FinalColDevComponent implements OnInit {
   finalColDevForm!: FormGroup;
-  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '' };
+  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '', action: '', official: '', remarks: '' };
 
   constructor(
     private fb: FormBuilder, 

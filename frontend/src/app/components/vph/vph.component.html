@@ -44,7 +44,10 @@
                     <td>{{ task.user }}</td>
                     <td>{{ task.receivedDate }}</td>
                     <td>{{ task.processedDate }}</td>
-                    <td>{{ task.actionDetails }}</td>
+                    <td>
+                      <a href="#" *ngIf="task.actionDetails === 'Forwarded'" (click)="showDetails(task)">{{ task.actionDetails }}</a>
+                      <span *ngIf="task.actionDetails !== 'Forwarded'">{{ task.actionDetails }}</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>

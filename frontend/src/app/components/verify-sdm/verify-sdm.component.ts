@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VerificationData } from 'src/app/models/verification-data.model';
 import { VerificationService } from 'src/app/services/verification.service';
+import { VPHComponent } from '../vph/vph.component';
 
 @Component({
   selector: 'app-verify-sdm',
@@ -11,7 +12,9 @@ import { VerificationService } from 'src/app/services/verification.service';
 })
 export class VerifySDMComponent implements OnInit {
   verifySDMForm!: FormGroup;
-  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '' };
+  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '', action: '', official: '', remarks: '' };
+
+  @ViewChild(VPHComponent) vphComponent!: VPHComponent;  // Use ViewChild to get a reference to VPHComponent
 
   constructor(
     private route: ActivatedRoute,
@@ -28,9 +31,15 @@ export class VerifySDMComponent implements OnInit {
     });
 
     this.verifySDMForm = this.fb.group({
-      action: ['forward', Validators.required], // Default to "Forward" action
+      action: ['forward', Validators.required],
       official: [false, Validators.requiredTrue],
       remarks: ['', Validators.required]
+    });
+
+    this.verificationService.getVerificationData().subscribe(data => {
+      if (data) {
+        this.receiveData(data);
+      }
     });
   }
 
@@ -54,6 +63,14 @@ export class VerifySDMComponent implements OnInit {
       }
     } else {
       console.error('Form is invalid.');
+    }
+  }
+
+  receiveData(data: VerificationData) {
+    if (this.vphComponent) {
+      this.vphComponent.actionDetails = data.action;
+      this.vphComponent.official = data.official;
+      this.vphComponent.remarks = data.remarks;
     }
   }
 

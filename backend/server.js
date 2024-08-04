@@ -142,10 +142,10 @@ app.post('/login', async (req, res) => {
     connection = await pool.getConnection();
     const [user] = await connection.query('SELECT * FROM users WHERE username = ? AND type = ?', [username, type]);
     if (user.length === 0) {
-      return res.status(401).json({ error: 'Username does not Exists' });
+      return res.status(401).json({ error: 'Invalid username or type' });
     }
     if (user[0].password !== password) {
-      return res.status(401).json({ error: 'Invalid username, password, or type' });
+      return res.status(401).json({ error: 'Invalid password' });
     }
     req.session.user = user[0];
     console.log('Session set:', req.session); // Debugging line

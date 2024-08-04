@@ -52,12 +52,12 @@ export class LoginComponent {
   loginUser() {
     if (this.loginForm.valid) {
       const { username, password, type } = this.loginForm.value;
-
+  
       this.authService.login(username, password, type).subscribe(
         response => {
           console.log('Login successful:', response);
           this.loginSuccess = true;
-
+  
           // Navigate based on user type
           switch (response.user.type) {
             case 'official1':

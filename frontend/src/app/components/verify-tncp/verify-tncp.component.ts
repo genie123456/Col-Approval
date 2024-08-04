@@ -11,8 +11,7 @@ import { VerificationService } from 'src/app/services/verification.service';
 })
 export class VerifyTNCPComponent implements OnInit {
   tncpVerificationForm!: FormGroup;
-  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '' };
-
+  data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '', action: '', official: '', remarks: '' };
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
