@@ -59,6 +59,7 @@ import { ModalService } from './services/modal.service';
 import { VPHComponent } from './components/vph/vph.component';
 import { ModalContentComponent } from './components/modal-content/modal-content.component';
 import { VerificationService } from './services/verification.service';
+import { ViewStatusComponent } from './components/view-status/view-status.component';
 
 registerLocaleData(localeEnGb);
 
@@ -104,6 +105,7 @@ registerLocaleData(localeEnGb);
     FormDataComponent,
     VPHComponent,
     ModalContentComponent,
+    ViewStatusComponent,
   ],
   imports: [
     HttpClientModule,

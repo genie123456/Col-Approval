@@ -33,12 +33,14 @@ import { DiversionCertificateComponent } from './components/verify-sdm/diversion
 import { DevelopmentPermissionComponent } from './components/verify-sdm/development-permission/development-permission.component';
 import { FinalColDevComponent } from './components/adm-verification/final-col-dev/final-col-dev.component';
 import { FormDataComponent } from './components/form-data/form-data.component';
+import { ViewStatusComponent } from './components/view-status/view-status.component';
 
 // Define routes
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'status', component: ViewStatusComponent },
 
   { path: 'dashboard', component: DashboardComponent }, // , canActivate: [authGuard]
   { path: 'apply', component: ApplyingFormComponent },

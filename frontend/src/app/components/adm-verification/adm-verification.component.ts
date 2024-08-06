@@ -33,35 +33,30 @@ export class AdmVerificationComponent implements OnInit {
     });
   }
   
-  onSubmit() {
-    console.log('Submit button clicked');
-    console.log('Form Submitted');
-    console.log('Form value:', this.admVerificationForm.value);
-    console.log('Form valid:', this.admVerificationForm.valid);
-    
-    if (this.admVerificationForm.valid) {
-      const action = this.admVerificationForm.value.action === 'forward' ? 'Forwarded' : 'Rejected';
-      const official = this.admVerificationForm.value.official ? 'Executive Engineer' : '';
-      const remarks = this.admVerificationForm.value.remarks;
 
-      const verificationData = {
-        ...this.data,
-        action,
-        official,
-        remarks
-      };
+onSubmit() {
+  if (this.admVerificationForm.valid) {
+    const action = this.admVerificationForm.value.action === 'forward' ? 'Forwarded' : 'Rejected';
+    const official = this.admVerificationForm.value.official ? 'Executive Engineer' : '';
+    const remarks = this.admVerificationForm.value.remarks;
 
-      this.verificationService.setVerificationData(verificationData);
+    const verificationData = {
+      ...this.data,
+      action,
+      official,
+      remarks
+    };
 
-      if (action === 'Forwarded' || action === 'Rejected') {
-        this.showAlert(action === 'Forwarded' ? 'Successfully Forwarded' : 'Rejected');
-      } else {
-        console.error('Form is invalid or incomplete.');
-      }
-    } else {
-      console.error('Form is invalid.');
-    }
+    // Pass data to VerificationService
+    this.verificationService.setVerificationData(verificationData);
+
+    // Show alert on successful form submission
+    this.showAlert(action === 'Forwarded' ? 'Successfully Forwarded' : 'Rejected');
+  } else {
+    console.error('Form is invalid.');
   }
+}
+
   
   showAlert(message: string) {
     alert(message);

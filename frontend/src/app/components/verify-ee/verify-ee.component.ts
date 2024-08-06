@@ -29,18 +29,25 @@ export class VerifyEEComponent implements OnInit {
       this.data.appRefNo = params.get('appRefNo')!;
       this.data.appReceivedDate = params.get('appReceivedDate')!;
     });
-
+  
     this.verifyEEForm = this.fb.group({
       action: ['forward', Validators.required],
       official: [false, Validators.requiredTrue],
       remarks: ['', Validators.required]
     });
-
+  
+    // Subscribe to the verification data
     this.verificationService.getVerificationData().subscribe(data => {
       if (data) {
         this.receiveData(data);
       }
     });
+  }
+
+  receiveData(data: VerificationData) {
+    this.vphComponent.actionDetails = data.action;
+    this.vphComponent.official = data.official;
+    this.vphComponent.remarks = data.remarks;
   }
 
   onSubmit() {
@@ -63,12 +70,6 @@ export class VerifyEEComponent implements OnInit {
     } else {
       console.error('Form is invalid.');
     }
-  }
-
-  receiveData(data: VerificationData) {
-    this.vphComponent.actionDetails = data.action;
-    this.vphComponent.official = data.official;
-    this.vphComponent.remarks = data.remarks;
   }
 
   showAlert(message: string) {

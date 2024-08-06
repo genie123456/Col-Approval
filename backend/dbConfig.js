@@ -6,7 +6,7 @@ const pool = mysql.createPool({
     user: 'root',
     password: '',
     database: 'cas',
-    connectionLimit: 30
+    connectionLimit: 60
 });
 
 // Test database connection

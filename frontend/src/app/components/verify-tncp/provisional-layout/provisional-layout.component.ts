@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VerificationData } from 'src/app/models/verification-data.model';
 import { VerificationService } from 'src/app/services/verification.service';
+import { VPHComponent } from '../../vph/vph.component'; 
+
 
 @Component({
   selector: 'app-provisional-layout',
@@ -12,6 +14,8 @@ import { VerificationService } from 'src/app/services/verification.service';
 export class ProvisionalLayoutComponent implements OnInit {
   provisionalLayoutForm!: FormGroup;
   data: VerificationData = { serviceName: '', currentTask: '', appRefNo: '', appReceivedDate: '', action: '', official: '', remarks: '' };
+
+  @ViewChild(VPHComponent) vphComponent!: VPHComponent;  // Use ViewChild to get a reference to VPHComponent
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -31,6 +35,18 @@ export class ProvisionalLayoutComponent implements OnInit {
       official: [false, Validators.requiredTrue],
       remarks: ['', Validators.required]
     });
+
+    this.verificationService.getVerificationData().subscribe(data => {
+      if (data) {
+        this.receiveData(data);
+      }
+    });
+  }
+
+  receiveData(data: VerificationData) {
+    this.vphComponent.actionDetails = data.action;
+    this.vphComponent.official = data.official;
+    this.vphComponent.remarks = data.remarks;
   }
 
   onSubmit() {

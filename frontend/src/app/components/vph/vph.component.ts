@@ -115,10 +115,12 @@ remarks: string = '';
       }
     });
   }
-  showDetails(task: TaskDetails) {
-    alert(`Action: ${task.actionDetails}\nOfficial: ${this.official}\nRemarks: ${this.remarks}`);
-    // Or if you want to use a modal instead of an alert, you'd need to implement modal logic here.
+// vph.component.ts
+
+showDetails(task: TaskDetails) {
+  alert(`Action: ${this.actionDetails}\nOfficial: ${this.official}\nRemarks: ${this.remarks}`);
 }
+
 
 // Add this method to handle the display of details in an alert
 showForwardedDetails(task: TaskDetails) {
