@@ -191,8 +191,6 @@ const getJoinedFormFieldsDataById = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   saveApplyingFormData,
   getApplyingFormData,

@@ -57,7 +57,6 @@ export class FormDataComponent implements OnInit {
     );
   }  
     
-
   processClearanceTexts(): void {
     // console.log('Before processing:', this.applicantData);
     if (this.applicantData) {

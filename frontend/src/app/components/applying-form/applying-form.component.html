@@ -15,7 +15,7 @@
             <option *ngFor="let district of districts" [value]="district.toLowerCase()">
               {{ district }}
             </option>
-          </select>
+          </select>          
         </div>
         <div *ngIf="applyingForm.get('selectedDistrict')?.invalid && (applyingForm.get('selectedDistrict')?.dirty || applyingForm.get('selectedDistrict')?.touched)" class="error-message">
           <span style="color: red;">This Field is Required.</span>
@@ -368,7 +368,6 @@
             <br>
             <div class="row">
               <div class="col-7"><strong>2. Colonizer Registration Certificate(Attach a copy in PDF format of the issuing local urban body’s name, serial number, and date as an annexure in the Annexure Section.)</strong></div>
-              <!-- <div class="col-5">{{ formData.applicantData.email }}</div> -->
             </div>
             <div class="row">
               <div class="col-7">2.1 Name of the Issuing Local Urban Body</div>
@@ -385,8 +384,7 @@
             <br>
             
             <div class="row">
-              <div class="col-7"><strong>3. Current Address</strong></div>
-              <!-- <div class="col-5">{{ formData.applicantData.email }}</div> -->
+              <div class="col-7"><strong>3. Current Address</strong></div>            
             </div>
             <div class="row">
               <div class="col-7">3.1 House Number</div>
@@ -507,9 +505,7 @@
               </div>
               <div class="col-5">{{ formData.applicantData.EWS }}</div>
               </div>    
-          </div>
-        
-            
+          </div>    
             <div class="row">
               <div class="col-7"><strong>If the proposed layout is less than one acre</strong></div>
               <div class="col-5">{{ formData.applicantData.EWS_Less }}</div>
@@ -570,6 +566,16 @@
               <div class="col-9">{{ formData.formFieldsData.office }}</div>
             </div>
         </div>
+
+<!-- Uploaded Files Section -->
+<!-- <div class="container p-3 rounded">
+  <h4><strong>Uploaded Files</strong></h4>
+  <hr>
+  <div class="row" *ngFor="let file of formData.uploadedFiles">
+    <div class="col-7"><strong>{{ file.selectId }}</strong></div>
+    <div class="col-5">{{ file.fileName }}</div>
+  </div>
+</div> -->
       </div>
       </div>
     </div>

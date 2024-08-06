@@ -32,7 +32,7 @@ export class ApplyingFormComponent implements OnInit {
   applicantFormData: FormGroup;
   attachmentsForm!: FormGroup;
 
-  formData: any;
+  formData: any = {};
 
   showAdditionalForm: boolean = false;
   isKhasraIntegrated: boolean = true;
@@ -42,6 +42,7 @@ export class ApplyingFormComponent implements OnInit {
 
   showAttachments: boolean = false;
   isAttachmentsOpened: boolean = false;
+  uploadedFiles: { selectId: string; fileName: string }[] = [];
 
   required: string = 'This Field is Required';
   clearanceLabels: { [key: string]: string } = {
@@ -65,7 +66,7 @@ export class ApplyingFormComponent implements OnInit {
     private applyingFormService: ApplyingFormService, 
     private attachmentsService: AttachmentsService,
     private modalService: NgbModal,
-    private router: Router 
+    private router: Router, 
   ) {
     this.applyingForm = this.fb.group({
       selectedDistrict: ['', Validators.required],
@@ -140,6 +141,8 @@ export class ApplyingFormComponent implements OnInit {
     this.applyingForm.get('selectedDistrict')!.valueChanges.subscribe(district => {
       this.updateOfficeInput(district);
     });
+
+    console.log(this.districts);  // Add this to verify the array
   }
 
   ngOnInit() {
@@ -226,10 +229,18 @@ export class ApplyingFormComponent implements OnInit {
       const formData = new FormData();
       formData.append('username', this.username);  // Include username in FormData
   
+      this.uploadedFiles = [];
+  
       Object.keys(this.attachmentsForm.controls).forEach(key => {
         const control = this.attachmentsForm.get(key);
         if (control && control.value) {
           formData.append(key, control.value);
+  
+          // Find the corresponding field from ATTACHMENT_FIELDS
+          const field = ATTACHMENT_FIELDS.find(f => f.formControlName === key);
+          if (field) {
+            this.uploadedFiles.push({ selectId: field.selectId, fileName: control.value.name });
+          }
         }
       });
   
@@ -249,7 +260,7 @@ export class ApplyingFormComponent implements OnInit {
       this.successMessage = 'Submitted successfully (no files to upload).';
       this.openSuccessModal();
     }
-  }  
+  }
 
   openSuccessModal() {
     this.successMessage = 'Submitted successfully.';
@@ -303,12 +314,13 @@ export class ApplyingFormComponent implements OnInit {
         ...this.applyingForm.value,
         office: this.applyingForm.get('office')?.value // Add this line
       },
-      applicantData: this.applicantFormData.value
+      applicantData: this.applicantFormData.value,
+      uploadedFiles: this.uploadedFiles // Include the uploaded files in formData
     };
   
     // Filter the clearances
     this.processClearanceTexts();
-    
+  
     // Open the modal
     const modalElement = document.getElementById('previewModal');
     if (modalElement) {
@@ -318,6 +330,7 @@ export class ApplyingFormComponent implements OnInit {
       console.error('Modal element not found');
     }
   }
+   
 
   processClearanceTexts(): void {
     if (this.formData && this.formData.applicantData) {
